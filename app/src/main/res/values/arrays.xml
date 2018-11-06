@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<string-array name="txt_frequency_arr">
+    <item>週間前</item>
+    <item>日前</item>
+    <item>時間前</item>
+</string-array>
+</resources>
