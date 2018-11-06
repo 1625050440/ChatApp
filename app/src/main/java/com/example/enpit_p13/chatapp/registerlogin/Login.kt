@@ -1,9 +1,12 @@
-package com.example.enpit_p13.chatapp
+package com.example.enpit_p13.chatapp.registerlogin
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.widget.Toast
+import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -23,10 +26,12 @@ class Login: AppCompatActivity() {
 
                         //else if cuccsessful
                         Log.d("Main", "Successfully login user with uid: ${it.result.user.uid}")
+                        intent = Intent(this,LatestMessagesActivity::class.java)
+                        startActivity(intent)
                     }
                     .addOnFailureListener {
-                        Log.d("Main", "Failed to create user: ${it.message}")
-                        Toast.makeText(this, "Failed to create user:", Toast.LENGTH_SHORT).show()
+                        Log.d("Main", "Failed to login with user: ${it.message}")
+                        Toast.makeText(this, "Failed to login with this user:", Toast.LENGTH_SHORT).show()
                     }
         }
 
