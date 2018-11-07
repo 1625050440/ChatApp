@@ -6,6 +6,7 @@ import android.os.Build
 import android.os.Bundle
 import android.support.annotation.RequiresApi
 import android.support.v7.app.AppCompatActivity
+import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
@@ -46,8 +47,8 @@ class LatestMessagesActivity : AppCompatActivity() {
     }
     private fun sendData() {
         val uid = FirebaseAuth.getInstance().uid.toString()
-        val reference = FirebaseDatabase.getInstance().getReference("/$uid").push()
-        reference.setValue(Room_chat_messager(explain_EditText.text.toString(), title_edditext.text.toString()))
+        val reference = FirebaseDatabase.getInstance().getReference("/Room_Chat/$uid").push()
+        reference.setValue(Room_chat_messager(explain_EditText.text.toString(), title_edditext.text.toString(),uid))
     }
     companion object {
         val USER_KE = "USER_KE"
@@ -55,7 +56,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(Build.VERSION_CODES.O)
     private fun fetchUsers() {
-        val ref = FirebaseDatabase.getInstance().getReference("/${FirebaseAuth.getInstance().uid.toString()}")
+        val ref = FirebaseDatabase.getInstance().getReference("/Room_Chat/${FirebaseAuth.getInstance().uid.toString()}")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             @TargetApi(Build.VERSION_CODES.O)
             @RequiresApi(Build.VERSION_CODES.O)
@@ -64,10 +65,11 @@ class LatestMessagesActivity : AppCompatActivity() {
 
                 p0.children.forEach() {
                     val user = it.getValue(Room_chat_messager::class.java)
-                    if (user != null) {
+                    Log.d("Chat_Room",user?.kadaimeiText.toString())
+                    if (!user?.kadaimeiText.toString().isEmpty()) {
                         room_create_button.text = "チャットルームへ"
-                        title_edditext.setText(user.kadaimeiText.toString())
-                        explain_EditText.setText(user.messageText.toString())
+                        title_edditext.setText(user?.kadaimeiText.toString())
+                        explain_EditText.setText(user?.messageText.toString())
                         title_edditext.focusable = View.NOT_FOCUSABLE
                         explain_EditText.focusable = View.NOT_FOCUSABLE
                         room_create_button.setOnClickListener {
@@ -99,7 +101,7 @@ class LatestMessagesActivity : AppCompatActivity() {
                 val intent = Intent(this, Activity_chat::class.java)
                 startActivity(intent)
             }
-            R.id.menu_new_message -> {
+            R.id.list_chat -> {
                 val intent = Intent(this, NewMessageActivity::class.java)
                 startActivity(intent)
             }
