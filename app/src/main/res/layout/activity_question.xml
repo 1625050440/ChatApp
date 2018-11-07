@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".quetion.questiontempActivity"
+    tools:context=".quetion.QuestiontempActivity"
    >
 
     <LinearLayout
@@ -50,7 +50,6 @@
             android:layout_marginLeft="40dp"
             android:layout_marginTop="20dp"
             android:layout_weight="1"
-            android:text="TextView"
             android:textSize="20dp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="231dp"
@@ -125,25 +124,13 @@
                 android:layout_height="match_parent"
                 android:layout_weight="1"
                 android:ems="10"
-                android:hint="（例）26歳の男の子で、"
+                android:hint="（例）26歳の男の子で、あまり会話がありません"
+                android:inputType="textPersonName"
                 android:textSize="20dp"
-                android:textStyle="bold"
-                android:inputType="textPersonName" />
+                android:lines="2"
+                android:textStyle="bold" />
 
         </LinearLayout>
-
-        <EditText
-            android:id="@+id/text3"
-            android:layout_width="334dp"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="40dp"
-            android:layout_marginTop="20dp"
-            android:layout_weight="1"
-            android:ems="10"
-            android:hint="(例)子どもとあまり会話できていません。"
-            android:textSize="20dp"
-            android:textStyle="bold"
-            android:inputType="textPersonName" />
 
         <TextView
             android:id="@+id/texttemplate4"
@@ -151,18 +138,18 @@
             android:layout_height="wrap_content"
             android:layout_marginLeft="40dp"
             android:layout_weight="1"
-            android:text="皆さんの意見をお待ちしています"
+            android:text="どうしたらよいでしょうか\n皆さんの意見をお待ちしています。"
             android:textSize="20dp"
             android:textStyle="bold"
             tools:layout_marginTop="20dp" />
 
         <Button
-            android:id="@+id/save"
+            android:id="@+id/sendButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_weight="1"
-            android:text="送る"
+            android:text="送信"
             android:textSize="20dp"
             android:textStyle="bold"
             tools:layout_editor_absoluteX="148dp"

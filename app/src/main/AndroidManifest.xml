@@ -10,7 +10,7 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <activity android:name=".quetion.questiontempActivity">
+        <activity android:name=".quetion.QuestiontempActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 

@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">ChatApp</string>
+    <string name="app_name">カンガルー・チャット</string>
     <string name="createroom">createroom</string>
 
     <string name="ans__yes">はい</string>
