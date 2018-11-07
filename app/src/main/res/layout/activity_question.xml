@@ -125,7 +125,7 @@
                 android:layout_weight="1"
                 android:ems="10"
                 android:hint="（例）26歳の男の子で、あまり会話がありません"
-                android:inputType="textPersonName"
+                android:inputType="textMultiLine"
                 android:textSize="20dp"
                 android:lines="2"
                 android:textStyle="bold" />
