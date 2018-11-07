@@ -1,8 +1,10 @@
 package com.example.enpit_p13.chatapp.room_chat
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
@@ -10,6 +12,7 @@ import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.models.User
+import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -28,8 +31,13 @@ class Room_chat_Activity : AppCompatActivity() {
         supportActionBar?.title = userdata.kadaimeiText
         explain_textview.text = userdata.messageText
         createFirebaseListener()
-        send_Button_room_chat.setOnClickListener{
-            if (!room_chat_edittext.text.toString().isEmpty()){
+        send_Button_room_chat.setOnLongClickListener(){
+            template()
+        }
+        send_Button_room_chat.setOnClickListener {
+            template_button.visibility = View.INVISIBLE
+            template_button.isClickable = false
+            if (!room_chat_edittext.text.toString().isEmpty()) {
                 sendData()
                 createFirebaseListener()
 
@@ -39,7 +47,12 @@ class Room_chat_Activity : AppCompatActivity() {
                 Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
 
             }
-
+        }
+        template_button.setOnClickListener{
+            template_button.visibility = View.INVISIBLE
+            template_button.isClickable = false
+            intent = Intent(this,QuestiontempActivity::class.java)
+            startActivity(intent)
         }
     }
     private fun sendData() {
@@ -110,6 +123,11 @@ class Room_chat_Activity : AppCompatActivity() {
         })
 
 
+    }
+    private fun template(): Boolean {
+       template_button.visibility = View.VISIBLE
+        template_button.isClickable = true
+        return false
     }
 }
 

@@ -22,7 +22,6 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_latest_messages.*
-
 class LatestMessagesActivity : AppCompatActivity() {
 
 
@@ -43,6 +42,17 @@ class LatestMessagesActivity : AppCompatActivity() {
             }
 
         }
+        delete_button.setOnClickListener {
+         /*   room_create_button.text = "ルーム作成"
+            title_edditext.setText("")
+            explain_EditText.setText("")
+            delete_button.visibility = View.INVISIBLE
+            delete_button.isClickable = false */
+            FirebaseDatabase.getInstance().getReference("/Room_Chat/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
+            intent = Intent(this,LatestMessagesActivity::class.java)
+            startActivity(intent)
+        }
+
 
     }
     private fun sendData() {
@@ -53,31 +63,39 @@ class LatestMessagesActivity : AppCompatActivity() {
     companion object {
         val USER_KE = "USER_KE"
     }
+
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(Build.VERSION_CODES.O)
     private fun fetchUsers() {
-        val ref = FirebaseDatabase.getInstance().getReference("/Room_Chat/${FirebaseAuth.getInstance().uid.toString()}")
+        val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${FirebaseAuth.getInstance().uid.toString()}")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             @TargetApi(Build.VERSION_CODES.O)
             @RequiresApi(Build.VERSION_CODES.O)
             //val adapter = GroupAdapter<ViewHolder>()
             override fun onDataChange(p0: DataSnapshot) {
-
                 p0.children.forEach() {
                     val user = it.getValue(Room_chat_messager::class.java)
                     Log.d("Chat_Room",user?.kadaimeiText.toString())
                     if (!user?.kadaimeiText.toString().isEmpty()) {
+                        var delete_check = user?.kadaimeiText.toString()
+                        delete_button.visibility = View.VISIBLE
+                        delete_button.isClickable = true
                         room_create_button.text = "チャットルームへ"
                         title_edditext.setText(user?.kadaimeiText.toString())
                         explain_EditText.setText(user?.messageText.toString())
-                        title_edditext.focusable = View.NOT_FOCUSABLE
-                        explain_EditText.focusable = View.NOT_FOCUSABLE
-                        room_create_button.setOnClickListener {
-                            val intent = Intent(it.context, Room_chat_Activity::class.java)
-                            intent.putExtra(USER_KE, user)
-                            startActivity(intent)
-                        }
-                    }
+                        title_edditext.isEnabled = false
+                        title_edditext.isFocusable = false
+                        explain_EditText.isEnabled = false
+                        explain_EditText.isFocusable = false
+
+                                        room_create_button.setOnClickListener {
+                                            val intent = Intent(it.context, Room_chat_Activity::class.java)
+                                            intent.putExtra(USER_KE, user)
+                                            startActivity(intent)
+                                        }
+
+                                }
+
                 }
             }
             override fun onCancelled(p0: DatabaseError) {

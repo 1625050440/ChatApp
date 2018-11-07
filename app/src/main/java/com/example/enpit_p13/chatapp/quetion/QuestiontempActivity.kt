@@ -31,7 +31,16 @@ class QuestiontempActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
 
-        send()
+        val pref = PreferenceManager.getDefaultSharedPreferences(this)
+        pref.apply{
+            val editText1 = getString("TEXT1", "")
+            val editText2 = getString("TEXT2", "")
+            val editText3 = getString("TEXT3", "")
+
+            text1.setText(editText1)
+            text2.setText(editText2)
+         //   text3.setText(editText3)
+        }
         spinner.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener{
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
@@ -83,7 +92,7 @@ class QuestiontempActivity : AppCompatActivity() {
         var mDatabase = FirebaseDatabase.getInstance().getReference("/Room_chat/${userdata.uid.toString()}/${userdata.kadaimeiText.toString()}").push()
 */
 
-        
+
         val message= (spin.text.toString() + "\n" + texttemplate1.text.toString() + text1.text.toString()
                 + texttemplate2.text.toString()  + "\n" + texttemplate3.text.toString() + text2.text.toString() + "\n" + texttemplate4.text.toString())
         Log.d("mess",message)

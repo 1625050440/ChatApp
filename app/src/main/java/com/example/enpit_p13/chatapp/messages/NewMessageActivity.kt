@@ -25,14 +25,6 @@ class NewMessageActivity : AppCompatActivity() {
 
         supportActionBar?.title = "Select Room"
 
-      /*  val adapter = GroupAdapter<ViewHolder>()
-
-        adapter.add(UserItem())
-        adapter.add(UserItem())
-        adapter.add(UserItem())
-
-        recycle_message.adapter = adapter
-*/
         fetchUsers()
     }
 
