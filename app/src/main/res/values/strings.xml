@@ -16,4 +16,7 @@
     <string name="Q6edit_detail_text">詳細記述欄(200文字以内)</string>
     <string name="Q7text">・現在の生活状況はどのようなものですか？</string>
     <string name="AnaryzeSheetLabel">分析シート</string>
+    <string name="title_activity_top_page">TopPageActivity</string>
+
+    <string name="text">年齢</string>
 </resources>

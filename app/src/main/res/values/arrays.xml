@@ -5,4 +5,10 @@
     <item>日前</item>
     <item>時間前</item>
 </string-array>
+
+    <string-array name="list">
+        <item>コミュニケーション</item>
+        <item>就職活動</item>
+        <item>世間体</item>
+    </string-array>
 </resources>
