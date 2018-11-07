@@ -82,6 +82,8 @@ class QuestiontempActivity : AppCompatActivity() {
 
         var mDatabase = FirebaseDatabase.getInstance().getReference("/Room_chat/${userdata.uid.toString()}/${userdata.kadaimeiText.toString()}").push()
 */
+
+        
         val message= (spin.text.toString() + "\n" + texttemplate1.text.toString() + text1.text.toString()
                 + texttemplate2.text.toString()  + "\n" + texttemplate3.text.toString() + text2.text.toString() + "\n" + texttemplate4.text.toString())
         Log.d("mess",message)
