@@ -4,10 +4,10 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".room_chat.Room_chat_Activity">
+    tools:context=".room_chat.Room_chat_from_ListView">
 
     <android.support.v7.widget.RecyclerView
-        android:id="@+id/recycler_chat_room"
+        android:id="@+id/recycler_chat_room_from_listroom"
         android:layout_width="match_parent"
         android:layout_height="577dp"
         android:layout_marginBottom="8dp"
@@ -16,7 +16,7 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explain_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/explain_textview_from_listview" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -41,7 +41,7 @@
 
             <EditText
 
-                android:id="@+id/room_chat_edittext"
+                android:id="@+id/room_chat_edittext_from_listview"
 
                 android:layout_width="match_parent"
 
@@ -55,7 +55,7 @@
         </android.support.design.widget.TextInputLayout>
 
         <ImageButton
-            android:id="@+id/send_Button_room_chat"
+            android:id="@+id/send_Button_room_chat_from_listview"
             android:layout_width="0dp"
             android:layout_height="match_parent"
             android:layout_weight="2"
@@ -64,7 +64,7 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/explain_textview"
+        android:id="@+id/explain_textview_from_listview"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="8dp"
@@ -75,10 +75,8 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_edittext_register"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_chat_room"
+        app:layout_constraintBottom_toTopOf="@+id/recycler_chat_room_from_listroom"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
-
-
 </android.support.constraint.ConstraintLayout>

@@ -40,6 +40,7 @@
                 android:value=".messages.NewMessageActivity" />
         </activity>
         <activity android:name=".room_chat.Room_chat_Activity" />
+        <activity android:name=".room_chat.Room_chat_from_ListView"></activity>
     </application>
 
 </manifest>
