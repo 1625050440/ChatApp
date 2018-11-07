@@ -1,4 +1,22 @@
 <resources>
     <string name="app_name">ChatApp</string>
     <string name="createroom">createroom</string>
+
+    <string name="ans__yes">はい</string>
+    <string name="ans_no">いいえ</string>
+    <string name="Q1text">・お子さんは週に何回外出しますか？</string>
+    <string name="Q2text">・最後にお子さんと会話をしたのはいつ頃ですか？</string>
+    <string name="Q3text">・1日に何回お子さんと話しますか？</string>
+    <string name="Q1hint">(例) ５</string>
+    <string name="Q2hint">(例) 23</string>
+    <string name="Q3hint">(例) 3</string>
+    <string name="Q4text">・お子さんと話すことに苦痛を感じますか?</string>
+    <string name="Q5text">・お子さんと話すことに苦痛を感じますか?</string>
+    <string name="Q6text">・お子さんが現在の状況になった経緯を知っていますか？</string>
+    <string name="Q6edit_detail_text">詳細記述欄(200文字以内)</string>
+    <string name="Q7text">・現在の生活状況はどのようなものですか？</string>
+    <string name="AnaryzeSheetLabel">分析シート</string>
+    <string name="title_activity_top_page">TopPageActivity</string>
+
+    <string name="text">年齢</string>
 </resources>
