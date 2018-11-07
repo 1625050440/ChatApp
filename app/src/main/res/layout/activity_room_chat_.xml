@@ -6,6 +6,19 @@
     android:layout_height="match_parent"
     tools:context=".room_chat.Room_chat_Activity">
 
+    <Button
+        android:id="@+id/template_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="template作成"
+        android:clickable="false"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent" />
+
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_chat_room"
         android:layout_width="match_parent"
@@ -16,7 +29,9 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explain_textview" />
+        app:layout_constraintTop_toBottomOf="@+id/explain_textview" >
+
+    </android.support.v7.widget.RecyclerView>
 
     <LinearLayout
         android:id="@+id/linearLayout"
