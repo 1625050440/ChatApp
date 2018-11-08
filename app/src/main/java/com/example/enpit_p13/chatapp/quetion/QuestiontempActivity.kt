@@ -6,6 +6,7 @@ import android.preference.PreferenceManager
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.Toast
@@ -28,6 +29,7 @@ class QuestiontempActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_question)
 
+        this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         val pref = PreferenceManager.getDefaultSharedPreferences(this)
         pref.apply{
             val editText1 = getString("TEXT1", "")

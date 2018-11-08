@@ -31,8 +31,8 @@ class Login: AppCompatActivity() {
                         startActivity(intent)
                     }
                     .addOnFailureListener {
-                        Log.d("Main", "Failed to login with user: ${it.message}")
-                        Toast.makeText(this, "Failed to login with this user:", Toast.LENGTH_SHORT).show()
+                        Log.d("Main", "ログインに失敗しました。")
+                        Toast.makeText(this, "ログインに失敗しました。", Toast.LENGTH_SHORT).show()
                     }
         }
 

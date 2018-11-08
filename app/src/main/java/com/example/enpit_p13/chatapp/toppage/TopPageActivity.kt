@@ -4,6 +4,8 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log
+import android.view.Menu
+import android.view.MenuItem
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.analyzesheet.OwnAnalysisActivity
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
@@ -31,15 +33,36 @@ class TopPageActivity : AppCompatActivity() {
 
         //登録したユーザー名を表示
         DisplayUsername()
-        
+
+        //リンク
         goToChatPage.setOnClickListener {
             startActivity<LatestMessagesActivity>()
         }
         goToAnalyzePage.setOnClickListener {
             startActivity<OwnAnalysisActivity>()
         }
+
+
     }
 
+    //メニューの処理
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when (item?.itemId) {
+            R.id.Sign_out -> {
+                FirebaseAuth.getInstance().signOut()
+                val intent = Intent(this, RegisterActivity::class.java)
+                intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
+                startActivity(intent)
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.top_menu,menu)
+        return super.onCreateOptionsMenu(menu)
+    }
+
+    //ログイン認証メソッド
     private fun verifyUserIsLoggedIn() {
         val uid = FirebaseAuth.getInstance().uid
         if (uid == null) {
@@ -49,13 +72,13 @@ class TopPageActivity : AppCompatActivity() {
         }
     }
 
+    //ユーザー名を表示するメソッド
     private fun DisplayUsername(){
         Log.d("exeDisp","実行")
         val ref = FirebaseDatabase.getInstance().reference.child("/users")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot)
             {
-
                 for(data in p0.children)
                 {
                     val userdata = data.getValue<User>(User::class.java)
@@ -65,13 +88,11 @@ class TopPageActivity : AppCompatActivity() {
                     Log.d("getUid",users.uid.toString())
 
                     if(users.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
-                        dis_puserName.text = "現在\"" + users.username + "\"さんでログイン中"
+                        dis_puserName.text = "現在\"" + users.username + "\"さんでログイン"
                     }
                 }
             }
             override fun onCancelled(p0: DatabaseError) {}
         })
-
     }
-
 }

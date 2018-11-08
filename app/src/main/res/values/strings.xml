@@ -22,4 +22,5 @@
     <string name="Q8text">・いつ頃から今の状況が続いていますか？</string>
     <string name="Q9text">・お子さんの状況はいかがですか？</string>
     <string name="Q9edit_dital_text">年齢、性別、最終職歴、性格等の自由記述</string>
+    <string name="loginText">ログイン</string>
 </resources>
