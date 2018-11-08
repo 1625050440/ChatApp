@@ -7,6 +7,7 @@ import android.util.Log
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
+import com.example.enpit_p13.chatapp.toppage.TopPageActivity
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_login.*
 
@@ -24,9 +25,9 @@ class Login: AppCompatActivity() {
                     .addOnCompleteListener {
                         if (!it.isSuccessful) return@addOnCompleteListener
 
-                        //else if cuccsessful
+                        //else if successful
                         Log.d("Main", "Successfully login user with uid: ${it.result.user.uid}")
-                        intent = Intent(this,LatestMessagesActivity::class.java)
+                        intent = Intent(this,TopPageActivity::class.java)
                         startActivity(intent)
                     }
                     .addOnFailureListener {

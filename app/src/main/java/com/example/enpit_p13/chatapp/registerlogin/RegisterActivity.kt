@@ -11,6 +11,7 @@ import android.widget.Toast
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.models.User
+import com.example.enpit_p13.chatapp.toppage.TopPageActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.storage.FirebaseStorage
@@ -112,7 +113,7 @@ class RegisterActivity : AppCompatActivity() {
         ref.setValue(user)
                 .addOnSuccessListener {
                     Log.d("Main","Finally we saved the user to Firebase Database")
-                    val intent = Intent(this, LatestMessagesActivity::class.java)
+                    val intent = Intent(this, TopPageActivity::class.java)
                     intent.flags =Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)
                     startActivity(intent)
 
