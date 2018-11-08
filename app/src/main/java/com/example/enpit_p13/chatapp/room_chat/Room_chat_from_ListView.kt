@@ -62,7 +62,7 @@ class Room_chat_from_ListView : AppCompatActivity() {
                         reference.setValue(Message(room_chat_edittext_from_listview.text.toString(), user?.username.toString()))
                                 .addOnSuccessListener {
                                     room_chat_edittext_from_listview.setText("")
-                                    recycler_chat_room_from_listroom.scrollToPosition(recycler_chat_room_from_listroom.adapter.itemCount-1)
+                                    recycler_chat_room_from_listroom.scrollToPosition(recycler_chat_room_from_listroom.adapter!!.itemCount-1)
                                 }
                     }
                 }

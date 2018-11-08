@@ -75,7 +75,7 @@ class Room_chat_Activity : AppCompatActivity() {
                         reference.setValue(Message(room_chat_edittext.text.toString(),user?.username.toString()))
                                 .addOnSuccessListener {
                                     room_chat_edittext.text.clear()
-                                    recycler_chat_room.scrollToPosition(recycler_chat_room.adapter.itemCount-1)
+                                    recycler_chat_room.scrollToPosition(recycler_chat_room.adapter!!.itemCount-1)
                                 }
                     }
                 }

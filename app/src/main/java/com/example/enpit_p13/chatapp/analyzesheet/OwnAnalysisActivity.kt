@@ -41,9 +41,6 @@ class OwnAnalysisActivity : AppCompatActivity() {
 
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         val spinner = parent as? Spinner
-                        val item = spinner?.selectedItem as? String
-                        val position = spinner?.selectedItemPosition
-
                     }
 
                     override fun onNothingSelected(p0: AdapterView<*>?) {
@@ -186,7 +183,7 @@ class OwnAnalysisActivity : AppCompatActivity() {
             }
         }
 
-        Q6_Edit_detali_text.text = quetion.q6_2
+        Q6_edit_detail.setText(quetion.q6_2)
         Q7_edit_text.setText(quetion.q7)
     }
 }

@@ -113,7 +113,7 @@ class Activity_chat : AppCompatActivity() {
                     }
                 }
                 recycle_chat.adapter = adapter
-                recycle_chat.scrollToPosition(recycle_chat.adapter.itemCount-1)
+                recycle_chat.scrollToPosition(recycle_chat.adapter!!.itemCount-1)
             }
 
 
