@@ -15,15 +15,59 @@
             app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" android:layout_marginBottom="70dp" android:id="@+id/scrollView2"
             android:layout_marginTop="50dp" android:background="@color/common_google_signin_btn_text_dark_default">
-        <LinearLayout android:layout_width="match_parent" android:layout_height="wrap_content"
-                      android:orientation="vertical" android:layout_marginTop="60dp">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_marginTop="60dp"
+            android:orientation="vertical">
+
             <TextView
-                    android:text="@string/Q1text"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/Q1text"
-                    tools:layout_editor_absoluteY="100dp" tools:layout_editor_absoluteX="32dp"
-                    android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
+                android:id="@+id/Q9_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q9text" />
+
+            <TextView
+                android:id="@+id/Q9_Edit_detali_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/Q9edit_dital_text" />
+
+            <EditText
+                android:id="@+id/Q9_edit_detail"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:gravity="start"
+                android:inputType="textMultiLine"
+                android:lineHeight="20dp"
+                android:lines="7"
+                android:maxLength="200"
+                android:minLines="1"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/Q1text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q1text"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="100dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -38,6 +82,7 @@
                     android:layout_width="50dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
+                    android:layout_marginLeft="24dp"
                     android:ems="10"
                     android:gravity="center_vertical|center_horizontal"
                     android:hint="(例)  ５"
@@ -59,20 +104,23 @@
                     tools:layout_editor_absoluteX="106dp"
                     tools:layout_editor_absoluteY="129dp" />
             </LinearLayout>
+
             <TextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="20dp"
-                    android:id="@+id/Q2text"
-                    android:textSize="14sp"
-                    android:text="@string/Q2text"
-                    tools:layout_editor_absoluteY="183dp" tools:layout_editor_absoluteX="32dp"
-                    android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
+                android:id="@+id/Q2text"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q2text"
+                android:textSize="14sp"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="183dp" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginLeft="20dp"
-                android:layout_marginRight="20dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
                 android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
@@ -82,7 +130,7 @@
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
                     android:layout_marginStart="24dp"
-                    android:layout_marginLeft="24dp"
+                    android:layout_marginLeft="0dp"
                     android:ems="10"
                     android:gravity="center_horizontal"
                     android:hint="(例)  23"
@@ -102,136 +150,228 @@
                     tools:layout_editor_absoluteX="106dp"
                     tools:layout_editor_absoluteY="210dp" />
             </LinearLayout>
+
             <TextView
-                    android:text="@string/Q3text"
+                android:id="@+id/Q3text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q3text"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="267dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/Q3_edit_num"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="(例)  3"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="12sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="286dp" />
+
+                <TextView
+                    android:id="@+id/Q3edit_text"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:id="@+id/Q3text"
-                    tools:layout_editor_absoluteY="267dp" tools:layout_editor_absoluteX="32dp"
-                    android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
-            <LinearLayout
-                    android:orientation="horizontal"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:layout_marginLeft="40dp"
-                    android:layout_marginBottom="20dp" android:layout_marginRight="40dp">
-                <EditText
-                        android:layout_width="50dp"
-                        android:layout_height="wrap_content"
-                        android:inputType="number"
-                        android:ems="10"
-                        android:id="@+id/Q3_edit_num"
-                        android:textSize="12sp"
-                        android:hint="(例)  3" android:gravity="center_vertical|center_horizontal"
-                        android:singleLine="true"
-                        tools:layout_editor_absoluteY="286dp" tools:layout_editor_absoluteX="56dp"/>
-                <TextView
-                        android:text="回/日"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:id="@+id/Q3edit_text"
-                        tools:layout_editor_absoluteY="296dp" tools:layout_editor_absoluteX="106dp"/>
+                    android:text="回/日"
+                    tools:layout_editor_absoluteX="106dp"
+                    tools:layout_editor_absoluteY="296dp" />
             </LinearLayout>
+
             <TextView
-                    android:text="@string/Q4text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/Q4text" android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                android:id="@+id/Q5text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="@string/Q5text" />
+
             <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/Q4_RadioGroup"
-                    android:orientation="horizontal" android:paddingBottom="0dp" android:paddingLeft="0dp"
-                    android:paddingRight="0dp" android:padding="0dp" android:paddingTop="0dp"
-                    android:layout_marginLeft="40dp" android:layout_marginBottom="20dp"
-                    android:layout_marginRight="40dp">
+                android:id="@+id/Q5_RadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
                 <RadioButton
-                        android:text="@string/ans__yes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/Q4_yesButtom"
-                        android:layout_weight="1" android:checked="false"/>
-                <RadioButton
-                        android:text="@string/ans_no"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/Q4_noButtom"
-                        android:layout_weight="1" android:checked="false"/>
-            </RadioGroup>
-            <TextView
-                    android:text="@string/Q5text"
+                    android:id="@+id/Q5_yesButtom"
                     android:layout_width="wrap_content"
-                    android:layout_height="0dp" android:id="@+id/Q5text" android:layout_weight="1"
-                    android:layout_marginLeft="10dp" android:layout_marginRight="10dp"/>
-            <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:orientation="horizontal"
-                    android:layout_marginLeft="40dp" android:layout_marginBottom="20dp" android:id="@+id/Q5_RadioGroup"
-                    android:layout_marginRight="40dp">
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/ans__yes" />
+
                 <RadioButton
-                        android:text="@string/ans__yes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/Q5_yesButtom" android:layout_weight="1"
-                        android:checked="false"/>
-                <RadioButton
-                        android:text="@string/ans_no"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/Q5_noButtom" android:layout_weight="1"
-                        style="@style/Widget.AppCompat.CompoundButton.RadioButton" android:checked="false"/>
+                    android:id="@+id/Q5_noButtom"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/ans_no" />
             </RadioGroup>
+
             <TextView
-                    android:text="@string/Q6text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/Q6text" android:layout_marginLeft="10dp"
-                    android:layout_marginRight="10dp"/>
+                android:id="@+id/Q6text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q6text" />
+
             <RadioGroup
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent" android:id="@+id/Q6_RadioGroup"
-                    android:orientation="horizontal" android:layout_marginLeft="40dp"
-                    android:layout_marginRight="40dp">
+                android:id="@+id/Q6_RadioGroup"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:orientation="horizontal">
+
                 <RadioButton
-                        android:text="@string/ans__yes"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/Q6_yesButtom" android:layout_weight="1"/>
+                    android:id="@+id/Q6_yesButtom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ans__yes" />
+
                 <RadioButton
-                        android:text="@string/ans_no"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content" android:id="@+id/Q6_noButtom" android:layout_weight="1"/>
+                    android:id="@+id/Q6_noButtom"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ans_no" />
             </RadioGroup>
+
             <TextView
-                    android:text="@string/Q6edit_detail_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/Q6_Edit_detali_text"
-                    android:layout_marginLeft="60dp" android:layout_marginBottom="5dp"
-                    android:layout_marginRight="60dp"/>
+                android:id="@+id/Q6_Edit_detali_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/Q6edit_detail_text" />
+
             <EditText
-                    android:layout_width="match_parent"
-                    android:ems="10"
-                    android:id="@+id/Q6_edit_detail" android:layout_marginLeft="40dp"
-                    android:layout_marginBottom="40dp" android:lines="7"
-                    android:background="@drawable/textview_border" android:lineHeight="20dp"
-                    android:inputType="textMultiLine" android:minLines="1" android:maxLength="200"
-                    android:textSize="18sp"
-                    android:layout_marginRight="40dp" android:layout_height="150dp"
-                    android:gravity="start"
-            />
+                android:id="@+id/Q6_edit_detail"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:gravity="start"
+                android:inputType="textMultiLine"
+                android:lineHeight="20dp"
+                android:lines="7"
+                android:maxLength="200"
+                android:minLines="1"
+                android:textSize="18sp" />
+
             <TextView
-                    android:text="@string/Q7text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/Q7text" android:layout_marginLeft="10dp"/>
+                android:id="@+id/Q7text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/Q7text" />
+
             <TextView
-                    android:text="@string/Q6edit_detail_text"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content" android:id="@+id/Q7_Edit_text"
-                    android:layout_marginLeft="60dp" android:layout_marginBottom="5dp"
-                    android:layout_marginRight="60dp"/>
+                android:id="@+id/Q7_Edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/Q6edit_detail_text" />
+
             <EditText
-                    android:layout_width="match_parent"
+                android:id="@+id/Q7_edit_text"
+                android:layout_width="match_parent"
+                android:layout_height="150dp"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:gravity="start"
+                android:inputType="textMultiLine"
+                android:lineHeight="20dp"
+                android:lines="7"
+                android:maxLength="200"
+                android:minLines="1"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Q8_text"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q8text" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/Q8Edit_num"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:layout_marginLeft="24dp"
                     android:ems="10"
-                    android:id="@+id/Q7_edit_text" android:layout_marginLeft="40dp"
-                    android:layout_marginBottom="40dp" android:lines="7"
-                    android:background="@drawable/textview_border" android:lineHeight="20dp"
-                    android:inputType="textMultiLine" android:minLines="1" android:maxLength="200"
-                    android:textSize="18sp"
-                    android:layout_marginRight="40dp" android:layout_height="150dp"
-                    android:gravity="start"
-            />
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="(例)  ５"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textSize="12sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="119dp" />
+
+                <Spinner
+                    android:id="@+id/Q8_spinner"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:entries="@array/txt_frequency_arr"
+                    tools:layout_editor_absoluteX="106dp"
+                    tools:layout_editor_absoluteY="210dp" />
+
+                <EditText
+                    android:id="@+id/Q8Edit_detail"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="詳細記述"
+                    android:inputType="textPersonName" />
+
+            </LinearLayout>
         </LinearLayout>
     </ScrollView>
     <Button

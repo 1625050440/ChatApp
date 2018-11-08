@@ -65,11 +65,6 @@ class OwnAnalysisActivity : AppCompatActivity() {
         val q2_1:String = Q2_edit_num.text.toString()
         val q2_2:Int = Q2_spinner.selectedItemPosition
         val q3:String = Q3_edit_num.text.toString()
-        val q4:Int = when {
-            Q4_noButtom.isChecked -> 0
-            Q4_yesButtom.isChecked -> 1
-            else -> 3
-        }
         val q5:Int = when {
             Q5_noButtom.isChecked -> 0
             Q5_yesButtom.isChecked -> 1
@@ -82,9 +77,13 @@ class OwnAnalysisActivity : AppCompatActivity() {
         }
         val q6_2:String =Q6_edit_detail.text.toString()
         val q7:String = Q7_edit_text.text.toString()
+        val q8_1:String = Q8Edit_num.text.toString()
+        val q8_2:Int = Q2_spinner.selectedItemPosition
+        val q8_3:String  = Q8Edit_detail.text.toString()
+        val q9:String = Q9_edit_detail.text.toString()
 
         //データベースに保存
-        var quetion = Quetion(q1,q2_1,q2_2,q3,q4,q5,q6_1,q6_2,q7)
+        var quetion = Quetion(q1,q2_1,q2_2,q3,q5,q6_1,q6_2,q7,q8_1,q8_2,q8_3,q9)
         mDatabase.setValue(quetion)
 
     }
@@ -113,7 +112,6 @@ class OwnAnalysisActivity : AppCompatActivity() {
 
     private fun setToplabel(){
         val ref = FirebaseDatabase.getInstance().reference.child("/users")
-        var uname:String?
         ref.addListenerForSingleValueEvent(object :ValueEventListener
         {
             override fun onDataChange(p0: DataSnapshot)
@@ -138,20 +136,6 @@ class OwnAnalysisActivity : AppCompatActivity() {
         Q2_edit_num.setText(quetion.q2_1)
         Q2_spinner.setSelection(quetion.q2_2)
         Q3_edit_num.setText(quetion.q3)
-        when {
-            quetion.q4 == 0 -> {
-                Q4_yesButtom.isChecked = false
-                Q4_noButtom.isChecked = true
-            }
-            quetion.q4 == 1 -> {
-                Q4_yesButtom.isChecked = true
-                Q4_noButtom.isChecked = false
-            }
-            else -> {
-                Q4_yesButtom.isChecked = false
-                Q4_noButtom.isChecked = false
-            }
-        }
 
         when {
             quetion.q5 == 0 -> {
@@ -185,5 +169,9 @@ class OwnAnalysisActivity : AppCompatActivity() {
 
         Q6_edit_detail.setText(quetion.q6_2)
         Q7_edit_text.setText(quetion.q7)
+        Q8Edit_num.setText(quetion.q8_1)
+        Q8_spinner.setSelection(quetion.q8_2)
+        Q8Edit_detail.setText(quetion.q8_3)
+        Q9_edit_detail.setText(quetion.q9)
     }
 }
