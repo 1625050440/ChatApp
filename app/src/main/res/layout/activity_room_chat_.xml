@@ -22,14 +22,14 @@
     <android.support.v7.widget.RecyclerView
         android:id="@+id/recycler_chat_room"
         android:layout_width="match_parent"
-        android:layout_height="577dp"
+        android:layout_height="0dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_blue_bright"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explain_textview" >
+        app:layout_constraintTop_toBottomOf="@+id/explain_textview">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -81,16 +81,12 @@
     <TextView
         android:id="@+id/explain_textview"
         android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
+        android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
-        android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_edittext_register"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/recycler_chat_room"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />

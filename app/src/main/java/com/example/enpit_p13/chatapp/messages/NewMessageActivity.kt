@@ -31,51 +31,80 @@ class NewMessageActivity : AppCompatActivity() {
     companion object {
         val USER_KEY = "USER_KEY"
     }
+    val check : ArrayList<Room_chat_messager> = ArrayList()
 
     private fun fetchUsers() {
+        val adapter = GroupAdapter<ViewHolder>()
+
        val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat")
         ref.addListenerForSingleValueEvent(object : ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
-
-                val adapter = GroupAdapter<ViewHolder>()
+                val count = p0.childrenCount
               p0.children.forEach(){
-                   val ref = FirebaseDatabase.getInstance().getReference("/Room_Chat/${it.key.toString()}")
-                   ref.addListenerForSingleValueEvent(object : ValueEventListener {
+                   val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${it.key.toString()}")
+                   ref.addValueEventListener(object : ValueEventListener {
                        override fun onDataChange(p0: DataSnapshot) {
                           for(data in p0.children){
                                val datauser = data.getValue<Room_chat_messager>(Room_chat_messager::class.java)
                               val user = datauser?.let { it } ?:continue
-                               Log.d("Chat_Room",user.kadaimeiText.toString())
-                              if(!user.kadaimeiText.toString().isEmpty()) {
+                               Log.d("Chat_Room",user?.kadaimeiText.toString())
+                              if(user?.kadaimeiText.toString()!="") {
                                   Log.d("Chat","user from New ${user.uid.toString()}")
-                                  adapter.add(UserItem(user))
+
+                                      check.add(user)
+                                        Log.d("Data","11 ${check.toString()} ")
+
+                                  check.sortByDescending{it->it.timestamp}
+                                  Log.d("Data","11 ${check.toString()} ")
+                                  Log.d("Data","11 ${check.size} ")
                               }
                            }
+                           Log.d("Data","11 ${check.toString()} ")
+                           Log.d("Data","11 ${count} ")
+
+                           Log.d("Data", "${check.toString()}")
+                           if(check.size.toLong() == count){
+                           for (data in check) {
+                               Log.d("Data", "${data.kadaimeiText.toString()}")
+
+                               adapter.add(UserItem(data))
+                           }
+
+                           }
+
                        }
+
                        override fun onCancelled(p0: DatabaseError) {
 
                        }
+
                    })
-                   }
 
-                adapter.setOnItemClickListener { item, view ->
-                    val userItem = item as UserItem
-                    val intent =Intent(view.context,Room_chat_from_ListView::class.java)
-                    intent.putExtra(USER_KEY,item.user)
-                    Log.d("Chat","user from New b ${item.user.uid.toString()}")
-                    startActivity(intent)
+              }
 
-                    finish()
-                }
-                recyclemessage_chat_list.adapter = adapter
             }
 
             override fun onCancelled(p0: DatabaseError) {
 
             }
         })
+
+
+        adapter.setOnItemClickListener { item, view ->
+            val userItem = item as UserItem
+            val intent = Intent(view.context, Room_chat_from_ListView::class.java)
+            intent.putExtra(USER_KEY, item.user)
+            Log.d("Chat", "user from New b ${item.user.uid.toString()}")
+            startActivity(intent)
+        }
+
+        recyclemessage_chat_list.adapter= adapter
+
     }
+
 }
+
+
 
 class UserItem(val user: Room_chat_messager):Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
@@ -86,6 +115,7 @@ class UserItem(val user: Room_chat_messager):Item<ViewHolder>(){
         return R.layout.room_chat
     }
 }
+
 //this is super tedious
     //class CustomAdapter: RecyclerView.Adapter<ViewModel>{
     //override fun onBindViewHolder(holder: ViewModel, position: Int) {

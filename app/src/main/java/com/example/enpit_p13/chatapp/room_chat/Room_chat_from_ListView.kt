@@ -1,5 +1,6 @@
 package com.example.enpit_p13.chatapp.room_chat
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -8,6 +9,7 @@ import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
+import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -32,7 +34,7 @@ class Room_chat_from_ListView : AppCompatActivity() {
         send_Button_room_chat_from_listview.setOnClickListener{
             if (!room_chat_edittext_from_listview.text.toString().isEmpty()){
                 sendData()
-                createFirebaseListener()
+               // createFirebaseListener()
 
 
             } else {
@@ -55,10 +57,13 @@ class Room_chat_from_ListView : AppCompatActivity() {
                     val userData = data.getValue<User>(User::class.java)
                     var i = 0
                     val user = userData?.let { it } ?: continue
-                    if(user.uid == FirebaseAuth.getInstance().uid){
+                    if(user.uid == FirebaseAuth.getInstance().uid) {
                         val reference = FirebaseDatabase.getInstance().getReference("/Room_Chat/${userdata.uid.toString()}/${userdata.kadaimeiText.toString()}").push()
-                        reference.setValue(Message(room_chat_edittext_from_listview.text.toString(),user?.username.toString()))
-                        room_chat_edittext_from_listview.setText("")
+                        reference.setValue(Message(room_chat_edittext_from_listview.text.toString(), user?.username.toString()))
+                                .addOnSuccessListener {
+                                    room_chat_edittext_from_listview.setText("")
+                                    recycler_chat_room_from_listroom.scrollToPosition(recycler_chat_room_from_listroom.adapter.itemCount-1)
+                                }
                     }
                 }
             }
@@ -68,45 +73,56 @@ class Room_chat_from_ListView : AppCompatActivity() {
         })
     }
     private fun createFirebaseListener() {
+
         val userdata = intent.getParcelableExtra<Room_chat_messager>(NewMessageActivity.USER_KEY)
         Log.d("Main","${userdata.uid}${userdata.kadaimeiText}")
-        val ref =  FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${userdata.uid.toString()}/${userdata.kadaimeiText.toString()}")
-        ref?.addValueEventListener(object : ValueEventListener {
+        val reference =FirebaseDatabase.getInstance().getReference("/Room_Chat")
+        reference.addListenerForSingleValueEvent(object :ValueEventListener{
+            override fun onDataChange(p0: DataSnapshot) {
+                p0.children.forEach() {
+                    if (it.key.toString() == userdata.uid.toString()) {
+                        val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${userdata.uid.toString()}/${userdata.kadaimeiText.toString()}")
+                        ref.addValueEventListener(object : ValueEventListener {
+                            override fun onDataChange(dataSnapshot: DataSnapshot) {
+                                val adapter = GroupAdapter<ViewHolder>()
+                                var count = dataSnapshot.childrenCount
+                                for (data in dataSnapshot.children) {
+                                    val messageData = data.getValue<Message>(Message::class.java)
+                                    val message = messageData?.let { it } ?: continue
+                                    Log.d("Chat", message.text.toString())
+                                    if (message.Uid == FirebaseAuth.getInstance().uid) {
 
-            override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var count = 0;
+                                        adapter.add(ChatToItem(message.text!!))
+                                    } else {
+                                        adapter.add(ChatfromItem(message.text!!, message.username!!))
+                                    }
 
-                val adapter = GroupAdapter<ViewHolder>()
 
-                // val toReturn: ArrayList<Message> = ArrayList();
+                                }
 
-                for (data in dataSnapshot.children) {
+                                 if(adapter.itemCount.toLong() != count){
+                                    intent = Intent(this@Room_chat_from_ListView, LatestMessagesActivity::class.java)
+                                    startActivity(intent)
+                                }
+                                recycler_chat_room_from_listroom.adapter = adapter
+                                // setupAdapter(toReturn)
+                                recycler_chat_room_from_listroom.scrollToPosition(adapter.itemCount - 1)
 
-                    val messageData = data.getValue<Message>(Message::class.java)
-                    val message = messageData?.let { it } ?: continue
-                    Log.d("Chat",message.text.toString())
-                    if (message.Uid == FirebaseAuth.getInstance().uid) {
-                        count += 1
-                        adapter.add(ChatToItem(message.text!!))
+                            }
+                            override fun onCancelled(databaseError: DatabaseError) {
+                                //log error
+                            }
+                        })
                     }
-                    else {
-                        count += 1
-                        adapter.add(ChatfromItem(message.text!!,message.username!!))
-                    }
-
                 }
 
 
-                recycler_chat_room_from_listroom.adapter = adapter
-                // setupAdapter(toReturn)
-                recycler_chat_room_from_listroom.scrollToPosition(count-1)
             }
-
-
-            override fun onCancelled(databaseError: DatabaseError) {
+                override fun onCancelled(databaseError: DatabaseError) {
                 //log error
             }
         })
 
-    }
+        }
+
 }

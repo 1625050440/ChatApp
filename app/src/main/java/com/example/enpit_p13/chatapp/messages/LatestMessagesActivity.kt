@@ -13,6 +13,7 @@ import android.view.View
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.models.Room_Group
 import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
@@ -48,7 +49,19 @@ class LatestMessagesActivity : AppCompatActivity() {
             explain_EditText.setText("")
             delete_button.visibility = View.INVISIBLE
             delete_button.isClickable = false */
-            FirebaseDatabase.getInstance().getReference("/Room_Chat/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
+            FirebaseDatabase.getInstance().getReference("Room_Chat/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
+            val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/count")
+            ref.addValueEventListener(object :ValueEventListener{
+                override fun onDataChange(p0: DataSnapshot) {
+                    p0.children.forEach(){
+                        val value = it.getValue(Room_Group::class.java)
+                            val reference = FirebaseDatabase.getInstance().getReference("/Room_Chat/count")
+                            reference.setValue(value?.count!!-1)
+                    }
+                }
+                override fun onCancelled(p0: DatabaseError) {
+                }
+            })
             intent = Intent(this,LatestMessagesActivity::class.java)
             startActivity(intent)
         }

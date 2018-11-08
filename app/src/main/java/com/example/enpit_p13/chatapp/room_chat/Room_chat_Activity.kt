@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
@@ -23,53 +24,59 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_room_chat_.*
 
 class Room_chat_Activity : AppCompatActivity() {
-
+    companion object {
+        val USER_KEY = "USER_KEY"
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_chat_)
         val userdata = intent.getParcelableExtra<Room_chat_messager>(LatestMessagesActivity.USER_KE)
         supportActionBar?.title = userdata.kadaimeiText
         explain_textview.text = userdata.messageText
-        createFirebaseListener()
-        send_Button_room_chat.setOnLongClickListener(){
-            template()
-        }
-        send_Button_room_chat.setOnClickListener {
-            template_button.visibility = View.INVISIBLE
-            template_button.isClickable = false
-            if (!room_chat_edittext.text.toString().isEmpty()) {
-                sendData()
-                createFirebaseListener()
-
-
-            } else {
-
-                Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
-
+        this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+            createFirebaseListener(userdata)
+            send_Button_room_chat.setOnLongClickListener() {
+                template()
             }
-        }
-        template_button.setOnClickListener{
-            template_button.visibility = View.INVISIBLE
-            template_button.isClickable = false
-            intent = Intent(this,QuestiontempActivity::class.java)
-            startActivity(intent)
-        }
+            send_Button_room_chat.setOnClickListener {
+                // template_button.visibility = View.INVISIBLE
+                // template_button.isClickable = false
+                if (!room_chat_edittext.text.toString().isEmpty()) {
+                    sendData(userdata)
+                    //createFirebaseListener(userdata)
+                } else {
+
+                    Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
+
+                }
+            }
+            template_button.setOnClickListener {
+                template_button.visibility = View.INVISIBLE
+                template_button.isClickable = false
+                intent = Intent(this, QuestiontempActivity::class.java)
+                intent.putExtra(USER_KEY, userdata)
+                startActivity(intent)
+            }
+        //recycler_chat_room.adapter.notifyDataSetChanged()
     }
-    private fun sendData() {
+    private fun sendData(userdata : Room_chat_messager) {
 
         val ref = FirebaseDatabase.getInstance().getReference("/users")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
 
             override fun onDataChange(p0: DataSnapshot) {
                 for (data in p0.children) {
-                    val userdata = intent.getParcelableExtra<Room_chat_messager>(LatestMessagesActivity.USER_KE)
+                    //val userdata = intent.getParcelableExtra<Room_chat_messager>(LatestMessagesActivity.USER_KE)
                     val userData = data.getValue<User>(User::class.java)
                     var i = 0
                     val user = userData?.let { it } ?: continue
                     if(user?.uid == FirebaseAuth.getInstance().uid){
                         val reference = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${userdata.uid.toString()}/${userdata.kadaimeiText.toString()}").push()
                         reference.setValue(Message(room_chat_edittext.text.toString(),user?.username.toString()))
-                        room_chat_edittext.setText("")
+                                .addOnSuccessListener {
+                                    room_chat_edittext.text.clear()
+                                    recycler_chat_room.scrollToPosition(recycler_chat_room.adapter.itemCount-1)
+                                }
                     }
                 }
             }
@@ -78,14 +85,13 @@ class Room_chat_Activity : AppCompatActivity() {
             }
         })
     }
-    private fun createFirebaseListener() {
-        val userdata = intent.getParcelableExtra<Room_chat_messager>(LatestMessagesActivity.USER_KE)
+    private fun createFirebaseListener(userdata: Room_chat_messager) {
+        //val userdata = intent.getParcelableExtra<Room_chat_messager>(LatestMessagesActivity.USER_KE)
         Log.d("Main","${userdata.uid}${userdata.kadaimeiText}")
         val ref =  FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${userdata.uid.toString()}")?.child("/${userdata.kadaimeiText.toString()}")
         ref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
-                var count = 0;
 
                 val adapter = GroupAdapter<ViewHolder>()
 
@@ -94,17 +100,14 @@ class Room_chat_Activity : AppCompatActivity() {
                 for (data in dataSnapshot.children) {
 
                     val messageData = data.getValue<Message>(Message::class.java)
-                    var i = 0
                     val message = messageData?.let { it } ?: continue
 
                     if (message.Uid == FirebaseAuth.getInstance().uid) {
-                            count += 1
 
                             adapter.add(ChatToItem(message.text!!))
 
                     }
                     else {
-                        count += 1
                             adapter.add(ChatfromItem(message.text!!,message.username!!))
                     }
 
@@ -113,7 +116,7 @@ class Room_chat_Activity : AppCompatActivity() {
 
                 recycler_chat_room.adapter = adapter
                 // setupAdapter(toReturn)
-                recycler_chat_room.scrollToPosition(count-1)
+                recycler_chat_room.scrollToPosition(adapter.itemCount-1)
             }
 
 
@@ -127,7 +130,7 @@ class Room_chat_Activity : AppCompatActivity() {
     private fun template(): Boolean {
        template_button.visibility = View.VISIBLE
         template_button.isClickable = true
-        return false
+        return true
     }
 }
 
