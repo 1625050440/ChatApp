@@ -1,6 +1,7 @@
 package com.example.enpit_p13.chatapp.analyzesheet
 
 
+import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -11,10 +12,13 @@ import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.Toast
+import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.R.*
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.analyzesheet.Quetion
+import com.example.enpit_p13.chatapp.messages.NewMessageActivity
+import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_own_analysis.*
@@ -30,7 +34,6 @@ class OwnAnalysisActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(com.example.enpit_p13.chatapp.R.layout.activity_own_analysis)
         setSupportActionBar(toolbar)
-
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         setToplabel()
@@ -43,11 +46,9 @@ class OwnAnalysisActivity : AppCompatActivity() {
                         val spinner = parent as? Spinner
                     }
 
-                    override fun onNothingSelected(p0: AdapterView<*>?) {
-                    }
+                    override fun onNothingSelected(p0: AdapterView<*>?) {}
 
                 }
-
 
         save_button.setOnClickListener{
 

@@ -10,6 +10,7 @@ import android.util.Log
 import android.view.Menu
 import android.view.MenuItem
 import android.view.View
+import android.view.WindowManager
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
@@ -33,6 +34,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         setContentView(R.layout.activity_latest_messages)
         //verifyUserIsLoggedIn()
         fetchUsers()
+        this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         room_create_button.setOnClickListener {
             if(room_create_button.text.toString() == "ルーム作成") {
                 if (title_edditext.text.toString() != "" && explain_EditText.text.toString() != "") {

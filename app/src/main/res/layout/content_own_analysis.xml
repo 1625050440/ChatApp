@@ -30,7 +30,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/Q9text" />
+                android:text="@string/Q9text"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/Q9_Edit_detali_text"
@@ -66,6 +67,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="@string/Q1text"
+                android:textStyle="bold"
                 tools:layout_editor_absoluteX="32dp"
                 tools:layout_editor_absoluteY="100dp" />
 
@@ -113,6 +115,7 @@
                 android:layout_marginRight="10dp"
                 android:text="@string/Q2text"
                 android:textSize="14sp"
+                android:textStyle="bold"
                 tools:layout_editor_absoluteX="32dp"
                 tools:layout_editor_absoluteY="183dp" />
 
@@ -158,6 +161,7 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:text="@string/Q3text"
+                android:textStyle="bold"
                 tools:layout_editor_absoluteX="32dp"
                 tools:layout_editor_absoluteY="267dp" />
 
@@ -198,7 +202,8 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
                 android:layout_weight="1"
-                android:text="@string/Q5text" />
+                android:text="@string/Q5text"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/Q5_RadioGroup"
@@ -233,7 +238,8 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/Q6text" />
+                android:text="@string/Q6text"
+                android:textStyle="bold" />
 
             <RadioGroup
                 android:id="@+id/Q6_RadioGroup"
@@ -289,7 +295,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
-                android:text="@string/Q7text" />
+                android:text="@string/Q7text"
+                android:textStyle="bold" />
 
             <TextView
                 android:id="@+id/Q7_Edit_text"
@@ -324,14 +331,15 @@
                 android:layout_marginLeft="10dp"
                 android:layout_marginTop="20dp"
                 android:layout_marginRight="10dp"
-                android:text="@string/Q8text" />
+                android:text="@string/Q8text"
+                android:textStyle="bold" />
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="40dp"
                 android:layout_marginRight="0dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="40dp"
                 android:orientation="horizontal">
 
                 <EditText

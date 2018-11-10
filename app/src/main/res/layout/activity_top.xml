@@ -31,6 +31,7 @@
         android:layout_marginTop="48dp"
         android:text="ここはトップページです"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
@@ -86,17 +87,18 @@
         android:layout_marginTop="16dp"
         android:layout_marginEnd="16dp"
         android:layout_marginRight="16dp"
-        android:text="ログイン失敗"
+        android:text="ログイン中"
         android:textSize="18sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/appBarLayout2" />
 
     <Button
         android:id="@+id/goToChatPage"
+        style="@style/Widget.AppCompat.Button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="200dp"
-        android:background="@android:color/white"
+        android:background="@drawable/button_selector"
         android:shadowColor="@android:color/transparent"
         android:text="チャットページ"
         android:textSize="36sp"
@@ -110,7 +112,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
-        android:background="@android:color/white"
+        android:background="@drawable/button_selector"
         android:text="質問ページ"
         android:textSize="36sp"
         app:layout_constraintBottom_toTopOf="@+id/goToAnalyzePage"
@@ -127,7 +129,7 @@
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:layout_marginBottom="200dp"
-        android:background="@android:color/white"
+        android:background="@drawable/button_selector"
         android:text="分析ページ"
         android:textSize="36sp"
         app:layout_constraintBottom_toBottomOf="parent"
