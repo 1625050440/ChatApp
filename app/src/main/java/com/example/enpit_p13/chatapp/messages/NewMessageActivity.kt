@@ -5,8 +5,10 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_from_ListView
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
+import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -35,67 +37,64 @@ class NewMessageActivity : AppCompatActivity() {
 
     private fun fetchUsers() {
         val adapter = GroupAdapter<ViewHolder>()
-
-       val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener{
+        val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/")
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
-                val count = p0.childrenCount
-              p0.children.forEach(){
-                   val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${it.key.toString()}")
-                   ref.addValueEventListener(object : ValueEventListener {
-                       override fun onDataChange(p0: DataSnapshot) {
-                          for(data in p0.children){
-                               val datauser = data.getValue<Room_chat_messager>(Room_chat_messager::class.java)
-                              val user = datauser?.let { it } ?:continue
-                               Log.d("Chat_Room",user?.kadaimeiText.toString())
-                              if(user?.kadaimeiText.toString()!="") {
-                                  Log.d("Chat","user from New ${user.uid.toString()}")
+                var count = p0.childrenCount
+                for (data in p0.children) {
+                    val datauser = data.getValue<Room_chat_messager>(Room_chat_messager::class.java)
+                    val user = datauser?.let { it } ?: continue
+                    Log.d("Main", count.toString())
+                    if (user.check == false) {
+                        count--
+                    } else {
+                        if (user.kadaimeiText.toString() != "") {
+                            Log.d("Chat", "user from New ${user.uid.toString()}")
 
-                                      check.add(user)
-                                        Log.d("Data","11 ${check.toString()} ")
+                            check.add(user)
+                            Log.d("Data", "11 ${check.toString()} ")
 
-                                  check.sortByDescending{it->it.timestamp}
-                                  Log.d("Data","11 ${check.toString()} ")
-                                  Log.d("Data","11 ${check.size} ")
-                              }
-                           }
-                           Log.d("Data","11 ${check.toString()} ")
-                           Log.d("Data","11 ${count} ")
+                            check.sortByDescending { it -> it.timestamp }
+                            Log.d("Data", "11 ${check.toString()} ")
+                            Log.d("Data", "11 ${check.size} ")
+                        }
+                    }
+                }
+                Log.d("Data", "11 ${check.toString()} ")
+                Log.d("Data", "11 ${count} ")
 
-                           Log.d("Data", "${check.toString()}")
-                           if(check.size.toLong() == count){
-                           for (data in check) {
-                               Log.d("Data", "${data.kadaimeiText.toString()}")
+                Log.d("Data", "${check.toString()}")
+                if (check.size.toLong() == count) {
+                    for (data in check) {
+                        Log.d("Data", "${data.kadaimeiText.toString()}")
 
-                               adapter.add(UserItem(data))
-                           }
+                        adapter.add(UserItem(data))
+                    }
 
-                           }
-
-                       }
-
-                       override fun onCancelled(p0: DatabaseError) {
-
-                       }
-
-                   })
-
-              }
+                }
 
             }
 
             override fun onCancelled(p0: DatabaseError) {
 
             }
-        })
 
+        })
 
         adapter.setOnItemClickListener { item, view ->
             val userItem = item as UserItem
+            if(item.user.uid.toString()==FirebaseAuth.getInstance().uid.toString())
+            {
+                val intent = Intent(view.context, Room_chat_Activity::class.java)
+                Log.d("Chat", "user from New b ${item.user.uid.toString()}")
+                startActivity(intent)
+            }
+            else{
             val intent = Intent(view.context, Room_chat_from_ListView::class.java)
             intent.putExtra(USER_KEY, item.user)
             Log.d("Chat", "user from New b ${item.user.uid.toString()}")
             startActivity(intent)
+            }
         }
 
         recyclemessage_chat_list.adapter= adapter

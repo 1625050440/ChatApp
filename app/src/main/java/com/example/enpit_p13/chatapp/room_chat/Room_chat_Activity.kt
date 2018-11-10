@@ -11,7 +11,6 @@ import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
-import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -30,31 +29,51 @@ class Room_chat_Activity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_room_chat_)
-        val userdata = intent.getParcelableExtra<Room_chat_messager>(LatestMessagesActivity.USER_KE)
-        supportActionBar?.title = userdata.kadaimeiText
-        explain_textview.text = userdata.messageText
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
-            createFirebaseListener(userdata)
-            send_Button_room_chat.setOnLongClickListener() {
+
+        val ref = FirebaseDatabase.getInstance().getReference("/Room_Chat")
+        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+            for (data in p0.children) {
+                val userData = data.getValue<Room_chat_messager>(Room_chat_messager::class.java)
+                val user = userData?.let { it } ?: continue
+                //  val userdata = intent.getParcelableExtra<Room_chat_messager>(Room_chat_Activity.USER_KEY)
+                //val textkadai = intent.getStringExtra(LatestMessagesActivity.USER_KEY)
+                if (user.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
+                 supportActionBar?.title = user.kadaimeiText.toString()
+                    explain_textview.text = user.messageText.toString()
+                    createFirebaseListener(user)
+                    send_Button_room_chat.setOnClickListener {
+                        template_button.visibility = View.INVISIBLE
+                        template_button.isClickable = false
+                        if (!room_chat_edittext.text.toString().isEmpty()) {
+                            sendData(user)
+                            //createFirebaseListener(userdata)
+                        } else {
+
+                            Toast.makeText(this@Room_chat_Activity, "Please enter a message", Toast.LENGTH_SHORT).show()
+
+                        }
+                    }
+                }
+
+            }
+
+        }
+        override fun onCancelled(p0: DatabaseError) {
+
+        }
+    })
+
+        send_Button_room_chat.setOnLongClickListener() {
                 template()
             }
-            send_Button_room_chat.setOnClickListener {
-                // template_button.visibility = View.INVISIBLE
-                // template_button.isClickable = false
-                if (!room_chat_edittext.text.toString().isEmpty()) {
-                    sendData(userdata)
-                    //createFirebaseListener(userdata)
-                } else {
 
-                    Toast.makeText(this, "Please enter a message", Toast.LENGTH_SHORT).show()
-
-                }
-            }
             template_button.setOnClickListener {
                 template_button.visibility = View.INVISIBLE
                 template_button.isClickable = false
                 intent = Intent(this, QuestiontempActivity::class.java)
-                intent.putExtra(USER_KEY, userdata)
+              //  intent.putExtra(USER_KEY, userdata)
                 startActivity(intent)
             }
         //recycler_chat_room.adapter.notifyDataSetChanged()
@@ -71,7 +90,7 @@ class Room_chat_Activity : AppCompatActivity() {
                     var i = 0
                     val user = userData?.let { it } ?: continue
                     if(user?.uid == FirebaseAuth.getInstance().uid){
-                        val reference = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${userdata.uid.toString()}/${userdata.kadaimeiText.toString()}").push()
+                        val reference = FirebaseDatabase.getInstance().getReference("/Room_Chat/${userdata.kadaimeiText.toString()}").push()
                         reference.setValue(Message(room_chat_edittext.text.toString(),user?.username.toString()))
                                 .addOnSuccessListener {
                                     room_chat_edittext.text.clear()
@@ -87,8 +106,8 @@ class Room_chat_Activity : AppCompatActivity() {
     }
     private fun createFirebaseListener(userdata: Room_chat_messager) {
         //val userdata = intent.getParcelableExtra<Room_chat_messager>(LatestMessagesActivity.USER_KE)
-        Log.d("Main","${userdata.uid}${userdata.kadaimeiText}")
-        val ref =  FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${userdata.uid.toString()}")?.child("/${userdata.kadaimeiText.toString()}")
+        Log.d("Main","kaidaimei ${userdata.uid}${userdata.kadaimeiText}")
+        val ref =  FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${userdata.kadaimeiText.toString()}")
         ref.addValueEventListener(object : ValueEventListener {
 
             override fun onDataChange(dataSnapshot: DataSnapshot) {
@@ -130,7 +149,7 @@ class Room_chat_Activity : AppCompatActivity() {
     private fun template(): Boolean {
        template_button.visibility = View.VISIBLE
         template_button.isClickable = true
-        return true
+        return false
     }
 }
 

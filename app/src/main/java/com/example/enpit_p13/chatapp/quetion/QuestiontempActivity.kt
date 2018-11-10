@@ -9,9 +9,8 @@ import android.view.View
 import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.Toast
-import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
-import com.example.enpit_p13.chatapp.models.User
+import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
 import com.google.firebase.auth.FirebaseAuth
@@ -58,38 +57,47 @@ class QuestiontempActivity : AppCompatActivity() {
         }
 
     }
-
+    companion object {
+        val USER_KEY = "USER_KEY"
+    }
     private fun send(){
 
         val message= (spin.text.toString() + "\n" + texttemplate1.text.toString() + text1.text.toString()
                 + texttemplate2.text.toString()  + "\n" + texttemplate3.text.toString() + text2.text.toString() + "\n" + texttemplate4.text.toString())
         Log.d("mess",message)
-
-        val ref = FirebaseDatabase.getInstance().getReference("/users")
+      val ref = FirebaseDatabase.getInstance().getReference("/Room_Chat")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
-
             override fun onDataChange(p0: DataSnapshot) {
                 for (data in p0.children) {
-
-                    val userdata = intent.getParcelableExtra<Room_chat_messager>(Room_chat_Activity.USER_KEY)
-                    val userData = data.getValue<User>(User::class.java)
-                    var i = 0
+                    val userData = data.getValue<Room_chat_messager>(Room_chat_messager::class.java)
                     val user = userData?.let { it } ?: continue
-                    if(user?.uid == FirebaseAuth.getInstance().uid){
-                        val reference = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/${userdata.uid.toString()}/${userdata.kadaimeiText.toString()}").push()
-                        reference.setValue(Message(message,user?.username.toString()))
-                                .addOnSuccessListener {
-                                    intent = Intent(this@QuestiontempActivity,Room_chat_Activity::class.java)
-                                    startActivity(intent)
+                    //  val userdata = intent.getParcelableExtra<Room_chat_messager>(Room_chat_Activity.USER_KEY)
+                    //val textkadai = intent.getStringExtra(LatestMessagesActivity.USER_KEY)
+                    if (user.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
+
+                                    val refe = FirebaseDatabase.getInstance().getReference("/Room_Chat/${FirebaseAuth.getInstance().uid.toString()}")
+                                    refe.setValue(Room_chat_messager(message, user?.kadaimeiText.toString(), FirebaseAuth.getInstance().uid.toString(), user.check))
+                                            .addOnSuccessListener {
+
+                                        if (user?.messageText.toString().isEmpty()) {
+                                            intent = Intent(this@QuestiontempActivity, LatestMessagesActivity::class.java)
+                                            startActivity(intent)
+                                        } else {
+                                            intent = Intent(this@QuestiontempActivity, Room_chat_Activity::class.java)
+                                            startActivity(intent)
+                                        }
+                                    }
+
                                 }
-                    }
+
+
+
+
                 }
             }
             override fun onCancelled(p0: DatabaseError) {
 
             }
         })
-        //mDatabase.setValue(Message(message,"dasdfasdfas"))
-
     }
 }

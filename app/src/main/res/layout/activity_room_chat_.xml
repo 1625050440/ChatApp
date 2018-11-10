@@ -35,7 +35,7 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="600dp"
+        android:layout_width="0dp"
         android:layout_height="50dp"
         android:baselineAligned="false"
         android:orientation="horizontal"

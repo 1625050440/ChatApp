@@ -22,11 +22,19 @@
         </activity>
 
         <activity android:name=".messages.LatestMessagesActivity">
-        </activity>
 
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".registerlogin.RegisterActivity">
-        </activity>
 
+        <intent-filter>
+            <action android:name="android.intent.action.MAIN" />
+            <category android:name="android.intent.category.LAUNCHER" />
+        </intent-filter>
+        </activity>
         <activity android:name=".registerlogin.Login" />
         <activity android:name=".messages.NewMessageActivity">
             <meta-data
