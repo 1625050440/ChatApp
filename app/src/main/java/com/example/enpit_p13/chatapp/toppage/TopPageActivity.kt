@@ -9,7 +9,6 @@ import android.view.MenuItem
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.analyzesheet.OwnAnalysisActivity
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
-import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -23,10 +22,12 @@ import org.jetbrains.anko.startActivity
 
 class TopPageActivity : AppCompatActivity() {
 
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_top)
         setSupportActionBar(toolbar)
+
 
         //ログイン認証
         verifyUserIsLoggedIn()
@@ -88,7 +89,7 @@ class TopPageActivity : AppCompatActivity() {
                     Log.d("getUid",users.uid.toString())
 
                     if(users.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
-                        dis_puserName.text = "現在\"" + users.username + "\"さんでログイン"
+                        disp_userName.text = "現在\"" + users.username + "\"さんでログイン"
                     }
                 }
             }
