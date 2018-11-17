@@ -60,6 +60,7 @@ class QuestiontempActivity_from_chat_all : AppCompatActivity() {
 
     private fun send(){
 
+
         val message= (spin_chat_all.text.toString() + "\n" + texttemplate1_chat_all.text.toString() + text1_chat_all.text.toString()
                 + texttemplate2_chat_all.text.toString()  + "\n" + texttemplate3_chat_all.text.toString() + text2_chat_all.text.toString() + "\n" + texttemplate4_chat_all.text.toString() + "\n"
                 + editText_chat_all.text.toString())

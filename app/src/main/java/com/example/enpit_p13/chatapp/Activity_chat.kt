@@ -10,6 +10,7 @@ import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity_from_chat_all
+import com.example.enpit_p13.chatapp.quetion.RoomIntroduceActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -18,6 +19,7 @@ import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat.*
+import org.jetbrains.anko.startActivity
 
 class Activity_chat : AppCompatActivity() {
 
@@ -50,6 +52,12 @@ class Activity_chat : AppCompatActivity() {
             template_button_from_chat_all.isClickable = false
             intent = Intent(this, QuestiontempActivity_from_chat_all::class.java)
             startActivity(intent)
+        }
+
+        room_intro_button.setOnClickListener {
+            room_intro_button.visibility = View.INVISIBLE
+            room_intro_button.isClickable = false
+            startActivity<RoomIntroduceActivity>()
         }
 
     }
@@ -127,6 +135,8 @@ class Activity_chat : AppCompatActivity() {
     private fun template(): Boolean {
         template_button_from_chat_all.visibility = View.VISIBLE
         template_button_from_chat_all.isClickable = true
+        room_intro_button.visibility = View.VISIBLE
+        room_intro_button.isClickable = true
         return false
     }
 }

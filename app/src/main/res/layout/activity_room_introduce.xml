@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="45dp"
+        android:layout_marginLeft="45dp"
+        android:layout_marginTop="62dp"
+        android:text="チャットを紹介する"
+        android:textSize="30sp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <ScrollView
+        android:id="@+id/scrollView4"
+        android:layout_width="match_parent"
+        android:layout_height="605dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginBottom="60dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/text1"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="60dp"
+                android:text="私は、～と申します。\n"
+                android:textSize="24sp" />
+
+            <LinearLayout
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="20dp"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:id="@+id/text2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:text="私は、"
+                    android:textSize="24sp" />
+
+                <Spinner
+                    android:id="@+id/spinner1"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:entries="@array/list" />
+
+                <TextView
+                    android:id="@+id/text3"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="について悩んでいます。\n"
+                    android:textSize="24sp" />
+
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/text4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="45dp"
+                android:layout_marginTop="20dp"
+                android:layout_weight="1"
+                android:text="詳しい内容については、私のチャットルームでお伝えします。"
+                android:textSize="24sp"
+                app:lineHeight="45dp" />
+
+            <Button
+                android:id="@+id/sendButton_room_introduce"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:layout_marginTop="60dp"
+                android:text="送信" />
+
+        </LinearLayout>
+    </ScrollView>
+
+</android.support.constraint.ConstraintLayout>

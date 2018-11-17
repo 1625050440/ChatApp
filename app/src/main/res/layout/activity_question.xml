@@ -7,9 +7,40 @@
     tools:context=".quetion.QuestiontempActivity"
    >
 
+    <TextView
+        android:id="@+id/title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="25dp"
+        android:layout_weight="1"
+        android:text="質問テンプレート"
+        android:textSize="30dp"
+        android:textStyle="bold"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginLeft="16dp"
+        android:layout_marginTop="30dp"
+        android:layout_weight="1"
+        android:entries="@array/list"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title" />
+
     <ScrollView
+        android:id="@+id/scrollView3"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:layout_marginTop="133dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:id="@+id/linearLayout"
@@ -23,37 +54,11 @@
             app:layout_constraintVertical_bias="0.0">
 
             <TextView
-                android:id="@+id/title"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="60dp"
-                android:layout_weight="1"
-                android:text="質問テンプレート"
-                android:textSize="30dp"
-                android:textStyle="bold"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="30dp"
-                android:layout_weight="1"
-                android:entries="@array/list"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/title" />
-
-            <TextView
                 android:id="@+id/spin"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
-                android:layout_marginTop="40dp"
+                android:layout_marginTop="0dp"
                 android:text="コミュニケーション"
                 android:textSize="20dp"
                 android:textStyle="bold"

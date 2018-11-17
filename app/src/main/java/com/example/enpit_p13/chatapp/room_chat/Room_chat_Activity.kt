@@ -147,7 +147,7 @@ class Room_chat_Activity : AppCompatActivity() {
 
     }
     private fun template(): Boolean {
-       template_button.visibility = View.VISIBLE
+        template_button.visibility = View.VISIBLE
         template_button.isClickable = true
         return false
     }
