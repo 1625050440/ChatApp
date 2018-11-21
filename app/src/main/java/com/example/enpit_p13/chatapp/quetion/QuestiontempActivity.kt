@@ -20,6 +20,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_question.*
+import kotlinx.android.synthetic.main.activity_questiontemp_from_chat_all.*
 
 
 class QuestiontempActivity : AppCompatActivity() {
@@ -64,8 +65,9 @@ class QuestiontempActivity : AppCompatActivity() {
     }
     private fun send(){
 
-        val message= (spin.text.toString() + "\n" + texttemplate1.text.toString() + text1.text.toString()
-                + texttemplate2.text.toString()  + "\n" + texttemplate3.text.toString() + text2.text.toString() + "\n" + texttemplate4.text.toString())
+            val message= (spin.text.toString() + "\n" + texttemplate1.text.toString() + text1.text.toString()
+                + texttemplate2.text.toString()  + "\n" + texttemplate3.text.toString() + text2.text.toString()
+                + "\n" + texttemplate4.text.toString() + editText.text.toString())
         Log.d("mess",message)
       val ref = FirebaseDatabase.getInstance().getReference("/Room_Chat")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {

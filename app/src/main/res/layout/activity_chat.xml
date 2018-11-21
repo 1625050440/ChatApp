@@ -35,6 +35,18 @@
     </LinearLayout>
 
     <Button
+        android:id="@+id/room_intro_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:text="ルームを紹介する"
+        android:clickable="false"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/template_button_from_chat_all"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
         android:id="@+id/template_button_from_chat_all"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
