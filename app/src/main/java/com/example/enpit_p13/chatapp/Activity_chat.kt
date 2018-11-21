@@ -8,6 +8,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
+import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity_from_chat_all
 import com.google.firebase.auth.FirebaseAuth
@@ -25,6 +26,31 @@ class Activity_chat : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chat)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
+        val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+        reference.setValue(Check_online("Chat_all"))
+
+        val ref = FirebaseDatabase.getInstance().getReference()?.child("/Address/")
+        ref.addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                var count = p0.childrenCount
+                for (data in p0.children) {
+                    val userData = data.getValue<Check_online>(Check_online::class.java)
+                    val user = userData?.let { it } ?: continue
+                    if (user.uid_check_online.toString() != "Chat_all") {
+                        count--
+
+                    }
+
+                }
+                online_count_text_view.text= "在室中：${count}"
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
+
         createFirebaseListener()
         send_Button.setOnLongClickListener() {
             template()
