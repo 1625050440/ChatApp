@@ -11,6 +11,7 @@ import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
+import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -31,6 +32,8 @@ class Room_chat_Activity : AppCompatActivity() {
         setContentView(R.layout.activity_room_chat_)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
+
+
         val ref = FirebaseDatabase.getInstance().getReference("/Room_Chat")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
@@ -42,6 +45,29 @@ class Room_chat_Activity : AppCompatActivity() {
                 if (user.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
                  supportActionBar?.title = user.kadaimeiText.toString()
                     explain_textview.text = user.messageText.toString()
+                    //sendAddress
+                    FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                    .setValue(Check_online(user.kadaimeiText.toString()))
+                    val key =  user.kadaimeiText.toString()
+                    val ref = FirebaseDatabase.getInstance().getReference()?.child("/Address/")
+                    ref.addValueEventListener(object : ValueEventListener {
+                        override fun onDataChange(p0: DataSnapshot) {
+                            var count = p0.childrenCount
+                            for (data in p0.children) {
+                                val userData = data.getValue<Check_online>(Check_online::class.java)
+                                val user = userData?.let { it } ?: continue
+                                if (user.uid_check_online.toString() != key ) {
+                                    count--
+                                }
+
+                            }
+                                    myroom_count_textview.text= "在室中：$count"
+                        }
+
+                        override fun onCancelled(p0: DatabaseError) {
+
+                        }
+                    })
                     createFirebaseListener(user)
                     send_Button_room_chat.setOnClickListener {
                         template_button.visibility = View.INVISIBLE

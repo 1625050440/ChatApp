@@ -10,15 +10,18 @@
 
     <TextView
         android:id="@+id/kadaimei_textview"
-        android:layout_width="618dp"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_register"
+        android:background="@drawable/rounded_button"
         android:maxWidth="240dp"
         android:padding="16dp"
-        android:textColor="@android:color/black"
+        android:textColor="@android:color/holo_red_light"
         android:textStyle="bold"
-        app:layout_constraintTop_toTopOf="parent"
-        tools:layout_editor_absoluteX="0dp" />
+        android:gravity="center"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
 </android.support.constraint.ConstraintLayout>
