@@ -3,6 +3,7 @@ package com.example.enpit_p13.chatapp
 import android.os.Bundle
 import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
+import android.text.InputType
 import android.util.Log
 import com.example.enpit_p13.chatapp.analyzesheet.OwnAnalysisActivity
 import com.example.enpit_p13.chatapp.analyzesheet.Quetion
@@ -44,6 +45,20 @@ class LookBackAnalyzeActivity : AppCompatActivity() {
             }
 
         })
+
+        Q1_edit_num_lookback.setInputType(InputType.TYPE_NULL)
+        Q2_edit_num_loockback.setEnabled(false)
+        Q2_spinner_loockback.setEnabled(false)
+        Q3_edit_num_loockback.setEnabled(false)
+        Q5_yesButtom_loockback.setEnabled(false)
+        Q5_noButtom_loockback.setEnabled(false)
+        Q6_edit_detail_loockback.setEnabled(false)
+        Q6_noButtom_loockback.setEnabled(false)
+        Q6_yesButtom_loockback.setEnabled(false)
+        Q7_edit_text_loockback.setEnabled(false)
+        Q8Edit_detail_loockback.setEnabled(false)
+        Q9_edit_detail_lookback.setEnabled(false)
+
     }
 
     fun ReadQuetion(quetion: Quetion){
