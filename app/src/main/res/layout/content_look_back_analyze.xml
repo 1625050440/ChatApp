@@ -1,0 +1,399 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".LookBackAnalyzeActivity"
+    tools:showIn="@layout/activity_look_back_analyze">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"  android:id="@+id/scrollView"
+        android:layout_marginTop="50dp" android:background="@color/common_google_signin_btn_text_dark_default">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="0dp"
+            android:layout_marginTop="60dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/Q9_text_loolback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q9text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Q9_Edit_detali_text_lookback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/Q9edit_dital_text" />
+
+            <EditText
+                android:id="@+id/Q9_edit_detail_lookback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:gravity="start"
+                android:hint="\n\n\n\n\n\n"
+                android:inputType="textMultiLine"
+                android:lineHeight="20dp"
+                android:lines="7"
+                android:maxLength="200"
+                android:minLines="1"
+                android:textSize="18sp" />
+
+
+            <TextView
+                android:id="@+id/Q1text_lookback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q1text"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="100dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/Q1_edit_num_lookback"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:layout_marginLeft="24dp"
+                    android:ems="10"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="(例)  ５"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textSize="12sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="119dp" />
+
+                <TextView
+                    android:id="@+id/Q1edit_friquency_loockback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:layout_marginRight="100dp"
+                    android:text="回/週"
+                    tools:layout_editor_absoluteX="106dp"
+                    tools:layout_editor_absoluteY="129dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Q2text_loockback"
+                android:layout_width="wrap_content"
+                android:layout_height="20dp"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q2text"
+                android:textSize="14sp"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="183dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/Q2_edit_num_loockback"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:layout_marginStart="24dp"
+                    android:layout_marginLeft="0dp"
+                    android:ems="10"
+                    android:gravity="center_horizontal"
+                    android:hint="(例)  23"
+                    android:inputType="number"
+                    android:maxLength="3"
+                    android:singleLine="true"
+                    android:textSize="12sp"
+                    app:layout_constraintStart_toStartOf="@+id/Q2text_loockback"
+                    app:layout_constraintTop_toBottomOf="@+id/Q2text_loockback" />
+
+                <Spinner
+                    android:id="@+id/Q2_spinner_loockback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:entries="@array/txt_frequency_arr"
+                    tools:layout_editor_absoluteX="106dp"
+                    tools:layout_editor_absoluteY="210dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Q3text_loockback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q3text"
+                android:textStyle="bold"
+                tools:layout_editor_absoluteX="32dp"
+                tools:layout_editor_absoluteY="267dp" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/Q3_edit_num_loockback"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:ems="10"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="(例)  3"
+                    android:inputType="number"
+                    android:singleLine="true"
+                    android:textSize="12sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="286dp" />
+
+                <TextView
+                    android:id="@+id/Q3edit_text_loockback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="回/日"
+                    tools:layout_editor_absoluteX="106dp"
+                    tools:layout_editor_absoluteY="296dp" />
+            </LinearLayout>
+
+            <TextView
+                android:id="@+id/Q5text_loockback"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:layout_weight="1"
+                android:text="@string/Q5text"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/Q5_RadioGroup_loockback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="20dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/Q5_yesButtom_loockback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/ans__yes" />
+
+                <RadioButton
+                    android:id="@+id/Q5_noButtom_loockback"
+                    style="@style/Widget.AppCompat.CompoundButton.RadioButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:checked="false"
+                    android:text="@string/ans_no" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/Q6text_loockback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q6text"
+                android:textStyle="bold" />
+
+            <RadioGroup
+                android:id="@+id/Q6_RadioGroup_loockback"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:orientation="horizontal">
+
+                <RadioButton
+                    android:id="@+id/Q6_yesButtom_loockback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ans__yes" />
+
+                <RadioButton
+                    android:id="@+id/Q6_noButtom_loockback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/ans_no" />
+            </RadioGroup>
+
+            <TextView
+                android:id="@+id/Q6_Edit_detali_text_loockback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/Q6edit_detail_text" />
+
+            <EditText
+                android:id="@+id/Q6_edit_detail_loockback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:gravity="start"
+                android:hint="\n\n\n\n\n\n\n"
+                android:inputType="textMultiLine"
+                android:lineHeight="20dp"
+                android:lines="7"
+                android:maxLength="200"
+                android:minLines="1"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Q7text_loockback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:text="@string/Q7text"
+                android:textStyle="bold" />
+
+            <TextView
+                android:id="@+id/Q7_Edit_text_loockback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="60dp"
+                android:layout_marginRight="60dp"
+                android:layout_marginBottom="5dp"
+                android:text="@string/Q6edit_detail_text" />
+
+            <EditText
+                android:id="@+id/Q7_edit_text_loockback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="40dp"
+                android:layout_marginBottom="40dp"
+                android:background="@drawable/textview_border"
+                android:ems="10"
+                android:gravity="start"
+                android:hint="\n\n\n\n\n\n\n"
+                android:inputType="textMultiLine"
+                android:lineHeight="20dp"
+                android:lines="7"
+                android:maxLength="200"
+                android:minLines="1"
+                android:textSize="18sp" />
+
+            <TextView
+                android:id="@+id/Q8_text_loockback"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="10dp"
+                android:layout_marginTop="20dp"
+                android:layout_marginRight="10dp"
+                android:text="@string/Q8text"
+                android:textStyle="bold" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="40dp"
+                android:layout_marginRight="0dp"
+                android:layout_marginBottom="40dp"
+                android:orientation="horizontal">
+
+                <EditText
+                    android:id="@+id/Q8Edit_num_loockback"
+                    android:layout_width="50dp"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:layout_marginLeft="24dp"
+                    android:ems="10"
+                    android:gravity="center_vertical|center_horizontal"
+                    android:hint="(例)  ５"
+                    android:inputType="number"
+                    android:maxLength="6"
+                    android:singleLine="true"
+                    android:textAppearance="@style/TextAppearance.AppCompat"
+                    android:textSize="12sp"
+                    tools:layout_editor_absoluteX="56dp"
+                    tools:layout_editor_absoluteY="119dp" />
+
+                <Spinner
+                    android:id="@+id/Q8_spinner_loockback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="0dp"
+                    android:entries="@array/txt_frequency_arr"
+                    tools:layout_editor_absoluteX="106dp"
+                    tools:layout_editor_absoluteY="210dp" />
+
+                <EditText
+                    android:id="@+id/Q8Edit_detail_loockback"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="0dp"
+                    android:layout_marginRight="40dp"
+                    android:layout_weight="1"
+                    android:ems="10"
+                    android:hint="詳細記述"
+                    android:inputType="textPersonName" />
+
+            </LinearLayout>
+        </LinearLayout>
+    </ScrollView>
+
+    <TextView
+        android:id="@+id/Label"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="分析シート"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+</android.support.constraint.ConstraintLayout>

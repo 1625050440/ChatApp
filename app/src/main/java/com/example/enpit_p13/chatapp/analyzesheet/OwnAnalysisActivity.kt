@@ -1,7 +1,6 @@
 package com.example.enpit_p13.chatapp.analyzesheet
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -12,14 +11,8 @@ import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.Toast
-import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
-import com.example.enpit_p13.chatapp.R.*
-import com.example.enpit_p13.chatapp.SelectOwnAnalyzeActivity
 import com.example.enpit_p13.chatapp.models.User
-import com.example.enpit_p13.chatapp.analyzesheet.Quetion
-import com.example.enpit_p13.chatapp.messages.NewMessageActivity
-import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_own_analysis.*
@@ -115,7 +108,7 @@ class OwnAnalysisActivity : AppCompatActivity() {
 
         //データベースに保存
         var quetion = Quetion(q1,q2_1,q2_2,q3,q5,q6_1,q6_2,q7,q8_1,q8_2,q8_3,q9)
-        mDatabase.child("time").setValue(quetion)
+        mDatabase.child(quetion.timestamp.toString()).setValue(quetion)
 
     }
 
