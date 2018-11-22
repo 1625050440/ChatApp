@@ -1,7 +1,6 @@
 package com.example.enpit_p13.chatapp.analyzesheet
 
 
-import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
@@ -12,22 +11,17 @@ import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.Toast
-import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
-import com.example.enpit_p13.chatapp.R.*
 import com.example.enpit_p13.chatapp.models.User
-import com.example.enpit_p13.chatapp.analyzesheet.Quetion
-import com.example.enpit_p13.chatapp.messages.NewMessageActivity
-import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
 import kotlinx.android.synthetic.main.activity_own_analysis.*
 import kotlinx.android.synthetic.main.content_own_analysis.*
+import org.jetbrains.anko.startActivity
 
 class OwnAnalysisActivity : AppCompatActivity() {
 
     var mDatabase = FirebaseDatabase.getInstance().getReference("/AnalyzeSheet/${FirebaseAuth.getInstance().uid}")
-
 
     override fun onCreate(savedInstanceState: Bundle?) {
 
@@ -38,7 +32,6 @@ class OwnAnalysisActivity : AppCompatActivity() {
 
         setToplabel()
 
-        fetchuser()
         Q2_spinner.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener{
 
@@ -59,6 +52,36 @@ class OwnAnalysisActivity : AppCompatActivity() {
             writeNewQetion()
         }
     }
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        menuInflater.inflate(R.menu.analyze_menu, menu)
+        return true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem?): Boolean {
+        when(item?.itemId){
+            R.id.look_back ->{
+                val ref = FirebaseDatabase.getInstance().reference.child("/AnalyzeSheet")
+
+                ref.addListenerForSingleValueEvent(object :ValueEventListener
+                {
+                    override fun onDataChange(p0: DataSnapshot)
+                    {
+                        Log.d("Main","実行")
+                        if(p0.hasChild(FirebaseAuth.getInstance().uid.toString())) {
+                            startActivity<SelectOwnAnalyzeActivity>()
+                        }else{
+                            Toast.makeText(this@OwnAnalysisActivity,"保存されているデータがありません",Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                    override fun onCancelled(p0: DatabaseError) {}
+                })
+            }
+        }
+
+        return super.onOptionsItemSelected(item)
+    }
+
 
     private fun writeNewQetion()
     {
@@ -85,13 +108,28 @@ class OwnAnalysisActivity : AppCompatActivity() {
 
         //データベースに保存
         var quetion = Quetion(q1,q2_1,q2_2,q3,q5,q6_1,q6_2,q7,q8_1,q8_2,q8_3,q9)
-        mDatabase.setValue(quetion)
+        mDatabase.child(quetion.timestamp.toString()).setValue(quetion)
 
     }
 
     private fun fetchuser()
     {
         val ref = FirebaseDatabase.getInstance().reference.child("/AnalyzeSheet")
+
+        ref.addValueEventListener(object :ValueEventListener
+        {
+            override fun onCancelled(p0: DatabaseError) {}
+
+            override fun onDataChange(p0: DataSnapshot) {
+                if(p0.key == FirebaseAuth.getInstance().uid) {
+                    Log.d("exe", p0.key)
+                    Log.d("p0chkey", p0.child("1542701485246").key)
+
+                }
+            }
+
+        })
+
         ref.addListenerForSingleValueEvent(object :ValueEventListener
         {
             override fun onDataChange(p0: DataSnapshot)
