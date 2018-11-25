@@ -1,13 +1,10 @@
-package com.example.enpit_p13.chatapp
+package com.example.enpit_p13.chatapp.analyzesheet
 
 import android.os.Bundle
-import android.support.design.widget.Snackbar
 import android.support.v7.app.AppCompatActivity;
 import android.text.InputType
 import android.util.Log
-import com.example.enpit_p13.chatapp.analyzesheet.OwnAnalysisActivity
-import com.example.enpit_p13.chatapp.analyzesheet.Quetion
-import com.example.enpit_p13.chatapp.analyzesheet.SelectOwnAnalyzeActivity
+import com.example.enpit_p13.chatapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -16,7 +13,6 @@ import com.google.firebase.database.ValueEventListener
 
 import kotlinx.android.synthetic.main.activity_look_back_analyze.*
 import kotlinx.android.synthetic.main.content_look_back_analyze.*
-import kotlinx.android.synthetic.main.content_own_analysis.*
 import java.sql.Date
 import java.text.SimpleDateFormat
 

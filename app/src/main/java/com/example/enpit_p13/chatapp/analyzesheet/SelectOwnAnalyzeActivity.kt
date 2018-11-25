@@ -6,7 +6,6 @@ import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
 import android.support.v7.widget.LinearLayoutManager
 import android.util.Log
-import com.example.enpit_p13.chatapp.LookBackAnalyzeActivity
 import com.example.enpit_p13.chatapp.R
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.*
