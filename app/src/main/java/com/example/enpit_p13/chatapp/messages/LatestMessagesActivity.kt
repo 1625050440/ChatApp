@@ -25,6 +25,7 @@ import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_latest_messages.*
+import org.jetbrains.anko.startActivity
 
 class LatestMessagesActivity : AppCompatActivity() {
 
@@ -38,6 +39,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         reference.setValue(Check_online("Top_Page"))
         fetchUsers()
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
         room_create_button.setOnClickListener {
             if(room_create_button.text.toString() == "ルーム作成") {
                 if (title_edditext.text.toString() != "" && explain_EditText.text.toString() != "") {
@@ -107,6 +109,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         delete_button.setOnClickListener {
             val dialog = DeleteConfirmDialog()
             dialog.show(supportFragmentManager,"alert_dialog")
+            startActivity<LatestMessagesActivity>()
            // startActivity<Room_chat_from_ListView>()
 
 
