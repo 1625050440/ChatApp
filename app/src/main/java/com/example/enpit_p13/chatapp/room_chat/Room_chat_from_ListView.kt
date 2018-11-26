@@ -8,6 +8,7 @@ import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
+import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
@@ -19,6 +20,7 @@ import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_room_chat_from__list_view.*
+import org.jetbrains.anko.startActivity
 
 class Room_chat_from_ListView : AppCompatActivity() {
 
@@ -68,6 +70,11 @@ class Room_chat_from_ListView : AppCompatActivity() {
 
         }
     }
+
+    override fun onBackPressed() {
+        startActivity<LatestMessagesActivity>()
+    }
+
     private fun sendData() {
 
         val ref = FirebaseDatabase.getInstance().getReference("/users")

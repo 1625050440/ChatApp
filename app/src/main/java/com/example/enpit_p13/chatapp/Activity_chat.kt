@@ -8,6 +8,7 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
+import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity_from_chat_all
@@ -86,6 +87,10 @@ class Activity_chat : AppCompatActivity() {
             startActivity<RoomIntroduceActivity>()
         }
 
+    }
+
+    override fun onBackPressed() {
+        startActivity<LatestMessagesActivity>()
     }
 
     private fun sendData() {

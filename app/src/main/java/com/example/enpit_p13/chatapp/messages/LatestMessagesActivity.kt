@@ -19,12 +19,14 @@ import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
 import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
+import com.example.enpit_p13.chatapp.toppage.TopPageActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
 import kotlinx.android.synthetic.main.activity_latest_messages.*
+import org.jetbrains.anko.startActivity
 
 class LatestMessagesActivity : AppCompatActivity() {
 
@@ -188,6 +190,10 @@ class LatestMessagesActivity : AppCompatActivity() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onBackPressed() {
+        startActivity<TopPageActivity>()
     }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {

@@ -62,11 +62,7 @@
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".quetion.QuestiontempActivity_from_chat_all" />
-        <activity android:name=".quetion.RoomIntroduceActivity">
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value=".messages.LatestMessagesActivity" />
-        </activity>
+        <activity android:name=".quetion.RoomIntroduceActivity"/>
         <activity android:name=".analyzesheet.SelectOwnAnalyzeActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

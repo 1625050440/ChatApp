@@ -18,6 +18,7 @@ import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.room_chat.view.*
+import org.jetbrains.anko.startActivity
 
 class NewMessageActivity : AppCompatActivity() {
 
@@ -28,6 +29,10 @@ class NewMessageActivity : AppCompatActivity() {
         supportActionBar?.title = "Select Room"
 
         fetchUsers()
+    }
+
+    override fun onBackPressed() {
+        startActivity<LatestMessagesActivity>()
     }
 
     companion object {

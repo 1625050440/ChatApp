@@ -11,6 +11,7 @@ import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
+import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
@@ -22,6 +23,7 @@ import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_room_chat_.*
+import org.jetbrains.anko.startActivity
 
 class Room_chat_Activity : AppCompatActivity() {
     companion object {
@@ -104,6 +106,11 @@ class Room_chat_Activity : AppCompatActivity() {
             }
         //recycler_chat_room.adapter.notifyDataSetChanged()
     }
+
+    override fun onBackPressed() {
+        startActivity<LatestMessagesActivity>()
+    }
+
     private fun sendData(userdata : Room_chat_messager) {
 
         val ref = FirebaseDatabase.getInstance().getReference("/users")
