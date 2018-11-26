@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.WindowManager
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.messages.DeleteConfirmDialog
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_question.*
@@ -24,7 +25,8 @@ class TemplateQuestionnaireActivity : AppCompatActivity() {
                 Toast.makeText(this,"質問１に回答してください",Toast.LENGTH_SHORT).show()
             }else{
                 writeDatabase()
-                startActivity<LatestMessagesActivity>()
+                val dialog = ThanksDialog()
+                dialog.show(supportFragmentManager,"Thanks_dialog")
             }
         }
     }

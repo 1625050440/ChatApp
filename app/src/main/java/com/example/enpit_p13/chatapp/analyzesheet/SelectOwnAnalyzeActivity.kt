@@ -53,7 +53,7 @@ class SelectOwnAnalyzeActivity : AppCompatActivity() {
 
                 for (data in p0.children) {
                     Log.d("timedata",data.key)
-                    val quetion = data.getValue<Quetion>(Quetion::class.java)
+                    val quetion = data.getValue<Question>(Question::class.java)
 
                     val time_data = quetion?.let { it} ?:continue
                     Log.d("item",time_data.timestamp.toString())
@@ -72,7 +72,7 @@ class SelectOwnAnalyzeActivity : AppCompatActivity() {
 
     }
 
-    class TimeItem(val Quser: Quetion): Item<ViewHolder>(){
+    class TimeItem(val Quser: Question): Item<ViewHolder>(){
         @SuppressLint("SimpleDateFormat", "SetTextI18n")
         override fun bind(viewHolder: ViewHolder, position: Int) {
             val time = SimpleDateFormat("yyyy年MM月dd日 hh時mm分").format(Date(Quser.timestamp))

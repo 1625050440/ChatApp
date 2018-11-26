@@ -16,18 +16,16 @@ import org.jetbrains.anko.toast
 class DeleteConfirmDialog : DialogFragment(){
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
-        val context = context
-        if(context == null)
-            return super.onCreateDialog(savedInstanceState)
+        val context = context ?: return super.onCreateDialog(savedInstanceState)
         val builder = AlertDialog.Builder(context).apply {
             setMessage("本当に削除しますか？")
-            setPositiveButton("はい") { dialog,which ->
+            setNegativeButton("はい") { dialog,which ->
                 context.toast("ルームが削除されました。")
                 sendData("","",false) //reset data
                 val intent = Intent(context, TemplateQuestionnaireActivity::class.java)
                 startActivity(intent)
             }
-            setNegativeButton("いいえ"){dialog,which->
+            setPositiveButton("いいえ"){dialog,which->
 
             }
         }

@@ -30,7 +30,7 @@ class OwnAnalysisActivity : AppCompatActivity() {
         setSupportActionBar(toolbar)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
-        setToplabel()
+        setTopLabel()
 
         Q2_spinner.onItemSelectedListener =
                 object : AdapterView.OnItemSelectedListener{
@@ -49,7 +49,7 @@ class OwnAnalysisActivity : AppCompatActivity() {
             Toast.makeText(this,"保存しました。",Toast.LENGTH_LONG).show()
 
 
-            writeNewQetion()
+            writeNewQuestion()
         }
     }
 
@@ -83,7 +83,7 @@ class OwnAnalysisActivity : AppCompatActivity() {
     }
 
 
-    private fun writeNewQetion()
+    private fun writeNewQuestion()
     {
         val q1:String = Q1_edit_num.text.toString()
         val q2_1:String = Q2_edit_num.text.toString()
@@ -107,7 +107,7 @@ class OwnAnalysisActivity : AppCompatActivity() {
         val q9:String = Q9_edit_detail.text.toString()
 
         //データベースに保存
-        var quetion = Quetion(q1,q2_1,q2_2,q3,q5,q6_1,q6_2,q7,q8_1,q8_2,q8_3,q9)
+        var quetion = Question(q1,q2_1,q2_2,q3,q5,q6_1,q6_2,q7,q8_1,q8_2,q8_3,q9)
         mDatabase.child(quetion.timestamp.toString()).setValue(quetion)
 
     }
@@ -137,10 +137,10 @@ class OwnAnalysisActivity : AppCompatActivity() {
                 Log.d("Main","実行")
                 for(data in p0.children)
                 {
-                    val userdata = data.getValue<Quetion>(Quetion::class.java)
+                    val userdata = data.getValue<Question>(Question::class.java)
                     val read_quetion = userdata?.let { it } ?:continue
                     if(read_quetion.userId.toString() == FirebaseAuth.getInstance().uid.toString()) {
-                       ReadQuetion(read_quetion)
+                        readQuestion(read_quetion)
                     }
 
                 }
@@ -149,7 +149,7 @@ class OwnAnalysisActivity : AppCompatActivity() {
         })
     }
 
-    private fun setToplabel(){
+    private fun setTopLabel(){
         val ref = FirebaseDatabase.getInstance().reference.child("/users")
         ref.addListenerForSingleValueEvent(object :ValueEventListener
         {
@@ -170,18 +170,18 @@ class OwnAnalysisActivity : AppCompatActivity() {
 
     }
 
-    fun ReadQuetion(quetion: Quetion){
-        Q1_edit_num.setText(quetion.q1)
-        Q2_edit_num.setText(quetion.q2_1)
-        Q2_spinner.setSelection(quetion.q2_2)
-        Q3_edit_num.setText(quetion.q3)
+    fun readQuestion(question: Question){
+        Q1_edit_num.setText(question.q1)
+        Q2_edit_num.setText(question.q2_1)
+        Q2_spinner.setSelection(question.q2_2)
+        Q3_edit_num.setText(question.q3)
 
         when {
-            quetion.q5 == 0 -> {
+            question.q5 == 0 -> {
                 Q5_yesButtom.isChecked = false
                 Q5_noButtom.isChecked = true
             }
-            quetion.q5 == 1 -> {
+            question.q5 == 1 -> {
                 Q5_yesButtom.isChecked = true
                 Q5_noButtom.isChecked = false
             }
@@ -192,11 +192,11 @@ class OwnAnalysisActivity : AppCompatActivity() {
         }
 
         when {
-            quetion.q6_1 == 0 -> {
+            question.q6_1 == 0 -> {
                 Q6_yesButtom.isChecked = false
                 Q6_noButtom.isChecked = true
             }
-            quetion.q6_1 == 1 -> {
+            question.q6_1 == 1 -> {
                 Q6_yesButtom.isChecked = true
                 Q6_noButtom.isChecked = false
             }
@@ -206,11 +206,11 @@ class OwnAnalysisActivity : AppCompatActivity() {
             }
         }
 
-        Q6_edit_detail.setText(quetion.q6_2)
-        Q7_edit_text.setText(quetion.q7)
-        Q8Edit_num.setText(quetion.q8_1)
-        Q8_spinner.setSelection(quetion.q8_2)
-        Q8Edit_detail.setText(quetion.q8_3)
-        Q9_edit_detail.setText(quetion.q9)
+        Q6_edit_detail.setText(question.q6_2)
+        Q7_edit_text.setText(question.q7)
+        Q8Edit_num.setText(question.q8_1)
+        Q8_spinner.setSelection(question.q8_2)
+        Q8Edit_detail.setText(question.q8_3)
+        Q9_edit_detail.setText(question.q9)
     }
 }
