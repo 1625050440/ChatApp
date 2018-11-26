@@ -109,7 +109,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         delete_button.setOnClickListener {
             val dialog = DeleteConfirmDialog()
             dialog.show(supportFragmentManager,"alert_dialog")
-            startActivity<LatestMessagesActivity>()
+            fetchUsers()
            // startActivity<Room_chat_from_ListView>()
 
 
@@ -158,8 +158,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
                 }
             }
-            override fun onCancelled(p0: DatabaseError) {
-            }
+            override fun onCancelled(p0: DatabaseError) {}
         })
     }
 

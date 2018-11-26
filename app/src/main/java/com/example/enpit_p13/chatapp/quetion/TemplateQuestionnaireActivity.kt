@@ -29,6 +29,10 @@ class TemplateQuestionnaireActivity : AppCompatActivity() {
         }
     }
 
+    override fun onBackPressed() {
+        startActivity<LatestMessagesActivity>()
+    }
+
     fun writeDatabase(){
         var q1:String = "none"
         val q2:String
