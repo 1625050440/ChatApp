@@ -105,11 +105,11 @@ class LatestMessagesActivity : AppCompatActivity() {
         }
 
         delete_button.setOnClickListener {
-            sendData("","",false) //reset data
+            val dialog = DeleteConfirmDialog()
+            dialog.show(supportFragmentManager,"alert_dialog")
            // startActivity<Room_chat_from_ListView>()
-            FirebaseDatabase.getInstance().getReference("/Room_Chat/${title_edditext.text.toString()}").removeValue()
-            intent = Intent(this,LatestMessagesActivity::class.java)
-            startActivity(intent)
+
+
         }
 
 

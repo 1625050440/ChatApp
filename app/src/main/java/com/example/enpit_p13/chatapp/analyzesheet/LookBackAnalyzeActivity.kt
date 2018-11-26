@@ -42,7 +42,7 @@ class LookBackAnalyzeActivity : AppCompatActivity() {
 
         })
 
-        Q1_edit_num_lookback.setInputType(InputType.TYPE_NULL)
+        Q1_edit_num_lookback.setEnabled(false)
         Q2_edit_num_loockback.setEnabled(false)
         Q2_spinner_loockback.setEnabled(false)
         Q3_edit_num_loockback.setEnabled(false)

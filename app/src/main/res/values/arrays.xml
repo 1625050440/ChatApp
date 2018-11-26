@@ -1,14 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-<string-array name="txt_frequency_arr">
-    <item>週間前</item>
-    <item>日前</item>
-    <item>時間前</item>
-</string-array>
+    <string-array name="txt_frequency_arr">
+        <item>週間前</item>
+        <item>日前</item>
+        <item>時間前</item>
+    </string-array>
 
     <string-array name="list">
         <item>コミュニケーション</item>
         <item>就職活動</item>
         <item>世間体</item>
+    </string-array>
+
+    <string-array name="temp_spinner_item">
+        <item>コミュニケーション</item>
+        <item>就職活動</item>
+        <item>世間体</item>
+        <item>自由記述/使用していない</item>
     </string-array>
 </resources>

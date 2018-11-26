@@ -30,14 +30,14 @@ class TemplateQuestionnaireActivity : AppCompatActivity() {
     }
 
     fun writeDatabase(){
-        var q1:Int = -1
+        var q1:String = "none"
         val q2:String
         val q3:String
 
         if(temp_Q1_noButton.isChecked){
-            q1 = 0
+            q1 = "no"
         }else if(temp_Q1_yesButton.isChecked){
-            q1 = 1
+            q1 = "yes"
         }
         q2 = temp_Q2_editText.text.toString()
         q3 = temp_Q3_editText.text.toString()
