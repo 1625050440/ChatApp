@@ -30,9 +30,21 @@ class Activity_chat : AppCompatActivity() {
         setContentView(R.layout.activity_chat)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
-        val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-        reference.setValue(Check_online("Chat_all"))
+        FirebaseDatabase.getInstance().getReference()?.child("/users/")
+                .addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.children.forEach {
+                            val data = it?.getValue(User::class.java)
+                            if(data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()){
+                            val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                            reference.setValue(Check_online("Chat_all",data?.username.toString()))
+                        }}
+                    }
 
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
         val ref = FirebaseDatabase.getInstance().getReference()?.child("/Address/")
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {

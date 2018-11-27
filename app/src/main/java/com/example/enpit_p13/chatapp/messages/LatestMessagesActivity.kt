@@ -15,6 +15,7 @@ import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.models.Check_online
+import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
 import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
@@ -36,8 +37,23 @@ class LatestMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
         //verifyUserIsLoggedIn()
-        val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-        reference.setValue(Check_online("Top_Page"))
+        FirebaseDatabase.getInstance().getReference()?.child("/users/")
+                .addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.children.forEach {
+                            val data = it?.getValue(User::class.java)
+                            if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
+                                val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                reference.setValue(Check_online("Top_Page", data?.username.toString()))
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
+
         fetchUsers()
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
@@ -111,9 +127,10 @@ class LatestMessagesActivity : AppCompatActivity() {
             val dialog = DeleteConfirmDialog()
             dialog.show(supportFragmentManager,"confirm_dialog")
            // startActivity<Room_chat_from_ListView>()
-
-
+            FirebaseDatabase.getInstance().getReference("/Room/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
         }
+
+
     }
     private fun sendData(title:String,message:String,check:Boolean) {
         val uid = FirebaseAuth.getInstance().uid.toString()
@@ -127,7 +144,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(Build.VERSION_CODES.O)
     private fun fetchUsers() {
-        val ref = FirebaseDatabase.getInstance().getReference().child("/Room_Chat")
+        val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             @TargetApi(Build.VERSION_CODES.O)
             @RequiresApi(Build.VERSION_CODES.O)
@@ -149,8 +166,8 @@ class LatestMessagesActivity : AppCompatActivity() {
                             explain_EditText.isFocusable = false
                         }
                         else{
-                            title_edditext.setText(user.kadaimeiText.toString())
-                            explain_EditText.setText(user.messageText.toString())
+                            title_edditext.setText(user?.kadaimeiText.toString())
+                            explain_EditText.setText(user?.messageText.toString())
                         }
                     }
 
