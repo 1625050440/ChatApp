@@ -5,6 +5,8 @@ import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.models.Check_online
+import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_from_ListView
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
@@ -90,9 +92,24 @@ class NewMessageActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             else{
+                FirebaseDatabase.getInstance().getReference()?.child("/users")
+                        .addValueEventListener(object : ValueEventListener{
+                            override fun onDataChange(p0: DataSnapshot) {
+                                p0.children.forEach {
+                                    val data = it?.getValue(User::class.java)
+                                    if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
+                                        val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                        reference.setValue(Check_online(userItem.user.uid.toString(), data?.username.toString()))
+                                    }
+                                }
+                            }
+
+                            override fun onCancelled(p0: DatabaseError) {
+
+                            }
+                        })
             val intent = Intent(view.context, Room_chat_from_ListView::class.java)
-            intent.putExtra(USER_KEY, item.user)
-            Log.d("Chat", "user from New b ${item.user.uid.toString()}")
+
             startActivity(intent)
             }
         }
@@ -107,7 +124,20 @@ class NewMessageActivity : AppCompatActivity() {
 
 class UserItem(val user: Room_chat_messager):Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
-    viewHolder.itemView.kadaimei_textview.text = user.kadaimeiText.toString()
+        FirebaseDatabase.getInstance().getReference("/users")
+                .addValueEventListener(object :ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        for (data in p0.children) {
+
+                            val check_user = data?.getValue<User>(User::class.java)
+                                if(check_user?.uid.toString() == user.uid.toString()) {
+                                    viewHolder.itemView.kadaimei_textview.text = "${check_user?.username.toString()} ${user.kadaimeiText.toString()}"
+                                }
+                        }
+                    }
+                    override fun onCancelled(p0: DatabaseError) {
+                    }
+                })
     }
 
     override fun getLayout(): Int {

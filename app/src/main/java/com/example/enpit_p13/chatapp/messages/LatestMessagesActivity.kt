@@ -15,6 +15,7 @@ import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.models.Check_online
+import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
 import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
@@ -34,8 +35,23 @@ class LatestMessagesActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
         //verifyUserIsLoggedIn()
-        val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-        reference.setValue(Check_online("Top_Page"))
+        FirebaseDatabase.getInstance().getReference()?.child("/users/")
+                .addValueEventListener(object : ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.children.forEach {
+                            val data = it?.getValue(User::class.java)
+                            if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
+                                val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                reference.setValue(Check_online("Top_Page", data?.username.toString()))
+                            }
+                        }
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
+
         fetchUsers()
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
         room_create_button.setOnClickListener {
@@ -107,7 +123,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         delete_button.setOnClickListener {
             sendData("","",false) //reset data
            // startActivity<Room_chat_from_ListView>()
-            FirebaseDatabase.getInstance().getReference("/Room_Chat/${title_edditext.text.toString()}").removeValue()
+            FirebaseDatabase.getInstance().getReference("/Room/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
             intent = Intent(this,LatestMessagesActivity::class.java)
             startActivity(intent)
         }

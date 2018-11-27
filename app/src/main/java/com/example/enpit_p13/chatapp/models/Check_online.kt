@@ -4,7 +4,8 @@ import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-class  Check_online(val uid_check_online: String):Parcelable
+class  Check_online(val uid_check_online: String,val username :String):Parcelable
 {
-    constructor(): this("")
+    constructor(): this("","")
+
 }
