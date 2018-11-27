@@ -114,8 +114,6 @@ class LatestMessagesActivity : AppCompatActivity() {
 
 
         }
-
-
     }
     private fun sendData(title:String,message:String,check:Boolean) {
         val uid = FirebaseAuth.getInstance().uid.toString()
