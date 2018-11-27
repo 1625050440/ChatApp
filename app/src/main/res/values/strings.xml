@@ -23,4 +23,5 @@
     <string name="Q9text">・お子さんの状況はいかがですか？</string>
     <string name="Q9edit_dital_text">年齢、性別、最終職歴、性格等の自由記述</string>
     <string name="loginText">ログイン</string>
+    <string name="title_activity_look_back_analyze">LookBackAnalyzeActivity</string>
 </resources>

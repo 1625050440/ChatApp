@@ -10,31 +10,25 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
 
-        <!--トップページのアクティビティ-->
+        <!-- トップページのアクティビティ -->
         <activity
             android:name=".toppage.TopPageActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
+        <!-- ここまで　 -->
+        <!--  -->
         <activity android:name=".messages.LatestMessagesActivity">
-
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".toppage.TopPageActivity" />
         </activity>
-        <activity android:name=".registerlogin.RegisterActivity">
-
-        <intent-filter>
-            <action android:name="android.intent.action.MAIN" />
-            <category android:name="android.intent.category.LAUNCHER" />
-        </intent-filter>
-        </activity>
+        <activity android:name=".registerlogin.RegisterActivity" />
         <activity android:name=".registerlogin.Login" />
         <activity android:name=".messages.NewMessageActivity">
             <meta-data
@@ -66,11 +60,28 @@
         <activity
             android:name=".analyzesheet.OwnAnalysisActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
-
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity android:name=".quetion.QuestiontempActivity_from_chat_all" />
+        <activity android:name=".quetion.RoomIntroduceActivity">
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".messages.LatestMessagesActivity" />
         </activity>
-        <activity android:name=".quetion.QuestiontempActivity_from_chat_all"></activity>
+        <activity android:name=".analyzesheet.SelectOwnAnalyzeActivity" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".analyzesheet.OwnAnalysisActivity" />
+        </activity>
+        <activity
+            android:name=".analyzesheet.LookBackAnalyzeActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" >
+            <meta-data
+                android:name="android.support.PARENT_ACTIVITY"
+                android:value=".analyzesheet.OwnAnalysisActivity" />
+        </activity>
+        <!-- ここまで　 -->
+        <activity android:name=".quetion.TemplateQuestionnaireActivity"></activity>
     </application>
 
 </manifest>
