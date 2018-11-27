@@ -6,7 +6,7 @@ import kotlinx.android.synthetic.main.content_own_analysis.*
 import java.sql.Timestamp
 import kotlin.system.measureTimeMillis
 
-class Quetion(
+class Question(
         //q5,q6_1の値は、ラジオボタンの状態であり、0の時いいえボタン、1の時はいボタン、
         //-1(初期値)の時、どちらのボタンも押されていない状態を示す。
         //q8,q2の値は、スピナーの位置を示す。

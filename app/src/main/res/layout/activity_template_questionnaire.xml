@@ -36,7 +36,22 @@
 
             android:orientation="vertical"
 >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="20dp"
+                android:text="使用したテンプレートで一番役に立ったものを教えてください"
+                android:textSize="19dp"
+                android:textStyle="bold"/>
 
+            <Spinner
+                android:id="@+id/temp_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginBottom="30dp"
+                android:entries="@array/temp_spinner_item" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -102,7 +117,8 @@
                 android:maxLength="200"
                 android:maxLines="7"
                 android:minLines="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                />
 
             <TextView
                 android:layout_width="wrap_content"

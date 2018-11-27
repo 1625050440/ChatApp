@@ -57,7 +57,8 @@
                 android:lines="7"
                 android:maxLength="200"
                 android:minLines="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
 
             <TextView
@@ -94,7 +95,8 @@
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textSize="12sp"
                     tools:layout_editor_absoluteX="56dp"
-                    tools:layout_editor_absoluteY="119dp" />
+                    tools:layout_editor_absoluteY="119dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/Q1edit_friquency_loockback"
@@ -142,7 +144,8 @@
                     android:singleLine="true"
                     android:textSize="12sp"
                     app:layout_constraintStart_toStartOf="@+id/Q2text_loockback"
-                    app:layout_constraintTop_toBottomOf="@+id/Q2text_loockback" />
+                    app:layout_constraintTop_toBottomOf="@+id/Q2text_loockback"
+                    android:textStyle="bold"/>
 
                 <Spinner
                     android:id="@+id/Q2_spinner_loockback"
@@ -184,7 +187,8 @@
                     android:singleLine="true"
                     android:textSize="12sp"
                     tools:layout_editor_absoluteX="56dp"
-                    tools:layout_editor_absoluteY="286dp" />
+                    tools:layout_editor_absoluteY="286dp"
+                    android:textStyle="bold"/>
 
                 <TextView
                     android:id="@+id/Q3edit_text_loockback"
@@ -289,7 +293,8 @@
                 android:lines="7"
                 android:maxLength="200"
                 android:minLines="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/Q7text_loockback"
@@ -324,7 +329,8 @@
                 android:lines="7"
                 android:maxLength="200"
                 android:minLines="1"
-                android:textSize="18sp" />
+                android:textSize="18sp"
+                android:textStyle="bold"/>
 
             <TextView
                 android:id="@+id/Q8_text_loockback"
@@ -359,7 +365,8 @@
                     android:textAppearance="@style/TextAppearance.AppCompat"
                     android:textSize="12sp"
                     tools:layout_editor_absoluteX="56dp"
-                    tools:layout_editor_absoluteY="119dp" />
+                    tools:layout_editor_absoluteY="119dp"
+                    android:textStyle="bold"/>
 
                 <Spinner
                     android:id="@+id/Q8_spinner_loockback"
@@ -379,7 +386,8 @@
                     android:layout_weight="1"
                     android:ems="10"
                     android:hint="詳細記述"
-                    android:inputType="textPersonName" />
+                    android:inputType="textPersonName"
+                    android:textStyle="bold"/>
 
             </LinearLayout>
         </LinearLayout>

@@ -40,6 +40,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         reference.setValue(Check_online("Top_Page"))
         fetchUsers()
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
         room_create_button.setOnClickListener {
             if(room_create_button.text.toString() == "ルーム作成") {
                 if (title_edditext.text.toString() != "" && explain_EditText.text.toString() != "") {
@@ -77,8 +78,8 @@ class LatestMessagesActivity : AppCompatActivity() {
                 }
             }
             else{
-                    val intent = Intent(this, Room_chat_Activity::class.java)
-                    startActivity(intent)
+                val intent = Intent(this, Room_chat_Activity::class.java)
+                startActivity(intent)
             }
         }
         val referrence = FirebaseDatabase.getInstance().getReference("/Room_Chat")
@@ -87,9 +88,9 @@ class LatestMessagesActivity : AppCompatActivity() {
                 p0.children.forEach(){
                     val user = it.getValue(Room_chat_messager::class.java)
                     if((!user?.messageText.toString().isEmpty()) && (user?.uid.toString()==FirebaseAuth.getInstance().uid.toString())){
-                            explain_EditText.setText(user?.messageText.toString())
-                            create_templates_button.visibility = View.INVISIBLE
-                            create_templates_button.isClickable = false
+                        explain_EditText.setText(user?.messageText.toString())
+                        create_templates_button.visibility = View.INVISIBLE
+                        create_templates_button.isClickable = false
 
                     }
                 }
@@ -107,19 +108,19 @@ class LatestMessagesActivity : AppCompatActivity() {
         }
 
         delete_button.setOnClickListener {
-            sendData("","",false) //reset data
+            val dialog = DeleteConfirmDialog()
+            dialog.show(supportFragmentManager,"confirm_dialog")
            // startActivity<Room_chat_from_ListView>()
-            FirebaseDatabase.getInstance().getReference("/Room_Chat/${title_edditext.text.toString()}").removeValue()
-            intent = Intent(this,LatestMessagesActivity::class.java)
-            startActivity(intent)
+
+
         }
 
 
     }
     private fun sendData(title:String,message:String,check:Boolean) {
         val uid = FirebaseAuth.getInstance().uid.toString()
-            val reference = FirebaseDatabase.getInstance().getReference("/Room_Chat/$uid/")
-            reference.setValue(Room_chat_messager(message, title, uid,check))
+        val reference = FirebaseDatabase.getInstance().getReference("/Room_Chat/$uid/")
+        reference.setValue(Room_chat_messager(message, title, uid,check))
     }
     companion object {
         val USER_KE = "USER_KE"
@@ -128,7 +129,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     @TargetApi(Build.VERSION_CODES.O)
     @RequiresApi(Build.VERSION_CODES.O)
     private fun fetchUsers() {
-        val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat")
+        val ref = FirebaseDatabase.getInstance().getReference().child("/Room_Chat")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {
             @TargetApi(Build.VERSION_CODES.O)
             @RequiresApi(Build.VERSION_CODES.O)
@@ -150,15 +151,14 @@ class LatestMessagesActivity : AppCompatActivity() {
                             explain_EditText.isFocusable = false
                         }
                         else{
-                            title_edditext.setText(user?.kadaimeiText.toString())
-                            explain_EditText.setText(user?.messageText.toString())
+                            title_edditext.setText(user.kadaimeiText.toString())
+                            explain_EditText.setText(user.messageText.toString())
                         }
                     }
 
                 }
             }
-            override fun onCancelled(p0: DatabaseError) {
-            }
+            override fun onCancelled(p0: DatabaseError) {}
         })
     }
 
