@@ -22,6 +22,7 @@ class DeleteConfirmDialog : DialogFragment(){
             setNegativeButton("はい") { dialog,which ->
                 context.toast("ルームが削除されました。")
                 sendData("","",false) //reset data
+                FirebaseDatabase.getInstance().getReference("/Room/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
                 val intent = Intent(context, TemplateQuestionnaireActivity::class.java)
                 startActivity(intent)
             }

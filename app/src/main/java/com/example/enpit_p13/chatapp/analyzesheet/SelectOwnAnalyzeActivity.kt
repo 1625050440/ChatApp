@@ -20,8 +20,6 @@ import kotlinx.android.synthetic.main.analyze_list_item_view.view.*
 
 
 class SelectOwnAnalyzeActivity : AppCompatActivity() {
-
-
     val list: MutableList<String> = mutableListOf()
     val adapter = GroupAdapter<ViewHolder>()
 
@@ -57,7 +55,6 @@ class SelectOwnAnalyzeActivity : AppCompatActivity() {
 
                     val time_data = quetion?.let { it} ?:continue
                     Log.d("item",time_data.timestamp.toString())
-
                     adapter.add(TimeItem(time_data))
                 }
 
@@ -75,12 +72,11 @@ class SelectOwnAnalyzeActivity : AppCompatActivity() {
     class TimeItem(val Quser: Question): Item<ViewHolder>(){
         @SuppressLint("SimpleDateFormat", "SetTextI18n")
         override fun bind(viewHolder: ViewHolder, position: Int) {
-            val time = SimpleDateFormat("yyyy年MM月dd日 hh時mm分").format(Date(Quser.timestamp))
-            viewHolder.itemView.analyze_item.text =  SimpleDateFormat("yyyy年MM月dd日 hh時mm分").format(Date(Quser.timestamp))
+            val time = SimpleDateFormat("yyyy年MM月dd日 a hh時mm分").format(Date(Quser.timestamp))
+            viewHolder.itemView.analyze_item.text =  SimpleDateFormat("yyyy年MM月dd日 a hh時mm分").format(Date(Quser.timestamp))
         }
         override fun getLayout(): Int {
             return R.layout.analyze_list_item_view
         }
     }
-
 }

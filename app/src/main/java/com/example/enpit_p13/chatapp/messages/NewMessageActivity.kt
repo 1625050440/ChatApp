@@ -21,6 +21,8 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_new_message.*
 import kotlinx.android.synthetic.main.room_chat.view.*
 import org.jetbrains.anko.startActivity
+import java.sql.Date
+import java.text.SimpleDateFormat
 
 class NewMessageActivity : AppCompatActivity() {
 
@@ -148,7 +150,8 @@ class UserItem(val user: Room_chat_messager):Item<ViewHolder>(){
 
                             val check_user = data?.getValue<User>(User::class.java)
                                 if(check_user?.uid.toString() == user.uid.toString()) {
-                                    viewHolder.itemView.kadaimei_textview.text = "${check_user?.username.toString()} ${user.kadaimeiText.toString()}"
+                                    val time = SimpleDateFormat("yyyy年MM月dd日").format(Date(user.timestamp))
+                                    viewHolder.itemView.kadaimei_textview.text = "作成者：${check_user?.username.toString()}\t\t課題名：${user.kadaimeiText.toString()}\t\t作成日：${time}"
                                 }
                         }
                     }

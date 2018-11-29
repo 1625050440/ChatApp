@@ -148,7 +148,7 @@ class Room_chat_from_ListView : AppCompatActivity() {
     private fun createFirebaseListener(check_uid : String) {
 
       //  Log.d("Main","${userdata.uid}${userdata.kadaimeiText}")
-        val reference =FirebaseDatabase.getInstance().getReference("/Room_Chat")
+        val reference = FirebaseDatabase.getInstance().getReference("/Room_Chat")
         reference.addListenerForSingleValueEvent(object :ValueEventListener{
             override fun onDataChange(p0: DataSnapshot) {
                 p0.children.forEach() {
@@ -169,28 +169,18 @@ class Room_chat_from_ListView : AppCompatActivity() {
                                         } else {
                                             adapter.add(ChatfromItem(message.text!!, message.username!!))
                                         }
-
                                     }
-
                                 recycler_chat_room_from_listroom.adapter = adapter
                                 // setupAdapter(toReturn)
                                 recycler_chat_room_from_listroom.scrollToPosition(adapter.itemCount - 1)
                             }
-                            override fun onCancelled(databaseError: DatabaseError) {
-                                //log error
-                            }
+                            override fun onCancelled(databaseError: DatabaseError) {}
                         })
                         }
                     }
                 }
-
-
-
-                override fun onCancelled(databaseError: DatabaseError) {
-                //log error
-            }
+                override fun onCancelled(databaseError: DatabaseError) {}
         })
-
         }
 
 }

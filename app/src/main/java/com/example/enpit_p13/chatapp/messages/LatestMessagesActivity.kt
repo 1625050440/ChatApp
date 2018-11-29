@@ -127,7 +127,6 @@ class LatestMessagesActivity : AppCompatActivity() {
             val dialog = DeleteConfirmDialog()
             dialog.show(supportFragmentManager,"confirm_dialog")
            // startActivity<Room_chat_from_ListView>()
-            FirebaseDatabase.getInstance().getReference("/Room/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
         }
 
 
