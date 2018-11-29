@@ -36,10 +36,7 @@ class Room_chat_Activity : AppCompatActivity() {
                 .addValueEventListener(object  : ValueEventListener{
                     override fun onDataChange(p0: DataSnapshot) {
                         p0.children.forEach {
-
                             val getusername = it.getValue(User::class.java)
-                            FirebaseDatabase.getInstance().getReference("/Address/${getusername?.uid.toString()}").onDisconnect()
-                                    .setValue(Check_online("OFF",getusername?.username.toString()))
                             if (getusername?.uid.toString() == FirebaseAuth.getInstance().uid){
                               uid_username = getusername?.username.toString()
                             }
@@ -52,7 +49,7 @@ class Room_chat_Activity : AppCompatActivity() {
                 })
 
         val ref = FirebaseDatabase.getInstance().getReference("/Room_Chat")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
             for (data in p0.children) {
                 val userData = data.getValue<Room_chat_messager>(Room_chat_messager::class.java)
@@ -88,6 +85,9 @@ class Room_chat_Activity : AppCompatActivity() {
                             for (data in p0.children) {
                                 val userData = data.getValue<Check_online>(Check_online::class.java)
                                 val user = userData?.let { it } ?: continue
+                                FirebaseDatabase.getInstance().getReference("/Address/${user.my_uid.toString()}")
+                                        .onDisconnect()
+                                        .setValue(Check_online("OFF",user.username.toString()))
                                 if (user.uid_check_online.toString() != key )   {
                                     count--
                                 }
@@ -201,8 +201,6 @@ class Room_chat_Activity : AppCompatActivity() {
                 //log error
             }
         })
-
-
     }
     private fun template(): Boolean {
         template_button.visibility = View.VISIBLE

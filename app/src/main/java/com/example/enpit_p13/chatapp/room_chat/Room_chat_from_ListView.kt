@@ -8,7 +8,6 @@ import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
-import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -32,21 +31,6 @@ class Room_chat_from_ListView : AppCompatActivity() {
         FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
         .setValue(Check_online(userdata.kadaimeiText.toString()))
         Log.d("Chat","user from Room_Chat ${userdata.uid.toString()}")*/
-        FirebaseDatabase.getInstance().getReference(".info/connected")
-                .addValueEventListener(object :ValueEventListener{
-                    override fun onDataChange(p0: DataSnapshot) {
-                        val connected = p0.getValue(Boolean::class.java)
-                        if(connected==false)
-                        {
-                            FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                                    .setValue(Check_online("OFF",""))
-                        }
-                    }
-
-                    override fun onCancelled(p0: DatabaseError) {
-
-                    }
-                })
         FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
                 .addValueEventListener(object : ValueEventListener {
                     override fun onDataChange(p0: DataSnapshot) {
@@ -58,10 +42,21 @@ class Room_chat_from_ListView : AppCompatActivity() {
                                                 p0.children.forEach {
                                                     val user = it.getValue(Room_chat_messager::class.java)
                                                     if (user?.uid.toString() == data?.uid_check_online.toString()) {
-                                                        supportActionBar?.title = "${data?.username} ${user?.kadaimeiText}"
-                                                        explain_textview_from_listview.text = user?.messageText
-                                                        uid = user?.uid.toString()
-                                                    }
+                                                        FirebaseDatabase.getInstance().getReference("/users/${user?.uid.toString()}")
+                                                                .addValueEventListener(object :ValueEventListener{
+                                                                    override fun onDataChange(p0: DataSnapshot) {
+                                                                        val myuser = p0.getValue(User::class.java)
+                                                                        supportActionBar?.title = "${myuser?.username} ${user?.kadaimeiText}"
+                                                                        explain_textview_from_listview.text = user?.messageText
+                                                                        uid = myuser?.uid.toString()
+                                                                        Log.d("Check_online", "$uid")
+                                                                    }
+
+                                                                    override fun onCancelled(p0: DatabaseError) {
+
+                                                                    }
+                                                    })
+                                                                                                          }
                                                 }
                                             }
 
@@ -79,6 +74,7 @@ class Room_chat_from_ListView : AppCompatActivity() {
                 })
 
        // val key = userdata.kadaimeiText.toString()
+        Log.d("Check_online","$uid")
         val ref = FirebaseDatabase.getInstance().getReference()?.child("/Address/")
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
@@ -86,6 +82,9 @@ class Room_chat_from_ListView : AppCompatActivity() {
                 for (data in p0.children) {
                     val userData = data.getValue<Check_online>(Check_online::class.java)
                     val user = userData?.let { it } ?: continue
+                    FirebaseDatabase.getInstance().getReference("/Address/${user.my_uid.toString()}")
+                            .onDisconnect()
+                            .setValue(Check_online("OFF",user.username.toString()))
                     if (user.uid_check_online.toString() != uid ) {
                         count--
                     }
@@ -101,7 +100,7 @@ class Room_chat_from_ListView : AppCompatActivity() {
         createFirebaseListener(uid)
         send_Button_room_chat_from_listview.setOnClickListener{
             if (!room_chat_edittext_from_listview.text.toString().isEmpty()){
-                sendData()
+                sendData(uid)
                // createFirebaseListener()
 
 
@@ -113,20 +112,17 @@ class Room_chat_from_ListView : AppCompatActivity() {
 
         }
     }
-    private fun sendData() {
+    private fun sendData(check_uid: String) {
 
         val ref = FirebaseDatabase.getInstance().getReference("/users")
-        ref.addListenerForSingleValueEvent(object : ValueEventListener {
-            val userdata = intent.getParcelableExtra<Room_chat_messager>(NewMessageActivity.USER_KEY)
+        ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 for (data in p0.children) {
 
-                    Log.d("Chat","userdata ${userdata.uid.toString()}")
                     val userData = data.getValue<User>(User::class.java)
-                    var i = 0
                     val user = userData?.let { it } ?: continue
                     if(user.uid == FirebaseAuth.getInstance().uid) {
-                        val reference = FirebaseDatabase.getInstance().getReference("/Room/${userdata.uid.toString()}").push()
+                        val reference = FirebaseDatabase.getInstance().getReference("/Room/$check_uid").push()
                         reference.setValue(Message(room_chat_edittext_from_listview.text.toString(), user?.username.toString()))
                                 .addOnSuccessListener {
                                     room_chat_edittext_from_listview.setText("")
