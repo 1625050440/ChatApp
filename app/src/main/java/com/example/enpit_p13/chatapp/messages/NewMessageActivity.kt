@@ -1,5 +1,6 @@
 package com.example.enpit_p13.chatapp.messages
 
+import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
@@ -58,7 +59,7 @@ class NewMessageActivity : AppCompatActivity() {
 
     private fun fetchUsers() {
         val adapter = GroupAdapter<ViewHolder>()
-        val ref = FirebaseDatabase.getInstance().getReference()?.child("/Room_Chat/")
+        val ref = FirebaseDatabase.getInstance().getReference().child("/Room_Chat/")
         ref.addValueEventListener(object : ValueEventListener {
             override fun onDataChange(p0: DataSnapshot) {
                 var count = p0.childrenCount
@@ -66,10 +67,10 @@ class NewMessageActivity : AppCompatActivity() {
                     val datauser = data.getValue<Room_chat_messager>(Room_chat_messager::class.java)
                     val user = datauser?.let { it } ?: continue
                     Log.d("Main", count.toString())
-                    if (user.check == false) {
+                    if (!user.check) {
                         count--
                     } else {
-                        if (user.kadaimeiText.toString() != "") {
+                        if (user.kadaimeiText != "") {
                             Log.d("Chat", "user from New ${user.uid.toString()}")
 
                             check.add(user)
@@ -84,10 +85,10 @@ class NewMessageActivity : AppCompatActivity() {
                 Log.d("Data", "11 ${check.toString()} ")
                 Log.d("Data", "11 ${count} ")
 
-                Log.d("Data", "${check.toString()}")
+                Log.d("Data", check.toString())
                 if (check.size.toLong() == count) {
                     for (data in check) {
-                        Log.d("Data", "${data.kadaimeiText.toString()}")
+                        Log.d("Data", data.kadaimeiText.toString())
 
                         adapter.add(UserItem(data))
                     }
@@ -111,7 +112,7 @@ class NewMessageActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             else{
-                FirebaseDatabase.getInstance().getReference()?.child("/users/")
+                FirebaseDatabase.getInstance().getReference().child("/users/")
                         .addValueEventListener(object : ValueEventListener{
                             override fun onDataChange(p0: DataSnapshot) {
                                 p0.children.forEach {
@@ -139,12 +140,11 @@ class NewMessageActivity : AppCompatActivity() {
 
 }
 
-
-
 class UserItem(val user: Room_chat_messager):Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         FirebaseDatabase.getInstance().getReference("/users")
                 .addValueEventListener(object :ValueEventListener{
+                    @SuppressLint("SimpleDateFormat", "SetTextI18n")
                     override fun onDataChange(p0: DataSnapshot) {
                         for (data in p0.children) {
 
