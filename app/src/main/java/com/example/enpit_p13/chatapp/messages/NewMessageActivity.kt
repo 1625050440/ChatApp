@@ -29,6 +29,18 @@ class NewMessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_message)
 
         supportActionBar?.title = "Select Room"
+        FirebaseDatabase.getInstance().getReference("/users/${FirebaseAuth.getInstance().uid.toString()}")
+                .addValueEventListener(object :ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        val data = p0.getValue(User::class.java)
+                        FirebaseDatabase.getInstance().getReference("/Address/${data?.uid.toString()}")
+                                .setValue(Check_online("List_Room",data?.username.toString()))
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
 
         fetchUsers()
     }
@@ -97,7 +109,7 @@ class NewMessageActivity : AppCompatActivity() {
                 startActivity(intent)
             }
             else{
-                FirebaseDatabase.getInstance().getReference()?.child("/users")
+                FirebaseDatabase.getInstance().getReference()?.child("/users/")
                         .addValueEventListener(object : ValueEventListener{
                             override fun onDataChange(p0: DataSnapshot) {
                                 p0.children.forEach {

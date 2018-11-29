@@ -25,6 +25,7 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_room_chat_.*
 import org.jetbrains.anko.startActivity
 
+var check_online = ""
 class Room_chat_Activity : AppCompatActivity() {
     companion object {
         val USER_KEY = "USER_KEY"
@@ -38,7 +39,10 @@ class Room_chat_Activity : AppCompatActivity() {
                 .addValueEventListener(object  : ValueEventListener{
                     override fun onDataChange(p0: DataSnapshot) {
                         p0.children.forEach {
+
                             val getusername = it.getValue(User::class.java)
+                            FirebaseDatabase.getInstance().getReference("/Address/${getusername?.uid.toString()}").onDisconnect()
+                                    .setValue(Check_online("OFF",getusername?.username.toString()))
                             if (getusername?.uid.toString() == FirebaseAuth.getInstance().uid){
                               uid_username = getusername?.username.toString()
                             }
@@ -87,7 +91,7 @@ class Room_chat_Activity : AppCompatActivity() {
                             for (data in p0.children) {
                                 val userData = data.getValue<Check_online>(Check_online::class.java)
                                 val user = userData?.let { it } ?: continue
-                                if (user.uid_check_online.toString() != key  ) {
+                                if (user.uid_check_online.toString() != key )   {
                                     count--
                                 }
 
