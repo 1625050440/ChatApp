@@ -32,30 +32,45 @@ class Room_chat_from_ListView : AppCompatActivity() {
         FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
         .setValue(Check_online(userdata.kadaimeiText.toString()))
         Log.d("Chat","user from Room_Chat ${userdata.uid.toString()}")*/
-        FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                .addValueEventListener(object : ValueEventListener{
+        FirebaseDatabase.getInstance().getReference(".info/connected")
+                .addValueEventListener(object :ValueEventListener{
                     override fun onDataChange(p0: DataSnapshot) {
-                        p0.children.forEach {
-                            val data = it.getValue(Check_online::class.java)
+                        val connected = p0.getValue(Boolean::class.java)
+                        if(connected==false)
+                        {
+                            FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                    .setValue(Check_online("OFF",""))
+                        }
+                    }
 
-                            FirebaseDatabase.getInstance().getReference("/Room_Chat")
-                                    .addValueEventListener(object :ValueEventListener{
-                                        override fun onDataChange(p0: DataSnapshot) {
-                                            p0.children.forEach {
-                                                val user = it.getValue(Room_chat_messager::class.java)
-                                                if (user?.uid.toString() == data?.uid_check_online.toString()){
-                                                    supportActionBar?.title = "${data?.username} ${user?.kadaimeiText}"
-                                                    explain_textview_from_listview.text = user?.messageText
-                                                    uid = user?.uid.toString()
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
+        FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                .addValueEventListener(object : ValueEventListener {
+                    override fun onDataChange(p0: DataSnapshot) {
+                        Log.d("Check_data","$p0")
+                            val data = p0.getValue(Check_online::class.java)
+                                FirebaseDatabase.getInstance().getReference("/Room_Chat")
+                                        .addValueEventListener(object : ValueEventListener {
+                                            override fun onDataChange(p0: DataSnapshot) {
+                                                p0.children.forEach {
+                                                    val user = it.getValue(Room_chat_messager::class.java)
+                                                    if (user?.uid.toString() == data?.uid_check_online.toString()) {
+                                                        supportActionBar?.title = "${data?.username} ${user?.kadaimeiText}"
+                                                        explain_textview_from_listview.text = user?.messageText
+                                                        uid = user?.uid.toString()
+                                                    }
                                                 }
                                             }
-                                        }
 
-                                        override fun onCancelled(p0: DatabaseError) {
+                                            override fun onCancelled(p0: DatabaseError) {
 
-                                        }
-                                    })
-                        }
+                                            }
+                                        })
+
+
                     }
 
                     override fun onCancelled(p0: DatabaseError) {
@@ -71,7 +86,7 @@ class Room_chat_from_ListView : AppCompatActivity() {
                 for (data in p0.children) {
                     val userData = data.getValue<Check_online>(Check_online::class.java)
                     val user = userData?.let { it } ?: continue
-                    if (user.uid_check_online.toString() != uid  ) {
+                    if (user.uid_check_online.toString() != uid ) {
                         count--
                     }
 

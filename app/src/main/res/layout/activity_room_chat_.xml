@@ -21,7 +21,7 @@
 
     <TextView
         android:id="@+id/explain_textview"
-        android:layout_width="400dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext_register"
@@ -31,13 +31,14 @@
 
     <TextView
         android:id="@+id/myroom_count_textview"
-        android:layout_width="0dp"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:gravity="right"
+        app:layout_constraintBottom_toBottomOf="@+id/explain_textview"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@+id/explain_textview"
         app:layout_constraintTop_toTopOf="@+id/explain_textview" />
