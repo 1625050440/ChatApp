@@ -11,7 +11,7 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
-import com.example.enpit_p13.chatapp.Message
+import com.example.enpit_p13.chatapp.Message_all
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -75,7 +75,7 @@ class QuestiontempActivity_from_chat_all : AppCompatActivity() {
                     val user = userData?.let { it } ?: continue
                     if(user?.uid == FirebaseAuth.getInstance().uid){
                         val reference = FirebaseDatabase.getInstance().getReference()?.child("/messages").push()
-                        reference.setValue(Message(message,user?.username.toString()))
+                        reference.setValue(Message_all(message,user?.username.toString(),false))
                                 .addOnSuccessListener {
                                     val intent = Intent(this@QuestiontempActivity_from_chat_all,Activity_chat::class.java)
                                     startActivity(intent)

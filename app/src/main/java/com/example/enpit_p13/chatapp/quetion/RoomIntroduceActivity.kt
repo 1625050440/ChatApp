@@ -1,9 +1,8 @@
 package com.example.enpit_p13.chatapp.quetion
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
-import android.preference.PreferenceManager
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -11,7 +10,7 @@ import android.widget.AdapterView
 import android.widget.Spinner
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
-import com.example.enpit_p13.chatapp.Message
+import com.example.enpit_p13.chatapp.Message_all
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -19,9 +18,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_questiontemp_from_chat_all.*
 import kotlinx.android.synthetic.main.activity_room_introduce.*
-import kotlinx.android.synthetic.main.activity_top.*
 
 class RoomIntroduceActivity : AppCompatActivity() {
 
@@ -62,7 +59,7 @@ class RoomIntroduceActivity : AppCompatActivity() {
                     val user = userData?.let { it } ?: continue
                     if(user.uid == FirebaseAuth.getInstance().uid){
                         val reference = FirebaseDatabase.getInstance().getReference().child("/messages").push()
-                        reference.setValue(Message(message, user.username.toString()))
+                        reference.setValue(Message_all(message, user.username.toString(),true))
                                 .addOnSuccessListener {
                                     val intent = Intent(this@RoomIntroduceActivity, Activity_chat::class.java)
                                     startActivity(intent)

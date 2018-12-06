@@ -5,12 +5,15 @@ import android.app.Dialog
 import android.content.Intent
 import android.os.Bundle
 import android.support.v4.app.DialogFragment
-import android.widget.Toast
+import android.util.Log
+import com.example.enpit_p13.chatapp.Message_all
 import com.example.enpit_p13.chatapp.quetion.TemplateQuestionnaireActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
-import kotlinx.android.synthetic.main.activity_latest_messages.*
+import com.google.firebase.database.ValueEventListener
 import org.jetbrains.anko.toast
 
 class DeleteConfirmDialog : DialogFragment(){
@@ -23,6 +26,22 @@ class DeleteConfirmDialog : DialogFragment(){
                 context.toast("ルームが削除されました。")
                 sendData("","",false) //reset data
                 FirebaseDatabase.getInstance().getReference("/Room/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
+                FirebaseDatabase.getInstance().getReference("/messages/")
+                        .addValueEventListener(object :ValueEventListener{
+                            override fun onDataChange(p0: DataSnapshot) {
+                               p0.children.forEach {
+                                   val delete_room = it?.getValue(Message_all::class.java)
+                                   if(delete_room?.Uid == FirebaseAuth.getInstance().uid.toString())
+                                   {
+                                       Log.d("Check_error","${p0.key}")
+                                       FirebaseDatabase.getInstance().getReference("/messages/${it?.key}").removeValue()
+                                   }
+                               }
+                            }
+                            override fun onCancelled(p0: DatabaseError) {
+
+                            }
+                        })
                 val intent = Intent(context, TemplateQuestionnaireActivity::class.java)
                 startActivity(intent)
             }

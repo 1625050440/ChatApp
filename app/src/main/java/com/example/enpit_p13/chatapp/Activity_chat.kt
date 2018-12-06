@@ -2,6 +2,7 @@ package com.example.enpit_p13.chatapp
 
 import android.content.Intent
 import android.os.Bundle
+import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
@@ -13,6 +14,8 @@ import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity_from_chat_all
 import com.example.enpit_p13.chatapp.quetion.RoomIntroduceActivity
+import com.example.enpit_p13.chatapp.room_chat.Room_chat_from_ListView
+import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -31,13 +34,13 @@ class Activity_chat : AppCompatActivity() {
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
         FirebaseDatabase.getInstance().getReference()?.child("/users/")
-                .addValueEventListener(object : ValueEventListener{
+                .addListenerForSingleValueEvent(object : ValueEventListener{
                     override fun onDataChange(p0: DataSnapshot) {
                         p0.children.forEach {
                             val data = it?.getValue(User::class.java)
                             if(data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()){
                             val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                            reference.setValue(Check_online("Chat_all",data?.username.toString()))
+                            reference.setValue(Check_online("Chat_all",data?.username.toString(),false))
                         }}
                     }
 
@@ -54,9 +57,7 @@ class Activity_chat : AppCompatActivity() {
                     val user = userData?.let { it } ?: continue
                     if (user.uid_check_online.toString() != "Chat_all") {
                         count--
-
                     }
-
                 }
                 online_count_text_view.text= "在室中：${count}"
             }
@@ -65,13 +66,42 @@ class Activity_chat : AppCompatActivity() {
 
             }
         })
+        FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                .addValueEventListener(object :ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        val data = p0.getValue(Check_online::class.java)
+                        if (data?.uid_check_online!="Chat_all" && data?.room_go == true){
+                            val builder = AlertDialog.Builder(this@Activity_chat)
+                            builder.setTitle("ルーム変更の確認")
+                            builder.setMessage("このルームへ移動しますか。")
+                            builder.setPositiveButton("はい"){dialog,which->
+                                startActivity<Room_chat_from_ListView>()
+                            }
+                            builder.setNeutralButton("いいえ"){dialog, which->
+                                FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                                        .setValue(Check_online("Chat_all",data?.username.toString(),false))
+                            }
+
+                            val dialog = builder.create()
+                            dialog.show()
+
+                        }
+
+                    }
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
 
         createFirebaseListener()
         send_Button.setOnLongClickListener() {
             template()
         }
         send_Button.setOnClickListener {
-
+            template_button_from_chat_all.visibility = View.INVISIBLE
+            template_button_from_chat_all.isClickable = false
+            room_intro_button.visibility = View.INVISIBLE
+            room_intro_button.isClickable = false
             if (!mainActivityEditText.text.toString().isEmpty()) {
 
                 sendData()
@@ -94,9 +124,27 @@ class Activity_chat : AppCompatActivity() {
         }
 
         room_intro_button.setOnClickListener {
-            room_intro_button.visibility = View.INVISIBLE
-            room_intro_button.isClickable = false
-            startActivity<RoomIntroduceActivity>()
+            FirebaseDatabase.getInstance().getReference("/Room_Chat/${FirebaseAuth.getInstance().uid.toString()}")
+                    .addListenerForSingleValueEvent(object :ValueEventListener{
+                        override fun onDataChange(p0: DataSnapshot) {
+                            val data = p0.getValue(Room_chat_messager::class.java)
+                            if(data==null || data?.check == false )
+                            {
+                                Toast.makeText(this@Activity_chat,"ルームは未作成です。",Toast.LENGTH_SHORT).show()
+                            }
+                            else
+                            {
+                                room_intro_button.visibility = View.INVISIBLE
+                                room_intro_button.isClickable = false
+                                startActivity<RoomIntroduceActivity>()
+                            }
+                        }
+
+                        override fun onCancelled(p0: DatabaseError) {
+
+                        }
+                    })
+
         }
 
     }
@@ -115,7 +163,7 @@ class Activity_chat : AppCompatActivity() {
                     val user = userData?.let { it } ?: continue
                     if (user?.uid == FirebaseAuth.getInstance().uid) {
                         val reference = FirebaseDatabase.getInstance().getReference()?.child("/messages").push()
-                        reference.setValue(Message(mainActivityEditText.text.toString(), user?.username.toString()))
+                        reference.setValue(Message_all(mainActivityEditText.text.toString(), user?.username.toString(),false))
                                 .addOnSuccessListener {
                                     mainActivityEditText.text.clear()
 
@@ -151,7 +199,7 @@ class Activity_chat : AppCompatActivity() {
 
                 for (data in dataSnapshot.children) {
 
-                    val messageData = data.getValue<Message>(Message::class.java)
+                    val messageData = data.getValue<Message_all>(Message_all::class.java)
                     //unwrap
                     val message = messageData?.let { it } ?: continue
 
@@ -160,9 +208,11 @@ class Activity_chat : AppCompatActivity() {
 
                     } else {
 
-                        adapter.add(ChatfromItem(message.text!!, message.username!!))
+                        adapter.add(ChatfromItem(message.text!!, message.username!!,message.room_ask,message.Uid.toString()))
                     }
                 }
+
+
                 recycle_chat.adapter = adapter
                 recycle_chat.scrollToPosition(recycle_chat.adapter!!.itemCount-1)
             }
@@ -180,7 +230,7 @@ class Activity_chat : AppCompatActivity() {
         template_button_from_chat_all.isClickable = true
         room_intro_button.visibility = View.VISIBLE
         room_intro_button.isClickable = true
-        return false
+        return true
     }
 }
    /* private fun setupAdapter(data: ArrayList<Message>){

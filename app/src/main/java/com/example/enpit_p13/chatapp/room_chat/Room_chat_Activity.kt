@@ -71,7 +71,7 @@ class Room_chat_Activity : AppCompatActivity() {
                                         val data = it?.getValue(User::class.java)
                                         if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
                                             val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                                            reference.setValue(Check_online(user.uid.toString(), data?.username.toString()))
+                                            reference.setValue(Check_online(user.uid.toString(), data?.username.toString(),true))
                                         }
                                     }
                                 }
@@ -90,7 +90,7 @@ class Room_chat_Activity : AppCompatActivity() {
                                 val user = userData?.let { it } ?: continue
                                 FirebaseDatabase.getInstance().getReference("/Address/${user.my_uid.toString()}")
                                         .onDisconnect()
-                                        .setValue(Check_online("OFF",user.username.toString()))
+                                        .setValue(Check_online("OFF",user.username.toString(),false))
                                 if (user.uid_check_online.toString() != key )   {
                                     count--
                                 }
@@ -193,7 +193,7 @@ class Room_chat_Activity : AppCompatActivity() {
 
                     }
                     else {
-                            adapter.add(ChatfromItem(message.text!!,message.username!!))
+                            adapter.add(ChatfromItem(message.text!!,message.username!!,false,""))
                     }
 
                 }
@@ -213,7 +213,7 @@ class Room_chat_Activity : AppCompatActivity() {
     private fun template(): Boolean {
         template_button.visibility = View.VISIBLE
         template_button.isClickable = true
-        return false
+        return true
     }
 }
 

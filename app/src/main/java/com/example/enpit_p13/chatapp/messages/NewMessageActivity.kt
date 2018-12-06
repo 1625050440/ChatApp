@@ -37,7 +37,7 @@ class NewMessageActivity : AppCompatActivity() {
                     override fun onDataChange(p0: DataSnapshot) {
                         val data = p0.getValue(User::class.java)
                         FirebaseDatabase.getInstance().getReference("/Address/${data?.uid.toString()}")
-                                .setValue(Check_online("List_Room",data?.username.toString()))
+                                .setValue(Check_online("List_Room",data?.username.toString(),false))
                     }
 
                     override fun onCancelled(p0: DatabaseError) {
@@ -119,7 +119,7 @@ class NewMessageActivity : AppCompatActivity() {
                                     val data = it?.getValue(User::class.java)
                                     if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
                                         val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                                        reference.setValue(Check_online(userItem.user.uid.toString(), data?.username.toString()))
+                                        reference.setValue(Check_online(userItem.user.uid.toString(), data?.username.toString(),true))
                                     }
                                 }
                             }

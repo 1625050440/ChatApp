@@ -44,7 +44,7 @@ class LatestMessagesActivity : AppCompatActivity() {
                             val data = it?.getValue(User::class.java)
                             if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
                                 val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                                reference.setValue(Check_online("Top_Page", data?.username.toString()))
+                                reference.setValue(Check_online("Top_Page", data?.username.toString(),false))
                             }
                         }
                     }

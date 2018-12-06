@@ -3,9 +3,15 @@ package com.example.enpit_p13.chatapp.messages
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.xwray.groupie.GroupAdapter
 import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
@@ -57,10 +63,33 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
 }
-class ChatfromItem(val text: String,val user: String) : Item<ViewHolder>(){
+class ChatfromItem(val text: String,val user: String,val check: Boolean,val uid:String) : Item<ViewHolder>(){
   override fun bind(viewHolder: ViewHolder,position: Int){
-    viewHolder.itemView.textView.textView.text = text
+    viewHolder.itemView.textView.text = text
       viewHolder.itemView.username_textview_from_row.text = user
+      var room_check = false
+      if (check== true)
+      {
+          viewHolder.itemView.link_button.visibility = View.VISIBLE
+          viewHolder.itemView.link_button.isClickable = true
+          viewHolder.itemView.link_button.setOnClickListener{
+              FirebaseDatabase.getInstance().getReference().child("/users/")
+                      .addValueEventListener(object : ValueEventListener {
+                          override fun onDataChange(p0: DataSnapshot) {
+                              p0.children.forEach {
+                                  val data = it?.getValue(User::class.java)
+                                  if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
+                                      val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                      reference.setValue(Check_online(uid, data?.username.toString(),true))
+                                  }
+                              }
+                          }
+                          override fun onCancelled(p0: DatabaseError) {
+
+                          }
+                      })
+          }
+      }
   }
 
     override fun getLayout(): Int {
