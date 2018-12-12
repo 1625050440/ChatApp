@@ -64,7 +64,7 @@ class RegisterActivity : AppCompatActivity() {
         val email = email_edittext.text.toString()
         val password = password_edittext.text.toString()
 
-        if (email.isEmpty() || password.isEmpty()) {
+        if (email.isEmpty() || password.isEmpty() || username_edittext.text.isEmpty()) {
             Toast.makeText(this, "アカウントの作成には、ユーザーネーム、メールアドレス、パスワードが必要です。", Toast.LENGTH_LONG).show()
             return
         }
@@ -77,7 +77,7 @@ class RegisterActivity : AppCompatActivity() {
                 .addOnCompleteListener {
                     if (!it.isSuccessful) return@addOnCompleteListener
 
-                    //else if cuccsessful
+                    //else if successful
                     Log.d("Main", "Successfully created user with uid: ${it.result?.user?.uid}")
                     uploadImageToFirebaseStorage()
                 }

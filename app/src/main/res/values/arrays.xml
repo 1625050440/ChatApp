@@ -18,4 +18,11 @@
         <item>世間体</item>
         <item>自由記述/使用していない</item>
     </string-array>
+
+    <string-array name="temp2_q2_spinner_item">
+        <item>使用しない</item>
+        <item>外出する</item>
+        <item>家から出ない</item>
+        <item>扉からでてこない</item>
+    </string-array>
 </resources>
