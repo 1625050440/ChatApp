@@ -128,7 +128,14 @@ class LatestMessagesActivity : AppCompatActivity() {
             dialog.show(supportFragmentManager,"confirm_dialog")
            // startActivity<Room_chat_from_ListView>()
         }
-
+      chat_all_home.setOnClickListener {
+          val intent = Intent(this, Activity_chat::class.java)
+          startActivity(intent)
+      }
+      room_view_home.setOnClickListener {
+          val intent = Intent(this, NewMessageActivity::class.java)
+          startActivity(intent)
+      }
 
     }
     private fun sendData(title:String,message:String,check:Boolean) {

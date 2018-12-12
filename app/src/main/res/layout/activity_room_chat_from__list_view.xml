@@ -16,7 +16,43 @@
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explain_textview_from_listview" />
+        app:layout_constraintTop_toBottomOf="@+id/explain_textview_from_listview">
+
+    </android.support.v7.widget.RecyclerView>
+
+    <TextView
+        android:id="@+id/room_de_confirm"
+        android:layout_width="396dp"
+        android:layout_height="279dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:layout_marginBottom="8dp"
+        android:background="@drawable/border_color"
+        android:gravity="center_horizontal"
+        android:text="アドバイスいただきありがとうございました。\n皆様の意見を参考にしたいと思います。"
+        android:textSize="32dp"
+        android:visibility="invisible"
+        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/recycler_chat_room_from_listroom"
+        app:layout_constraintTop_toBottomOf="@+id/thisroom_count_textview" />
+
+    <Button
+        android:id="@+id/return_button"
+        android:layout_width="wrap_content"
+        android:layout_height="70dp"
+        android:layout_marginBottom="16dp"
+        android:background="@drawable/chatpage"
+        android:clickable="false"
+        android:text=""
+        android:visibility="invisible"
+        app:layout_constraintBottom_toBottomOf="@+id/room_de_confirm"
+        app:layout_constraintEnd_toEndOf="@+id/room_de_confirm"
+        app:layout_constraintHorizontal_bias="0.495"
+        app:layout_constraintStart_toStartOf="@+id/room_de_confirm" />
 
     <LinearLayout
         android:id="@+id/linearLayout"
@@ -67,11 +103,13 @@
         android:id="@+id/explain_textview_from_listview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
+        android:layout_marginStart="28dp"
+        android:layout_marginLeft="28dp"
+        android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext_register"
         android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     <TextView
         android:id="@+id/thisroom_count_textview"
@@ -79,10 +117,59 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         android:gravity="right"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toEndOf="@+id/explain_textview_from_listview"
-        app:layout_constraintTop_toTopOf="@+id/explain_textview_from_listview" />
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="0dp"
+        android:layout_height="75dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <Button
+            android:id="@+id/this_room_guess"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button2"
+            android:text="ルーム" />
+
+        <Button
+            android:id="@+id/home_chat_guess"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            android:background="@drawable/button1"
+            android:text="チャットホーム" />
+
+        <Button
+            android:id="@+id/chat_all_guess"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:background="@drawable/button1"
+            android:text="全体チャット" />
+
+        <Button
+            android:id="@+id/room_view_guess"
+            android:layout_width="match_parent"
+            android:layout_height="75dp"
+            android:layout_weight="1"
+            android:background="@drawable/button1"
+            android:text="ルーム選択" />
+
+    </LinearLayout>
 </android.support.constraint.ConstraintLayout>

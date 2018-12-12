@@ -2,7 +2,6 @@ package com.example.enpit_p13.chatapp
 
 import android.content.Intent
 import android.os.Bundle
-import android.support.v7.app.AlertDialog
 import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
@@ -10,6 +9,7 @@ import android.widget.Toast
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
+import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity_from_chat_all
@@ -59,7 +59,7 @@ class Activity_chat : AppCompatActivity() {
                         count--
                     }
                 }
-                online_count_text_view.text= "在室中：${count}"
+               this_room_chat_all.text = "全体チャット($count)"
             }
 
             override fun onCancelled(p0: DatabaseError) {
@@ -69,24 +69,11 @@ class Activity_chat : AppCompatActivity() {
         FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
                 .addValueEventListener(object :ValueEventListener{
                     override fun onDataChange(p0: DataSnapshot) {
-                        val data = p0.getValue(Check_online::class.java)
-                        if (data?.uid_check_online!="Chat_all" && data?.room_go == true){
-                            val builder = AlertDialog.Builder(this@Activity_chat)
-                            builder.setTitle("ルーム変更の確認")
-                            builder.setMessage("このルームへ移動しますか。")
-                            builder.setPositiveButton("はい"){dialog,which->
-                                startActivity<Room_chat_from_ListView>()
-                            }
-                            builder.setNeutralButton("いいえ"){dialog, which->
-                                FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                                                        .setValue(Check_online("Chat_all",data?.username.toString(),false))
-                            }
+                        val data = p0?.getValue(Check_online::class.java)
+                        if ( data?.room_go == true ) {
 
-                            val dialog = builder.create()
-                            dialog.show()
-
+                           startActivity<Room_chat_from_ListView>()
                         }
-
                     }
                     override fun onCancelled(p0: DatabaseError) {
 
@@ -145,6 +132,12 @@ class Activity_chat : AppCompatActivity() {
                         }
                     })
 
+        }
+        home_chat_chat_all.setOnClickListener {
+            startActivity<LatestMessagesActivity>()
+        }
+        room_view_chat_all.setOnClickListener {
+            startActivity<NewMessageActivity>()
         }
 
     }
@@ -208,7 +201,7 @@ class Activity_chat : AppCompatActivity() {
 
                     } else {
 
-                        adapter.add(ChatfromItem(message.text!!, message.username!!,message.room_ask,message.Uid.toString()))
+                        adapter.add(ChatfromItem(message.text!!, message.username!!,message.room_ask,message.Uid.toString(),false))
                     }
                 }
 
