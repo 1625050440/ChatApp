@@ -38,17 +38,12 @@ class OwnAnalysisActivity : AppCompatActivity() {
                     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
                         val spinner = parent as? Spinner
                     }
-
                     override fun onNothingSelected(p0: AdapterView<*>?) {}
-
                 }
 
         save_button.setOnClickListener{
 
-
             Toast.makeText(this,"保存しました。",Toast.LENGTH_LONG).show()
-
-
             writeNewQuestion()
         }
     }

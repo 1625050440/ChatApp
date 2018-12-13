@@ -17,6 +17,7 @@ import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
+import com.example.enpit_p13.chatapp.quetion.Qustiontemp2Activity
 import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
@@ -118,7 +119,7 @@ class LatestMessagesActivity : AppCompatActivity() {
         })
         create_templates_button.setOnClickListener {
             sendData(title_edditext.text.toString(),explain_EditText.text.toString(),false)
-            intent = Intent(this, QuestiontempActivity::class.java)
+            intent = Intent(this, Qustiontemp2Activity::class.java)
             //intent.putExtra(USER_KEY,title_edditext.text.toString())
             startActivity(intent)
         }

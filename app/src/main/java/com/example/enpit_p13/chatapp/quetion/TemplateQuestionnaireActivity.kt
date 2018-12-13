@@ -49,7 +49,7 @@ class TemplateQuestionnaireActivity : AppCompatActivity() {
         q3 = temp_Q3_editText.text.toString()
 
         val questionnaire = Questionnaire(q1,q2,q3)
-        val ref = FirebaseDatabase.getInstance().getReference("Quetionnaire")
+        val ref = FirebaseDatabase.getInstance().getReference("Questionnaires")
         ref.push().setValue(questionnaire)
     }
 }
