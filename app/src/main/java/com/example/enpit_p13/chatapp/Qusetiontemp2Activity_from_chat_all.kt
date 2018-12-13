@@ -1,4 +1,4 @@
-package com.example.enpit_p13.chatapp.quetion
+package com.example.enpit_p13.chatapp
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -8,8 +8,6 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.Spinner
-import android.widget.Toast
-import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
@@ -18,31 +16,16 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_question.*
-import kotlinx.android.synthetic.main.activity_qustiontemp2.*
-import kotlinx.android.synthetic.main.content_own_analysis.*
+import kotlinx.android.synthetic.main.activity_qusetiontemp2_from_chat_all.*
 
-
-class Qustiontemp2Activity : AppCompatActivity() {
+class Qusetiontemp2Activity_from_chat_all : AppCompatActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_qustiontemp2)
+        setContentView(R.layout.activity_qusetiontemp2_from_chat_all)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
-        editTemplate.isEnabled = false
-        send_button.visibility = View.INVISIBLE
-        send_button.isClickable = false
-        editTemplate.setOnClickListener {
-            if(!editTemplate.isEnabled){
-                Toast.makeText(this,"テンプレートの作成を行ってください",Toast.LENGTH_SHORT).show()
-            }
-        }
-
-        create_temp()
-
         var  temptext = ""
-
         temp_create_button.setOnClickListener(){
             temptext = "私と子供との関係は、以下のような状況です。\n"
             if(t1_text.text != ""){
@@ -56,7 +39,7 @@ class Qustiontemp2Activity : AppCompatActivity() {
                 temptext = temptext + "・" + t3_text.text + "\n"
             }
             if (t4_text.text != ""){
-                temptext = temptext + t4_text.text + "\n"
+                temptext = temptext + "現在の状況について" + t4_text.text + "\n"
             }
             temptext += "そこで質問なのですが、どうやって子供と打ち解け現在の状況を脱する事ができますか？\nみなさんの意見をお聞きしたいです。"
             editTemplate.setText(temptext)
@@ -72,7 +55,6 @@ class Qustiontemp2Activity : AppCompatActivity() {
             send(temptext)
         }
     }
-
     companion object {
         val USER_KEY = "USER_KEY"
     }
@@ -125,9 +107,9 @@ class Qustiontemp2Activity : AppCompatActivity() {
                         item?.let{
                             when (it) {
                                 0 -> t4_text.text = ""
-                                1 -> t4_text.text = "現在の状況について支援機関への相談をしたことがあります。"
-                                2 -> t4_text.text = "現在の状況について親戚や友達に相談をしたことがあります。"
-                                3 -> t4_text.text = "現在の状況について誰も身近に相談する相手がいません。"
+                                1 -> t4_text.text = "支援機関への相談をしたことがあります。"
+                                2 -> t4_text.text = "親戚や友達に相談をしたことがあります。"
+                                3 -> t4_text.text = "誰も身近に相談する相手がいません。"
                             }
                         }
                     }
@@ -153,14 +135,14 @@ class Qustiontemp2Activity : AppCompatActivity() {
                     if (user.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
 
                         val refe = FirebaseDatabase.getInstance().getReference("/Room_Chat/${FirebaseAuth.getInstance().uid.toString()}")
-                        refe.setValue(Room_chat_messager(message, user?.kadaimeiText.toString(), FirebaseAuth.getInstance().uid.toString(), user.check))
+                        refe.setValue(Room_chat_messager(message, user.kadaimeiText.toString(), FirebaseAuth.getInstance().uid.toString(), user.check))
                                 .addOnSuccessListener {
 
-                                    if (user?.messageText.toString().isEmpty()) {
-                                        intent = Intent(this@Qustiontemp2Activity, LatestMessagesActivity::class.java)
+                                    if (user.messageText.toString().isEmpty()) {
+                                        intent = Intent(this@Qusetiontemp2Activity_from_chat_all, LatestMessagesActivity::class.java)
                                         startActivity(intent)
                                     } else {
-                                        intent = Intent(this@Qustiontemp2Activity, Room_chat_Activity::class.java)
+                                        intent = Intent(this@Qusetiontemp2Activity_from_chat_all, Room_chat_Activity::class.java)
                                         startActivity(intent)
                                     }
                                 }

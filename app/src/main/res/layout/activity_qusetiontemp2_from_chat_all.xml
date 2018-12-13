@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".quetion.Qustiontemp2Activity">
+    tools:context=".Qusetiontemp2Activity_from_chat_all">
 
     <Spinner
         android:id="@+id/spinner2"
@@ -213,18 +213,10 @@
                     android:orientation="vertical">
 
                     <TextView
-                        android:id="@+id/textView4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="私と子供との関係は、以下のような状況です。 "
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
                         android:id="@+id/t1_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center_horizontal"
                         android:textSize="18sp"
@@ -234,7 +226,7 @@
                         android:id="@+id/t2_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginTop="70dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center_horizontal"
                         android:textSize="18sp"
@@ -244,7 +236,7 @@
                         android:id="@+id/t3_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
+                        android:layout_marginTop="20dp"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -252,15 +244,7 @@
                         android:id="@+id/t4_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="0dp"
-                        android:textSize="18sp"
-                        android:textStyle="bold" />
-
-                    <TextView
-                        android:id="@+id/textView5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:text="そこで質問なのですが、どうやって子供と打ち解け現在の状況を脱する事ができますか？\nみなさんの意見をお聞きしたいです。"
+                        android:layout_marginTop="70dp"
                         android:textSize="18sp"
                         android:textStyle="bold" />
 
@@ -324,5 +308,6 @@
         android:text="送信"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent" />
+
 
 </android.support.constraint.ConstraintLayout>

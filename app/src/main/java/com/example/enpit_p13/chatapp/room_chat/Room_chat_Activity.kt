@@ -16,7 +16,7 @@ import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
-import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
+import com.example.enpit_p13.chatapp.quetion.Qustiontemp2Activity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -136,7 +136,7 @@ class Room_chat_Activity : AppCompatActivity() {
             template_button.setOnClickListener {
                 template_button.visibility = View.INVISIBLE
                 template_button.isClickable = false
-                intent = Intent(this, QuestiontempActivity::class.java)
+                intent = Intent(this, Qustiontemp2Activity::class.java)
               //  intent.putExtra(USER_KEY, userdata)
                 startActivity(intent)
             }

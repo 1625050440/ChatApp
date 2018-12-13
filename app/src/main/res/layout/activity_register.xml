@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@android:color/holo_green_dark"
+    android:background="@drawable/loginpage"
     tools:context=".registerlogin.RegisterActivity">
 
     <EditText
@@ -13,7 +13,7 @@
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="172dp"
+        android:layout_marginTop="123dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@drawable/rounded_edittext_register"
@@ -34,9 +34,9 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext_register"
         android:ems="10"
+        android:gravity="center"
         android:hint="email"
         android:inputType="textEmailAddress"
-        android:gravity="center"
         android:maxLength="20"
         app:layout_constraintEnd_toEndOf="@+id/username_edittext"
         app:layout_constraintStart_toStartOf="@+id/username_edittext"
@@ -91,7 +91,7 @@
         android:id="@+id/Title"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="74dp"
+        android:layout_marginTop="360dp"
         android:text="新規登録"
         android:textSize="30sp"
         app:layout_constraintEnd_toEndOf="parent"
