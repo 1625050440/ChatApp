@@ -19,16 +19,16 @@
     <ScrollView
         android:id="@+id/scrollView"
         android:layout_width="0dp"
-        android:layout_height="504dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="2dp"
         android:layout_marginLeft="2dp"
-        android:layout_marginTop="24dp"
+        android:layout_marginTop="400dp"
         android:layout_marginEnd="8dp"
         android:layout_marginRight="8dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner2">
+        app:layout_constraintTop_toTopOf="parent">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -38,6 +38,9 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
+                android:layout_marginRight="20dp"
+                android:background="@drawable/textview_border"
                 android:orientation="horizontal">
 
                 <LinearLayout
@@ -45,6 +48,7 @@
                     android:layout_width="297dp"
                     android:layout_height="match_parent"
                     android:layout_marginBottom="0dp"
+                    android:background="@drawable/textview_border"
                     android:orientation="vertical"
                     android:padding="20dp"
                     android:paddingRight="30dp"
@@ -72,6 +76,14 @@
                             android:layout_weight="0">
 
                             <RadioButton
+                                android:id="@+id/t1_radio3"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:checked="true"
+                                android:text="使用しない" />
+
+                            <RadioButton
                                 android:id="@+id/t1_radio1"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
@@ -87,19 +99,13 @@
                                 android:layout_weight="1"
                                 android:text="無" />
 
-                            <RadioButton
-                                android:id="@+id/t1_radio3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="使用しない" />
                         </RadioGroup>
 
                     </LinearLayout>
 
                     <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="85dp"
+                        android:layout_height="40dp"
                         android:layout_marginBottom="10dp"
                         android:orientation="horizontal">
 
@@ -114,7 +120,7 @@
                             android:textStyle="bold" />
 
                         <Spinner
-                            android:id="@+id/spinner3"
+                            android:id="@+id/t2_spinner"
                             android:layout_width="160dp"
                             android:layout_height="wrap_content"
                             android:layout_marginLeft="15dp"
@@ -146,50 +152,12 @@
                             android:layout_weight="0">
 
                             <RadioButton
-                                android:id="@+id/t2_radio1"
+                                android:id="@+id/t3_radio3"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:layout_weight="1"
-                                android:text="有" />
-
-                            <RadioButton
-                                android:id="@+id/t2_radio2"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="無" />
-
-                            <RadioButton
-                                android:id="@+id/t2_radio3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
+                                android:checked="true"
                                 android:text="使用しない" />
-
-                        </RadioGroup>
-                    </LinearLayout>
-
-                    <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="85dp"
-                        android:orientation="horizontal">
-
-                        <TextView
-                            android:id="@+id/temp4_Labal"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content"
-                            android:layout_marginLeft="0dp"
-                            android:layout_marginRight="0dp"
-                            android:layout_weight="1"
-                            android:text="外部への相談："
-                            android:textSize="12sp"
-                            android:textStyle="bold" />
-
-                        <RadioGroup
-                            android:layout_width="wrap_content"
-                            android:layout_height="match_parent"
-                            android:layout_marginLeft="10dp"
-                            android:layout_weight="0">
 
                             <RadioButton
                                 android:id="@+id/t3_radio1"
@@ -205,14 +173,32 @@
                                 android:layout_weight="1"
                                 android:text="無" />
 
-                            <RadioButton
-                                android:id="@+id/t3_radio3"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:layout_weight="1"
-                                android:text="使用しない" />
-
                         </RadioGroup>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="85dp"
+                        android:orientation="horizontal">
+
+                        <TextView
+                            android:id="@+id/temp4_Labal"
+                            android:layout_width="wrap_content"
+                            android:layout_height="wrap_content"
+                            android:layout_marginLeft="0dp"
+                            android:layout_marginRight="0dp"
+                            android:layout_weight="0"
+                            android:text="外部への相談："
+                            android:textSize="12sp"
+                            android:textStyle="bold" />
+
+                        <Spinner
+                            android:id="@+id/t4_spinner"
+                            android:layout_width="160dp"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="0"
+                            android:entries="@array/temp2_t4_spinner_item" />
+
                     </LinearLayout>
 
 
@@ -223,17 +209,18 @@
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
                     android:layout_marginLeft="0dp"
+                    android:background="@drawable/textview_border"
                     android:orientation="vertical">
 
                     <TextView
                         android:id="@+id/t1_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="70dp"
+                        android:layout_marginTop="30dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center_horizontal"
-                        android:text="TextView"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/t2_text"
@@ -242,34 +229,36 @@
                         android:layout_marginTop="70dp"
                         android:layout_marginRight="20dp"
                         android:gravity="center_horizontal"
-                        android:text="TextView"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/t3_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:layout_marginTop="70dp"
-                        android:text="TextView"
-                        android:textSize="18sp" />
+                        android:layout_marginTop="20dp"
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                     <TextView
                         android:id="@+id/t4_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="70dp"
-                        android:text="TextView"
-                        android:textSize="18sp" />
+                        android:textSize="18sp"
+                        android:textStyle="bold" />
 
                 </LinearLayout>
             </LinearLayout>
 
             <Button
-                android:id="@+id/temp_make_button"
+                android:id="@+id/temp_create_button"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:layout_marginLeft="20dp"
                 android:layout_marginTop="20dp"
                 android:text="テンプレート作成する" />
+
         </LinearLayout>
 
     </ScrollView>
@@ -278,28 +267,47 @@
         android:id="@+id/textView9"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginLeft="20dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginLeft="15dp"
         android:layout_marginTop="15dp"
         android:text="質問テンプレート"
         android:textSize="30sp"
+        android:textStyle="bold"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
-        android:id="@+id/editText2"
+        android:id="@+id/editTemplate"
         android:layout_width="0dp"
         android:layout_height="0dp"
+        android:layout_marginStart="20dp"
         android:layout_marginLeft="20dp"
-        android:layout_marginTop="20dp"
+        android:layout_marginEnd="20dp"
         android:layout_marginRight="20dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="38dp"
+        android:height="0dp"
         android:background="@drawable/textview_border"
         android:ems="10"
-        android:inputType="textImeMultiLine"
+        android:enabled="false"
+        android:gravity="start"
+        android:inputType="textMultiLine"
+        android:lineSpacingExtra="10sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintBottom_toTopOf="@+id/scrollView"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/scrollView" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner2" />
+
+    <Button
+        android:id="@+id/send_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="34dp"
+        android:layout_marginRight="34dp"
+        android:layout_marginBottom="21dp"
+        android:text="送信"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
 
 </android.support.constraint.ConstraintLayout>

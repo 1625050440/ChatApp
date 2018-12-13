@@ -8,13 +8,15 @@
         android:label="@string/app_name"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        android:screenOrientation="portrait">
 
         <!-- トップページのアクティビティ -->
         <activity
             android:name=".toppage.TopPageActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -23,34 +25,45 @@
         </activity>
         <!-- ここまで　 -->
         <!--  -->
-        <activity android:name=".messages.LatestMessagesActivity">
+        <activity android:name=".messages.LatestMessagesActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".toppage.TopPageActivity" />
         </activity>
-        <activity android:name=".registerlogin.RegisterActivity" />
-        <activity android:name=".registerlogin.Login" />
-        <activity android:name=".messages.NewMessageActivity">
+        <activity android:name=".registerlogin.RegisterActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".registerlogin.Login"
+            android:screenOrientation="portrait">
+        </activity>
+
+        <activity android:name=".messages.NewMessageActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".messages.LatestMessagesActivity" />
         </activity>
-        <activity android:name=".room_chat.Room_chat_Activity">
+        <activity android:name=".room_chat.Room_chat_Activity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".messages.LatestMessagesActivity" />
         </activity>
-        <activity android:name=".room_chat.Room_chat_from_ListView">
+        <activity android:name=".room_chat.Room_chat_from_ListView"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".messages.LatestMessagesActivity" />
         </activity>
-        <activity android:name=".Activity_chat">
+        <activity android:name=".Activity_chat"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".messages.LatestMessagesActivity" />
         </activity>
-        <activity android:name=".quetion.QuestiontempActivity">
+        <activity android:name=".quetion.QuestiontempActivity"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".messages.LatestMessagesActivity" />
@@ -60,7 +73,8 @@
         <activity
             android:name=".analyzesheet.OwnAnalysisActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar" />
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait"/>
         <activity android:name=".quetion.QuestiontempActivity_from_chat_all" />
         <activity android:name=".quetion.RoomIntroduceActivity" />
         <activity android:name=".analyzesheet.SelectOwnAnalyzeActivity">
@@ -71,14 +85,19 @@
         <activity
             android:name=".analyzesheet.LookBackAnalyzeActivity"
             android:label="@string/app_name"
-            android:theme="@style/AppTheme.NoActionBar">
+            android:theme="@style/AppTheme.NoActionBar"
+            android:screenOrientation="portrait">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".analyzesheet.OwnAnalysisActivity" />
         </activity>
         <!-- ここまで　 -->
-        <activity android:name=".quetion.TemplateQuestionnaireActivity" />
-        <activity android:name=".quetion.Qustiontemp2Activity"></activity>
+        <activity android:name=".quetion.TemplateQuestionnaireActivity"
+            android:screenOrientation="portrait">
+        </activity>
+        <activity android:name=".quetion.Qustiontemp2Activity"
+            android:screenOrientation="portrait">
+        </activity>
     </application>
 
 </manifest>

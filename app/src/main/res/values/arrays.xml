@@ -7,9 +7,12 @@
     </string-array>
 
     <string-array name="list">
-        <item>コミュニケーション</item>
-        <item>就職活動</item>
-        <item>世間体</item>
+        <item>子供とのコミュニケーション</item>
+        <item>子供が外出しない</item>
+        <item>支援機関への相談</item>
+        <item>家庭内暴力</item>
+        <item>就労</item>
+        <item>その他</item>
     </string-array>
 
     <string-array name="temp_spinner_item">
@@ -24,5 +27,11 @@
         <item>外出する</item>
         <item>家から出ない</item>
         <item>扉からでてこない</item>
+    </string-array>
+    <string-array name="temp2_t4_spinner_item">
+        <item>使用しない</item>
+        <item>支援機関に相談している</item>
+        <item>親戚や友達に話せる</item>
+        <item>誰にも相談していない</item>
     </string-array>
 </resources>
