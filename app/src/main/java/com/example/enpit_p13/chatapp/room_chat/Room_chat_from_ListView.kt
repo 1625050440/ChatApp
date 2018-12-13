@@ -3,12 +3,15 @@ package com.example.enpit_p13.chatapp.room_chat
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import android.view.View
 import android.widget.Toast
+import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
+import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.google.firebase.auth.FirebaseAuth
@@ -37,10 +40,26 @@ class Room_chat_from_ListView : AppCompatActivity() {
                     override fun onDataChange(p0: DataSnapshot) {
                         Log.d("Check_data","$p0")
                             val data = p0.getValue(Check_online::class.java)
+                            FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                    .setValue(Check_online(data?.uid_check_online.toString(),data?.username.toString(),false))
                                 FirebaseDatabase.getInstance().getReference("/Room_Chat/${data?.uid_check_online}")
                                         .addValueEventListener(object : ValueEventListener {
                                             override fun onDataChange(p0: DataSnapshot) {
                                                     val user = p0.getValue(Room_chat_messager::class.java)
+
+                                                    if(user?.check == false)
+                                                    {
+                                                        room_de_confirm.visibility = View.VISIBLE
+                                                        return_button.visibility = View.VISIBLE
+                                                        return_button.isClickable = true
+                                                        return_button.setOnClickListener {
+                                                            room_de_confirm.visibility = View.INVISIBLE
+                                                            return_button.visibility = View.INVISIBLE
+                                                            return_button.isClickable = false
+                                                            startActivity<LatestMessagesActivity>()
+                                                        }
+
+                                                    }
                                                         FirebaseDatabase.getInstance().getReference("/users/${user?.uid.toString()}")
                                                                 .addValueEventListener(object :ValueEventListener {
                                                                     override fun onDataChange(p0: DataSnapshot) {
@@ -104,7 +123,15 @@ class Room_chat_from_ListView : AppCompatActivity() {
 
                     }
                 })
-
+        home_chat_guess.setOnClickListener {
+            startActivity<LatestMessagesActivity>()
+        }
+        chat_all_guess.setOnClickListener {
+            startActivity<Activity_chat>()
+        }
+        room_view_guess.setOnClickListener {
+            startActivity<NewMessageActivity>()
+        }
 
     }
 
@@ -158,7 +185,7 @@ class Room_chat_from_ListView : AppCompatActivity() {
 
                                             adapter.add(ChatToItem(message.text!!))
                                         } else {
-                                            adapter.add(ChatfromItem(message.text!!, message.username!!,false,""))
+                                            adapter.add(ChatfromItem(message.text!!, message.username!!,false,"",false))
                                         }
                                     }
                                 recycler_chat_room_from_listroom.adapter = adapter

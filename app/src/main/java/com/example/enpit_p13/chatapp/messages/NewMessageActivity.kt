@@ -5,6 +5,7 @@ import android.content.Intent
 import android.os.Bundle
 import android.support.v7.app.AppCompatActivity
 import android.util.Log
+import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
@@ -46,6 +47,13 @@ class NewMessageActivity : AppCompatActivity() {
                 })
 
         fetchUsers()
+        home_chat_list.setOnClickListener {
+            startActivity<LatestMessagesActivity>()
+        }
+        chat_all_list.setOnClickListener {
+            startActivity<Activity_chat>()
+        }
+
     }
 
     override fun onBackPressed() {
@@ -119,7 +127,7 @@ class NewMessageActivity : AppCompatActivity() {
                                     val data = it?.getValue(User::class.java)
                                     if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
                                         val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                                        reference.setValue(Check_online(userItem.user.uid.toString(), data?.username.toString(),true))
+                                        reference.setValue(Check_online(userItem.user.uid.toString(), data?.username.toString(),false))
                                     }
                                 }
                             }

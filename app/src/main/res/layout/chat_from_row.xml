@@ -32,11 +32,10 @@
         android:layout_marginStart="8dp"
         android:layout_marginLeft="8dp"
         android:layout_marginTop="10dp"
+        android:clickable="false"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:clickable="false"
-        app:srcCompat="@android:drawable/star_big_on"
-        />
+        app:srcCompat="@drawable/kangaroo" />
 
     <TextView
         android:id="@+id/username_textview_from_row"
@@ -62,7 +61,7 @@
         android:layout_marginBottom="8dp"
         android:background="@drawable/rounded_button"
         android:visibility="invisible"
-        android:clickable="true"
+        android:clickable="false"
         app:layout_constraintBottom_toBottomOf="@+id/textView"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.972"
@@ -70,5 +69,17 @@
         app:layout_constraintTop_toTopOf="@+id/textView"
         app:layout_constraintVertical_bias="0.642"
         app:srcCompat="@android:drawable/ic_menu_directions" />
+
+    <ImageView
+        android:id="@+id/add_comment"
+        android:layout_width="54dp"
+        android:layout_height="52dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:visibility="invisible"
+        android:clickable="false"
+        app:layout_constraintStart_toEndOf="@+id/textView"
+        app:layout_constraintTop_toTopOf="@+id/textView"
+        app:srcCompat="@android:drawable/ic_input_add" />
 
 </android.support.constraint.ConstraintLayout>

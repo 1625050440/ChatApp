@@ -13,19 +13,19 @@
         android:layout_height="50dp"
         android:layout_marginStart="32dp"
         android:layout_marginLeft="32dp"
-        android:layout_marginTop="18dp"
+        android:layout_marginTop="172dp"
         android:layout_marginEnd="32dp"
         android:layout_marginRight="32dp"
         android:background="@drawable/rounded_edittext_register"
         android:ems="10"
         android:fontFamily="monospace"
         android:gravity="center"
-        android:hint="Username"
+        android:hint="Username(20文字以下)"
         android:inputType="textPersonName"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/select_imageview_register" />
+        app:layout_constraintTop_toBottomOf="@+id/Title" />
 
     <EditText
         android:id="@+id/email_edittext"
@@ -37,6 +37,7 @@
         android:hint="email"
         android:inputType="textEmailAddress"
         android:gravity="center"
+        android:maxLength="20"
         app:layout_constraintEnd_toEndOf="@+id/username_edittext"
         app:layout_constraintStart_toStartOf="@+id/username_edittext"
         app:layout_constraintTop_toBottomOf="@+id/username_edittext" />
@@ -48,9 +49,9 @@
         android:layout_marginTop="8dp"
         android:background="@drawable/rounded_edittext_register"
         android:ems="10"
-        android:hint="password"
-        android:inputType="textPassword"
         android:gravity="center"
+        android:hint="password(6文字以上)"
+        android:inputType="textPassword"
         app:layout_constraintEnd_toEndOf="@+id/email_edittext"
         app:layout_constraintStart_toStartOf="@+id/email_edittext"
         app:layout_constraintTop_toBottomOf="@+id/email_edittext" />
@@ -85,31 +86,6 @@
         app:layout_constraintStart_toStartOf="@+id/register_button"
         app:layout_constraintTop_toBottomOf="@+id/register_button" />
 
-    <Button
-        android:id="@+id/selectphoto_button"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="55dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
-        android:background="@drawable/rounded_selectphoto"
-        android:text="SELECT PHOTO"
-        android:textColor="@android:color/white"
-        android:textStyle="bold"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/Title" />
-
-    <de.hdodenhof.circleimageview.CircleImageView
-        android:id="@+id/select_imageview_register"
-        android:layout_width="150dp"
-        android:layout_height="150dp"
-        app:civ_border_width="4dp"
-        app:layout_constraintBottom_toBottomOf="@+id/selectphoto_button"
-        app:layout_constraintEnd_toEndOf="@+id/selectphoto_button"
-        app:layout_constraintStart_toStartOf="@+id/selectphoto_button" />
 
     <TextView
         android:id="@+id/Title"

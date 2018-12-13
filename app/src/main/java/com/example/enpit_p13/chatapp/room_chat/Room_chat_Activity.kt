@@ -7,11 +7,13 @@ import android.util.Log
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
+import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
@@ -61,7 +63,7 @@ class Room_chat_Activity : AppCompatActivity() {
                 //val textkadai = intent.getStringExtra(LatestMessagesActivity.USER_KEY)
                 if (user.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
                  supportActionBar?.title = "$uid_username ${user.kadaimeiText.toString()}"
-                    explain_textview.text = user.messageText.toString()
+                   explain_textview.text = user.messageText.toString()
                     //sendAddress
 
                     FirebaseDatabase.getInstance().getReference()?.child("/users/")
@@ -71,7 +73,7 @@ class Room_chat_Activity : AppCompatActivity() {
                                         val data = it?.getValue(User::class.java)
                                         if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
                                             val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                                            reference.setValue(Check_online(user.uid.toString(), data?.username.toString(),true))
+                                            reference.setValue(Check_online(user.uid.toString(), data?.username.toString(),false))
                                         }
                                     }
                                 }
@@ -96,13 +98,14 @@ class Room_chat_Activity : AppCompatActivity() {
                                 }
 
                             }
-                                    myroom_count_textview.text= "在室中：$count"
+                                   this_room_my_room.text = "マイルーム(在室中：$count)"
                         }
 
                         override fun onCancelled(p0: DatabaseError) {
 
                         }
                     })
+
                     createFirebaseListener(user)
                     send_Button_room_chat.setOnClickListener {
                         template_button.visibility = View.INVISIBLE
@@ -137,7 +140,16 @@ class Room_chat_Activity : AppCompatActivity() {
               //  intent.putExtra(USER_KEY, userdata)
                 startActivity(intent)
             }
-        //recycler_chat_room.adapter.notifyDataSetChanged()
+        home_chat_my_room.setOnClickListener {
+           startActivity<LatestMessagesActivity>()
+       }
+        chat_all_my_room.setOnClickListener {
+            startActivity<Activity_chat>()
+        }
+        room_view_my_room.setOnClickListener {
+            startActivity<NewMessageActivity>()
+        }
+
     }
 
     override fun onBackPressed() {
@@ -170,8 +182,28 @@ class Room_chat_Activity : AppCompatActivity() {
             }
         })
     }
+
     private fun createFirebaseListener(userdata: Room_chat_messager) {
         //val userdata = intent.getParcelableExtra<Room_chat_messager>(LatestMessagesActivity.USER_KE)
+        FirebaseDatabase.getInstance().getReference()?.child("/Comment/${FirebaseAuth.getInstance().uid.toString()}")
+                .addValueEventListener(object :ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        var str:String = ""
+                        for (data in p0.children)
+                        {
+
+                            val userdata = data.getValue<Message>(Message::class.java)
+                            val message = userdata?.let { it }?:continue
+                            str = "$str \n ${message.text.toString()}"
+                        }
+                        comment_view.text=str
+
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
         Log.d("Main","kaidaimei ${userdata.uid}${userdata.kadaimeiText}")
         val ref =  FirebaseDatabase.getInstance().getReference()?.child("/Room/${userdata.uid.toString()}")
         ref.addValueEventListener(object : ValueEventListener {
@@ -193,7 +225,7 @@ class Room_chat_Activity : AppCompatActivity() {
 
                     }
                     else {
-                            adapter.add(ChatfromItem(message.text!!,message.username!!,false,""))
+                            adapter.add(ChatfromItem(message.text!!,message.username!!,false,message.timestamp.toString(),true))
                     }
 
                 }
@@ -209,6 +241,8 @@ class Room_chat_Activity : AppCompatActivity() {
                 //log error
             }
         })
+
+
     }
     private fun template(): Boolean {
         template_button.visibility = View.VISIBLE
