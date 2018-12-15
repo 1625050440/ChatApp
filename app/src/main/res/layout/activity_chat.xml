@@ -146,7 +146,7 @@
             android:background="@drawable/button1"
             android:text="ルーム選択" />
         <ImageButton
-            android:id="@+id/chatpage_help"
+            android:id="@+id/chatall_help"
             android:layout_width="wrap_content"
             android:layout_height="75dp"
             android:background="@drawable/button_tukaikata">

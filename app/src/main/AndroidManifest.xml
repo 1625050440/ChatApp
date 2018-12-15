@@ -101,7 +101,10 @@
             android:name=".quetion.Qustiontemp2Activity"
             android:screenOrientation="portrait" />
         <activity android:name=".Qusetiontemp2Activity_from_chat_all" />
-        <activity android:name=".image_slides.Chatpaper_Slider"></activity>
+        <activity android:name=".image_slides.Chatpaper_Slider" />
+        <activity android:name=".image_slides.Chatpage_Slider" />
+        <activity android:name=".image_slides.Chatall_Slider" />
+        <activity android:name=".image_slides.Chat_my_room"></activity>
     </application>
 
 </manifest>

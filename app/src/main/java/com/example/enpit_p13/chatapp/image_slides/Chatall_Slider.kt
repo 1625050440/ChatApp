@@ -7,39 +7,15 @@ import android.support.v7.app.AppCompatActivity
 import com.example.enpit_p13.chatapp.R
 import com.viewpagerindicator.CirclePageIndicator
 import java.util.*
-var count=0
-class Chatpaper_Slider : AppCompatActivity() {
+class Chatall_Slider : AppCompatActivity() {
 
     var imageModelArrayList: ArrayList<ImageModel>? = null
 
-     val myImageList: IntArray = intArrayOf(R.drawable.bunseki1,R.drawable.bunseki2,R.drawable.bunseki3)
-
+    val myImageList: IntArray = intArrayOf(R.drawable.chatall1,R.drawable.chatall2,R.drawable.chatall3,R.drawable.chatall4,R.drawable.chatall5)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chatpaper__slider)
+        setContentView(R.layout.activity_chatall__slider)
 
-      /*  FirebaseDatabase.getInstance().getReference("/Help/${FirebaseAuth.getInstance().uid.toString()}")
-                .addValueEventListener(object :ValueEventListener{
-                    override fun onDataChange(p0: DataSnapshot) {
-                        val data =  p0.getValue(Help::class.java)
-                        if(data?.help_ad =="bunseki")
-                        {
-                            count=2
-                            myImageList = intArrayOf(R.drawable.bunseki1,R.drawable.bunseki2,R.drawable.bunseki3)
-
-                        }
-                        else if(data?.help_ad =="chatpage")
-                        {
-                            count = 6
-
-
-                            myImageList = intArrayOf(R.drawable.chatpage1,R.drawable.chatpage2,R.drawable.chatpage3,R.drawable.chatpage4,R.drawable.chatpage5,R.drawable.chatpage6,R.drawable.chatpage7)
-                        }
-                    }
-                    override fun onCancelled(p0: DatabaseError) {
-
-                    }
-                })*/
         imageModelArrayList = ArrayList()
         imageModelArrayList = populateList()
 
@@ -49,7 +25,7 @@ class Chatpaper_Slider : AppCompatActivity() {
 
         val list = ArrayList<ImageModel>()
 
-        for (i in 0..2) {
+        for (i in 0..4) {
             val imageModel = ImageModel()
             imageModel.setImage_drawables(myImageList!![i])
             list.add(imageModel)
@@ -60,8 +36,8 @@ class Chatpaper_Slider : AppCompatActivity() {
 
     private fun init() {
 
-        mPager = findViewById(R.id.pager) as ViewPager
-        mPager!!.adapter = SlidingImage_Adapter(this@Chatpaper_Slider, this.imageModelArrayList!!)
+        mPager = findViewById(R.id.pager_chatall) as ViewPager
+        mPager!!.adapter = SlidingImage_Adapter(this@Chatall_Slider, this.imageModelArrayList!!)
 
         val indicator = findViewById(R.id.indicator) as CirclePageIndicator
 
@@ -82,12 +58,12 @@ class Chatpaper_Slider : AppCompatActivity() {
             }
             mPager!!.setCurrentItem(currentPage++, true)
         }
-       /* val swipeTimer = Timer()
-        swipeTimer.schedule(object : TimerTask() {
-            override fun run() {
-                handler.post(Update)
-            }
-        }, 3000, 3000)*/
+        /* val swipeTimer = Timer()
+         swipeTimer.schedule(object : TimerTask() {
+             override fun run() {
+                 handler.post(Update)
+             }
+         }, 3000, 3000)*/
 
         // Pager listener over indicator
         indicator.setOnPageChangeListener(object : ViewPager.OnPageChangeListener {

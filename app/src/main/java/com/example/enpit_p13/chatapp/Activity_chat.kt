@@ -6,11 +6,13 @@ import android.support.v7.app.AppCompatActivity
 import android.view.View
 import android.view.WindowManager
 import android.widget.Toast
+import com.example.enpit_p13.chatapp.image_slides.Chatall_Slider
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.Check_online
+import com.example.enpit_p13.chatapp.models.Help
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity_from_chat_all
 import com.example.enpit_p13.chatapp.quetion.RoomIntroduceActivity
@@ -145,6 +147,11 @@ class Activity_chat : AppCompatActivity() {
         }
         toppage_Chat_all.setOnClickListener {
             startActivity<TopPageActivity>()
+        }
+        chatall_help.setOnClickListener{
+            FirebaseDatabase.getInstance().getReference("/Help/${FirebaseAuth.getInstance().uid.toString()}")
+                    .setValue(Help("chatall"))
+            startActivity<Chatall_Slider>()
         }
 
     }

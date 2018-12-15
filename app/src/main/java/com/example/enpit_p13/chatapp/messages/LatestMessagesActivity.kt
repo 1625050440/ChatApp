@@ -14,7 +14,9 @@ import android.view.WindowManager
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.image_slides.Chatpage_Slider
 import com.example.enpit_p13.chatapp.models.Check_online
+import com.example.enpit_p13.chatapp.models.Help
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.Qustiontemp2Activity
 import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
@@ -144,6 +146,11 @@ class LatestMessagesActivity : AppCompatActivity() {
       }
         toppage_Lates.setOnClickListener {
             startActivity<TopPageActivity>()
+        }
+        chatpage_help.setOnClickListener{
+            FirebaseDatabase.getInstance().getReference("/Help/${FirebaseAuth.getInstance().uid.toString()}")
+                    .setValue(Help("chatpage"))
+            startActivity<Chatpage_Slider>()
         }
 
     }

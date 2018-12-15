@@ -8,8 +8,10 @@ import android.view.Menu
 import android.view.MenuItem
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.analyzesheet.OwnAnalysisActivity
+import com.example.enpit_p13.chatapp.image_slides.Chatpaper_Slider
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.models.Check_online
+import com.example.enpit_p13.chatapp.models.Help
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.google.firebase.auth.FirebaseAuth
@@ -67,6 +69,29 @@ class TopPageActivity : AppCompatActivity() {
 
                     }
                 })
+        FirebaseDatabase.getInstance().getReference()?.child("/Address/")
+        .addValueEventListener(object : ValueEventListener {
+            override fun onDataChange(p0: DataSnapshot) {
+                var count = p0.childrenCount
+                for (data in p0.children) {
+                    val userData = data.getValue<Check_online>(Check_online::class.java)
+                    val user = userData?.let { it } ?: continue
+                    if (user.uid_check_online.toString() == "OFF") {
+                        count--
+                    }
+                }
+                count_user.text = "オンライン中($count)"
+            }
+
+            override fun onCancelled(p0: DatabaseError) {
+
+            }
+        })
+        bunseki_help.setOnClickListener {
+            FirebaseDatabase.getInstance().getReference("/Help/${FirebaseAuth.getInstance().uid.toString()}")
+                    .setValue(Help("bunseki"))
+            startActivity<Chatpaper_Slider>()
+        }
 
     }
 

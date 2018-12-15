@@ -10,11 +10,13 @@ import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.Message
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.image_slides.Chat_my_room
 import com.example.enpit_p13.chatapp.messages.ChatToItem
 import com.example.enpit_p13.chatapp.messages.ChatfromItem
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.Check_online
+import com.example.enpit_p13.chatapp.models.Help
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.Qustiontemp2Activity
 import com.example.enpit_p13.chatapp.toppage.TopPageActivity
@@ -152,6 +154,11 @@ class Room_chat_Activity : AppCompatActivity() {
         }
         toppage_my_room.setOnClickListener {
             startActivity<TopPageActivity>()
+        }
+        myroom_help.setOnClickListener{
+            FirebaseDatabase.getInstance().getReference("/Help/${FirebaseAuth.getInstance().uid.toString()}")
+                    .setValue(Help("myroom"))
+            startActivity<Chat_my_room>()
         }
     }
 
