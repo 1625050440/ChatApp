@@ -17,6 +17,7 @@ import com.example.enpit_p13.chatapp.messages.NewMessageActivity
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.quetion.Qustiontemp2Activity
+import com.example.enpit_p13.chatapp.toppage.TopPageActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -149,7 +150,9 @@ class Room_chat_Activity : AppCompatActivity() {
         room_view_my_room.setOnClickListener {
             startActivity<NewMessageActivity>()
         }
-
+        toppage_my_room.setOnClickListener {
+            startActivity<TopPageActivity>()
+        }
     }
 
     override fun onBackPressed() {

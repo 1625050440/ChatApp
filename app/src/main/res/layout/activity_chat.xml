@@ -6,6 +6,26 @@
     android:layout_height="match_parent"
     tools:context=".Activity_chat">
 
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_own"
+        android:layout_width="match_parent"
+        android:layout_height="100dp"
+        android:background="@drawable/bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    <ImageView
+        android:id="@+id/toppage_Chat_all"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="48dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/hpicon1" />
     <Button
         android:id="@+id/room_intro_button"
         android:layout_width="wrap_content"
@@ -35,7 +55,6 @@
         android:id="@+id/recycle_chat"
         android:layout_width="0dp"
         android:layout_height="0dp"
-        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_green_light"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
@@ -92,18 +111,16 @@
             app:srcCompat="@android:drawable/ic_menu_send" />
 
     </LinearLayout>
+
     <LinearLayout
         android:id="@+id/linearLayout3"
         android:layout_width="0dp"
         android:layout_height="75dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_own">
 
         <Button
             android:id="@+id/home_chat_chat_all"
@@ -128,6 +145,13 @@
             android:layout_weight="1"
             android:background="@drawable/button1"
             android:text="ルーム選択" />
+        <ImageButton
+            android:id="@+id/chatpage_help"
+            android:layout_width="wrap_content"
+            android:layout_height="75dp"
+            android:background="@drawable/button_tukaikata">
+
+        </ImageButton>
 
     </LinearLayout>
 

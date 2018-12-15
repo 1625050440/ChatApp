@@ -16,7 +16,6 @@ import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
-import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity
 import com.example.enpit_p13.chatapp.quetion.Qustiontemp2Activity
 import com.example.enpit_p13.chatapp.registerlogin.RegisterActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
@@ -37,6 +36,7 @@ class LatestMessagesActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_latest_messages)
+        setSupportActionBar(toolbar_Lates)
         //verifyUserIsLoggedIn()
         FirebaseDatabase.getInstance().getReference()?.child("/users/")
                 .addValueEventListener(object : ValueEventListener{
@@ -45,7 +45,10 @@ class LatestMessagesActivity : AppCompatActivity() {
                             val data = it?.getValue(User::class.java)
                             if (data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()) {
                                 val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
-                                reference.setValue(Check_online("Top_Page", data?.username.toString(),false))
+                                reference.setValue(Check_online("Chat_Page", data?.username.toString(),false))
+                                FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                        .onDisconnect()
+                                        .setValue(Check_online("OFF",data?.username.toString(),false))
                             }
                         }
                     }
@@ -80,6 +83,8 @@ class LatestMessagesActivity : AppCompatActivity() {
                                 room_create_button.text = "チャットルームへ"
                                 title_edditext.isEnabled = false
                                 title_edditext.isFocusable = false
+
+                                title_edditext.background = getDrawable(R.drawable.button2)
                                 explain_EditText.isEnabled = false
                                 explain_EditText.isFocusable = false
                                 error_textview.text = " "
@@ -137,6 +142,9 @@ class LatestMessagesActivity : AppCompatActivity() {
           val intent = Intent(this, NewMessageActivity::class.java)
           startActivity(intent)
       }
+        toppage_Lates.setOnClickListener {
+            startActivity<TopPageActivity>()
+        }
 
     }
     private fun sendData(title:String,message:String,check:Boolean) {
@@ -166,6 +174,7 @@ class LatestMessagesActivity : AppCompatActivity() {
                             explain_EditText.setText(user?.messageText.toString())
                             delete_button.visibility = View.VISIBLE
                             delete_button.isClickable = true
+                            title_edditext.background = getDrawable(R.drawable.button2)
                             room_create_button.text = "チャットルームへ"
                             title_edditext.isEnabled = false
                             title_edditext.isFocusable = false
@@ -196,15 +205,7 @@ class LatestMessagesActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem?): Boolean {
         when (item?.itemId) {
-            R.id.menu_chat ->{
-                val intent = Intent(this, Activity_chat::class.java)
-                startActivity(intent)
-            }
-            R.id.list_chat -> {
-                val intent = Intent(this, NewMessageActivity::class.java)
-                startActivity(intent)
-            }
-            R.id.menu_sign_out -> {
+           R.id.menu_sign_out -> {
                 FirebaseAuth.getInstance().signOut()
                 val intent = Intent(this, RegisterActivity::class.java)
                 intent.flags = Intent.FLAG_ACTIVITY_CLEAR_TASK.or(Intent.FLAG_ACTIVITY_NEW_TASK)

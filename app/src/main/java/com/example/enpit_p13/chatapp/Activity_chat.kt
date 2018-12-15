@@ -16,6 +16,7 @@ import com.example.enpit_p13.chatapp.quetion.QuestiontempActivity_from_chat_all
 import com.example.enpit_p13.chatapp.quetion.RoomIntroduceActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_from_ListView
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
+import com.example.enpit_p13.chatapp.toppage.TopPageActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -41,6 +42,9 @@ class Activity_chat : AppCompatActivity() {
                             if(data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()){
                             val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
                             reference.setValue(Check_online("Chat_all",data?.username.toString(),false))
+                                FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                        .onDisconnect()
+                                        .setValue(Check_online("OFF",data?.username.toString(),false))
                         }}
                     }
 
@@ -138,6 +142,9 @@ class Activity_chat : AppCompatActivity() {
         }
         room_view_chat_all.setOnClickListener {
             startActivity<NewMessageActivity>()
+        }
+        toppage_Chat_all.setOnClickListener {
+            startActivity<TopPageActivity>()
         }
 
     }

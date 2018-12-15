@@ -1,8 +1,8 @@
 package com.example.enpit_p13.chatapp.quetion
 
 import android.content.Intent
-import android.support.v7.app.AppCompatActivity
 import android.os.Bundle
+import android.support.v7.app.AppCompatActivity
 import android.util.Log
 import android.view.View
 import android.view.WindowManager
@@ -11,6 +11,8 @@ import android.widget.Spinner
 import android.widget.Toast
 import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
+import com.example.enpit_p13.chatapp.models.Check_online
+import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
 import com.google.firebase.auth.FirebaseAuth
@@ -18,9 +20,7 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.google.firebase.database.ValueEventListener
-import kotlinx.android.synthetic.main.activity_question.*
 import kotlinx.android.synthetic.main.activity_qustiontemp2.*
-import kotlinx.android.synthetic.main.content_own_analysis.*
 
 
 class Qustiontemp2Activity : AppCompatActivity() {
@@ -29,6 +29,25 @@ class Qustiontemp2Activity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_qustiontemp2)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
+
+        FirebaseDatabase.getInstance().getReference()?.child("/users/")
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.children.forEach {
+                            val data = it?.getValue(User::class.java)
+                            if(data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()){
+                                val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                reference.setValue(Check_online("Qustiontemp2Activity",data?.username.toString(),false))
+                                FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                        .onDisconnect()
+                                        .setValue(Check_online("OFF",data?.username.toString(),false))
+                            }}
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
 
         editTemplate.isEnabled = false
         send_button.visibility = View.INVISIBLE

@@ -13,6 +13,7 @@ import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.Message_all
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -50,7 +51,24 @@ class QuestiontempActivity_from_chat_all : AppCompatActivity() {
                     override fun onNothingSelected(parent: AdapterView<*>?) {
                     }
                 }
+        FirebaseDatabase.getInstance().getReference()?.child("/users/")
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.children.forEach {
+                            val data = it?.getValue(User::class.java)
+                            if(data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()){
+                                val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                reference.setValue(Check_online("QuestiontempActivity_from_chat_all",data?.username.toString(),false))
+                                FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                        .onDisconnect()
+                                        .setValue(Check_online("OFF",data?.username.toString(),false))
+                            }}
+                    }
 
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
         sendButton_chat_all.setOnClickListener {
             Toast.makeText(this,"送信しました。", Toast.LENGTH_LONG).show()
             send()

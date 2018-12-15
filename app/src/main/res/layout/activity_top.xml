@@ -4,34 +4,28 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/toppage"
     tools:context=".toppage.TopPageActivity">
 
-    <android.support.design.widget.AppBarLayout
-        android:id="@+id/appBarLayout2"
+
+    <android.support.v7.widget.Toolbar
+        android:id="@+id/toolbar_Home"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:theme="@style/AppTheme.AppBarOverlay">
-
-        <android.support.v7.widget.Toolbar
-            android:id="@+id/toolbar"
-            android:layout_width="match_parent"
-            android:layout_height="?attr/actionBarSize"
-            android:background="?attr/colorPrimary"
-            app:popupTheme="@style/AppTheme.PopupOverlay" />
-
-    </android.support.design.widget.AppBarLayout>
+        android:layout_height="100dp"
+        android:background="@drawable/bar"
+        app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <ScrollView
+        android:id="@+id/scrollView6"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginTop="?android:attr/actionBarSize"
-        app:layout_constraintTop_toBottomOf="@+id/appBarLayout2">
+        android:layout_height="0dp"
+        android:background="@drawable/toppage"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar_Home">
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/ConstraintLayout2"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content">
+            android:layout_height="match_parent">
 
             <ImageView
                 android:id="@+id/imageView2"
@@ -54,7 +48,7 @@
                 app:srcCompat="@drawable/hiyoko" />
 
             <Button
-                android:id="@+id/button"
+                android:id="@+id/bunseki_help"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="8dp"
@@ -63,6 +57,8 @@
                 app:layout_constraintBottom_toBottomOf="@+id/goToAnalyzePage"
                 app:layout_constraintStart_toEndOf="@+id/goToAnalyzePage"
                 app:layout_constraintTop_toTopOf="@+id/goToAnalyzePage" />
+
+
 
             <TextView
                 android:id="@+id/disp_userName"
@@ -131,7 +127,19 @@
                 app:layout_constraintTop_toBottomOf="@+id/disp_userName"
                 app:srcCompat="@drawable/kangaroo_top" />
 
+
         </android.support.constraint.ConstraintLayout>
     </ScrollView>
+
+    <ImageView
+        android:id="@+id/toppage"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
+        android:layout_marginTop="48dp"
+        android:adjustViewBounds="true"
+        android:scaleType="fitCenter"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/hpicon1" />
 
 </android.support.constraint.ConstraintLayout>

@@ -5,7 +5,7 @@
     <application
         android:allowBackup="true"
         android:icon="@drawable/ic_kangaroo"
-        android:label="@string/app_name"
+        android:label=""
         android:roundIcon="@mipmap/ic_launcher_round"
         android:screenOrientation="portrait"
         android:supportsRtl="true"
@@ -14,7 +14,6 @@
         <!-- トップページのアクティビティ -->
         <activity
             android:name=".toppage.TopPageActivity"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <intent-filter>
@@ -34,10 +33,10 @@
         </activity>
         <activity
             android:name=".registerlogin.RegisterActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".registerlogin.Login"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".messages.NewMessageActivity"
             android:screenOrientation="portrait">
@@ -77,7 +76,6 @@
         <!-- 自己分析シートのアクティビティ -->
         <activity
             android:name=".analyzesheet.OwnAnalysisActivity"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity android:name=".quetion.QuestiontempActivity_from_chat_all" />
@@ -89,7 +87,6 @@
         </activity>
         <activity
             android:name=".analyzesheet.LookBackAnalyzeActivity"
-            android:label="@string/app_name"
             android:screenOrientation="portrait"
             android:theme="@style/AppTheme.NoActionBar">
             <meta-data
@@ -99,11 +96,12 @@
         <!-- ここまで　 -->
         <activity
             android:name=".quetion.TemplateQuestionnaireActivity"
-            android:screenOrientation="portrait"></activity>
+            android:screenOrientation="portrait" />
         <activity
             android:name=".quetion.Qustiontemp2Activity"
-            android:screenOrientation="portrait"></activity>
-        <activity android:name=".Qusetiontemp2Activity_from_chat_all"></activity>
+            android:screenOrientation="portrait" />
+        <activity android:name=".Qusetiontemp2Activity_from_chat_all" />
+        <activity android:name=".image_slides.Chatpaper_Slider"></activity>
     </application>
 
 </manifest>

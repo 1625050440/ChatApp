@@ -12,6 +12,7 @@ import com.example.enpit_p13.chatapp.models.User
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_from_ListView
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
+import com.example.enpit_p13.chatapp.toppage.TopPageActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
@@ -39,6 +40,9 @@ class NewMessageActivity : AppCompatActivity() {
                         val data = p0.getValue(User::class.java)
                         FirebaseDatabase.getInstance().getReference("/Address/${data?.uid.toString()}")
                                 .setValue(Check_online("List_Room",data?.username.toString(),false))
+                        FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                .onDisconnect()
+                                .setValue(Check_online("OFF",data?.username.toString(),false))
                     }
 
                     override fun onCancelled(p0: DatabaseError) {
@@ -52,6 +56,9 @@ class NewMessageActivity : AppCompatActivity() {
         }
         chat_all_list.setOnClickListener {
             startActivity<Activity_chat>()
+        }
+        toppage_list.setOnClickListener {
+            startActivity<TopPageActivity>()
         }
 
     }

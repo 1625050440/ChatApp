@@ -12,6 +12,7 @@ import android.widget.Toast
 import com.example.enpit_p13.chatapp.Activity_chat
 import com.example.enpit_p13.chatapp.Message_all
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.models.Check_online
 import com.example.enpit_p13.chatapp.models.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.DataSnapshot
@@ -27,6 +28,24 @@ class RoomIntroduceActivity : AppCompatActivity() {
         setContentView(R.layout.activity_room_introduce)
         this.window.setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN)
 
+        FirebaseDatabase.getInstance().getReference()?.child("/users/")
+                .addListenerForSingleValueEvent(object : ValueEventListener{
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.children.forEach {
+                            val data = it?.getValue(User::class.java)
+                            if(data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()){
+                                val reference =FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                reference.setValue(Check_online("RoomIntroduceActivity",data?.username.toString(),false))
+                                FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                        .onDisconnect()
+                                        .setValue(Check_online("OFF",data?.username.toString(),false))
+                            }}
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
         setText1()
 
         spinner1.onItemSelectedListener =

@@ -26,6 +26,7 @@ class DeleteConfirmDialog : DialogFragment(){
                 context.toast("ルームが削除されました。")
                 sendData("","",false) //reset data
                 FirebaseDatabase.getInstance().getReference("/Room/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
+                FirebaseDatabase.getInstance().getReference("/Comment/${FirebaseAuth.getInstance().uid.toString()}").removeValue()
                 FirebaseDatabase.getInstance().getReference("/messages/")
                         .addValueEventListener(object :ValueEventListener{
                             override fun onDataChange(p0: DataSnapshot) {
@@ -33,8 +34,22 @@ class DeleteConfirmDialog : DialogFragment(){
                                    val delete_room = it?.getValue(Message_all::class.java)
                                    if(delete_room?.Uid == FirebaseAuth.getInstance().uid.toString())
                                    {
-                                       Log.d("Check_error","${p0.key}")
-                                       FirebaseDatabase.getInstance().getReference("/messages/${it?.key}").removeValue()
+                                       FirebaseDatabase.getInstance().getReference("/Room_Chat/${FirebaseAuth.getInstance().uid}")
+                                               .addValueEventListener(object :ValueEventListener{
+                                                   override fun onDataChange(p0: DataSnapshot) {
+                                                       val data = p0.getValue(Room_chat_messager::class.java)
+                                                       if(data?.check ==false)
+                                                       {
+                                                           Log.d("Check","hjhb ${data?.check}")
+                                                           Log.d("Check","jkhjkh ${it.key}")
+                                                           FirebaseDatabase.getInstance().getReference("/messages/${it?.key}").removeValue()
+                                                       }
+                                                   }
+
+                                                   override fun onCancelled(p0: DatabaseError) {
+
+                                                   }
+                                               })
                                    }
                                }
                             }
