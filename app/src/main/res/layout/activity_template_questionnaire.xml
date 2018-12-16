@@ -36,28 +36,13 @@
 
             android:orientation="vertical"
 >
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="40dp"
-                android:layout_marginBottom="20dp"
-                android:text="使用したテンプレートで一番役に立ったものを教えてください"
-                android:textSize="19dp"
-                android:textStyle="bold"/>
 
-            <Spinner
-                android:id="@+id/temp_spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="50dp"
-                android:layout_marginBottom="30dp"
-                android:entries="@array/temp_spinner_item" />
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginBottom="20dp"
-                android:text="テンプレート機能は質問を考えるうえで役立ちましたか？"
+                android:text="質問１：テンプレート機能は質問を考えるうえで役立ちましたか？(必須)"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 
@@ -89,7 +74,24 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginBottom="20dp"
-                android:text="追加したら役立ちそうなテンプレートの項目があれば教えてください"
+                android:text="質問２：使用したテンプレートで一番役に立ったものを教えてください"
+                android:textSize="19dp"
+                android:textStyle="bold" />
+
+            <Spinner
+                android:id="@+id/temp_spinner"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="50dp"
+                android:layout_marginBottom="30dp"
+                android:entries="@array/questionnaire_q1_item" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginLeft="40dp"
+                android:layout_marginBottom="20dp"
+                android:text="質問３：追加したら役立ちそうなテンプレートの項目があれば教えてください"
                 android:textSize="17dp"
                 android:textStyle="bold" />
 
@@ -125,7 +127,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="40dp"
                 android:layout_marginBottom="20dp"
-                android:text="テンプレート機能の改善点があれば教えてください"
+                android:text="質問４：テンプレート機能の改善点があれば教えてください"
                 android:textSize="20dp"
                 android:textStyle="bold" />
 

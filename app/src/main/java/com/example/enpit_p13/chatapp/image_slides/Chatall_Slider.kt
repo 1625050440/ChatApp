@@ -14,7 +14,7 @@ class Chatall_Slider : AppCompatActivity() {
     val myImageList: IntArray = intArrayOf(R.drawable.chatall1,R.drawable.chatall2,R.drawable.chatall3,R.drawable.chatall4,R.drawable.chatall5)
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_chatall__slider)
+        setContentView(R.layout.activity_chatpage__slider)
 
         imageModelArrayList = ArrayList()
         imageModelArrayList = populateList()
@@ -36,7 +36,7 @@ class Chatall_Slider : AppCompatActivity() {
 
     private fun init() {
 
-        mPager = findViewById(R.id.pager_chatall) as ViewPager
+        mPager = findViewById(R.id.pager_chatpage) as ViewPager
         mPager!!.adapter = SlidingImage_Adapter(this@Chatall_Slider, this.imageModelArrayList!!)
 
         val indicator = findViewById(R.id.indicator) as CirclePageIndicator

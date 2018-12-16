@@ -34,4 +34,11 @@
         <item>親戚や友達に話せる</item>
         <item>誰にも相談していない</item>
     </string-array>
+    <string-array name="questionnaire_q1_item">
+        <item>使用していない/役に立なかった</item>
+        <item>子供との会話</item>
+        <item>子供外出</item>
+        <item>子供からの暴力</item>
+        <item>外部への相談</item>
+    </string-array>
 </resources>

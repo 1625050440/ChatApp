@@ -5,5 +5,5 @@
     <item
         android:id="@+id/look_back"
         android:title="過去のデータ"
-        app:showAsAction="never" />
+        app:showAsAction="always" />
 </menu>
