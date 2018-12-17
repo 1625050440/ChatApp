@@ -159,7 +159,8 @@ class Qustiontemp2Activity : AppCompatActivity() {
 
     private fun send(sendtext:String){
 
-        val message= sendtext
+        val str = spinner2.selectedItem.toString()
+        val message= str + "\n" + sendtext
         Log.d("mess",message)
         val ref = FirebaseDatabase.getInstance().getReference("/Room_Chat")
         ref.addListenerForSingleValueEvent(object : ValueEventListener {

@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Qusetiontemp2Activity_from_chat_all">
+    tools:context=".quetion.Qusetiontemp2Activity_from_chat_all">
 
     <Spinner
         android:id="@+id/spinner2"

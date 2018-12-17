@@ -1,4 +1,4 @@
-package com.example.enpit_p13.chatapp
+package com.example.enpit_p13.chatapp.quetion
 
 import android.content.Intent
 import android.support.v7.app.AppCompatActivity
@@ -8,6 +8,7 @@ import android.view.View
 import android.view.WindowManager
 import android.widget.AdapterView
 import android.widget.Spinner
+import com.example.enpit_p13.chatapp.R
 import com.example.enpit_p13.chatapp.messages.LatestMessagesActivity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_Activity
 import com.example.enpit_p13.chatapp.room_chat.Room_chat_messager
