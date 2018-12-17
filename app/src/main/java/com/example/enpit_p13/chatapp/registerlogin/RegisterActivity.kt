@@ -68,6 +68,8 @@ class RegisterActivity : AppCompatActivity() {
                     //else if successful
                     Log.d("Main", "Successfully created user with uid: ${it.result?.user?.uid}")
                    // uploadImageToFirebaseStorage()
+                    saveUserToDatabase(it.toString())
+
                 }
                 .addOnFailureListener {
                     Log.d("Main", "Failed to create user: ${it.message}")

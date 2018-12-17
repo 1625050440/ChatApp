@@ -6,11 +6,57 @@
     android:layout_height="match_parent"
     tools:context=".room_chat.Room_chat_from_ListView">
 
+    <ScrollView
+        android:id="@+id/scrollView9"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_marginStart="8dp"
+        android:layout_marginLeft="8dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginRight="8dp"
+        app:layout_constraintBottom_toBottomOf="@+id/scrollView7"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/scrollView7"
+        app:layout_constraintTop_toTopOf="@+id/scrollView7">
+
+        <TextView
+            android:id="@+id/comment_from_view"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"/>
+    </ScrollView>
+
+    <ScrollView
+        android:id="@+id/scrollView7"
+        android:layout_width="400dp"
+        android:layout_height="100dp"
+        android:layout_marginTop="8dp"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3">
+
+        <TextView
+            android:id="@+id/explain_textview_from_listview"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="28dp"
+            android:layout_marginLeft="28dp"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/rounded_edittext_register"
+            android:maxWidth="400dp"
+            android:maxLines="15"
+            android:textStyle="bold"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
+    </ScrollView>
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar_own"
         android:layout_width="match_parent"
         android:layout_height="100dp"
         android:background="@drawable/bar"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
     <ImageView
@@ -28,13 +74,15 @@
         android:id="@+id/recycler_chat_room_from_listroom"
         android:layout_width="match_parent"
         android:layout_height="0dp"
+        android:layout_marginTop="8dp"
         android:layout_marginBottom="8dp"
         android:background="@android:color/holo_blue_bright"
         app:layoutManager="android.support.v7.widget.LinearLayoutManager"
         app:layout_constraintBottom_toTopOf="@+id/linearLayout"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/explain_textview_from_listview">
+        app:layout_constraintTop_toBottomOf="@+id/scrollView7">
 
     </android.support.v7.widget.RecyclerView>
 
@@ -118,32 +166,12 @@
     </LinearLayout>
 
     <TextView
-        android:id="@+id/explain_textview_from_listview"
+        android:id="@+id/thisroom_count_textview"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="28dp"
-        android:layout_marginLeft="28dp"
         android:layout_marginTop="8dp"
-        android:background="@drawable/rounded_edittext_register"
-        android:textStyle="bold"
-        android:maxWidth="400dp"
-        android:maxLines="15"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
-
-    <TextView
-        android:id="@+id/thisroom_count_textview"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="8dp"
-        android:layout_marginLeft="8dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginRight="8dp"
         android:gravity="right"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toEndOf="@+id/explain_textview_from_listview"
         app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 
     <LinearLayout

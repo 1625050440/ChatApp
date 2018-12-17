@@ -91,6 +91,29 @@ class Room_chat_from_ListView : AppCompatActivity() {
 
                                                                             }
                                                                         })
+
+
+                                                                            //val userdata = intent.getParcelableExtra<Room_chat_messager>(LatestMessagesActivity.USER_KE)
+                                                                            FirebaseDatabase.getInstance().getReference()?.child("/Comment/$get_uid")
+                                                                                    .addValueEventListener(object :ValueEventListener{
+                                                                                        override fun onDataChange(p0: DataSnapshot) {
+                                                                                            var str:String = ""
+                                                                                            for (data in p0.children)
+                                                                                            {
+
+                                                                                                val userdata = data.getValue<Message>(Message::class.java)
+                                                                                                val message = userdata?.let { it }?:continue
+                                                                                                str = "$str \n ${message.text.toString()}"
+                                                                                            }
+                                                                                            comment_from_view.text=str
+
+                                                                                        }
+
+                                                                                        override fun onCancelled(p0: DatabaseError) {
+
+                                                                                        }
+                                                                                    })
+
                                                                         createFirebaseListener(get_uid)
                                                                         send_Button_room_chat_from_listview.setOnClickListener{
                                                                             if (!room_chat_edittext_from_listview.text.toString().isEmpty()){

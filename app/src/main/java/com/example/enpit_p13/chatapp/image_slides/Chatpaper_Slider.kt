@@ -5,6 +5,13 @@ import android.os.Handler
 import android.support.v4.view.ViewPager
 import android.support.v7.app.AppCompatActivity
 import com.example.enpit_p13.chatapp.R
+import com.example.enpit_p13.chatapp.models.Check_online
+import com.example.enpit_p13.chatapp.models.User
+import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.DataSnapshot
+import com.google.firebase.database.DatabaseError
+import com.google.firebase.database.FirebaseDatabase
+import com.google.firebase.database.ValueEventListener
 import com.viewpagerindicator.CirclePageIndicator
 import java.util.*
 var count=0
@@ -17,6 +24,25 @@ class Chatpaper_Slider : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_chatpaper__slider)
+
+        FirebaseDatabase.getInstance().getReference()?.child("/users/")
+                .addListenerForSingleValueEvent(object : ValueEventListener {
+                    override fun onDataChange(p0: DataSnapshot) {
+                        p0.children.forEach {
+                            val data = it?.getValue(User::class.java)
+                            if(data?.uid.toString() == FirebaseAuth.getInstance().uid.toString()){
+                                val reference = FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                reference.setValue(Check_online("Chatpaper_Slider",data?.username.toString(),false))
+                                FirebaseDatabase.getInstance().getReference("/Address/${FirebaseAuth.getInstance().uid.toString()}")
+                                        .onDisconnect()
+                                        .setValue(Check_online("OFF",data?.username.toString(),false))
+                            }}
+                    }
+
+                    override fun onCancelled(p0: DatabaseError) {
+
+                    }
+                })
 
       /*  FirebaseDatabase.getInstance().getReference("/Help/${FirebaseAuth.getInstance().uid.toString()}")
                 .addValueEventListener(object :ValueEventListener{
